@@ -469,3 +469,40 @@ h1 em { color: var(--gold); font-style: normal; }
     .social-links { gap: 7px; padding-left: 9px; }
     .footer-disciplines { font-size: 7.5px; }
 }
+
+/* Give the mobile hero a calmer backdrop and a clear gap below the brand. */
+@media (max-width: 760px) {
+    .hero-photo { opacity: .56; background-position: 72% center; }
+    .hero::before {
+        background:
+            linear-gradient(90deg, rgba(5, 15, 32, .96), rgba(5, 15, 32, .86) 58%, rgba(5, 15, 32, .7)),
+            linear-gradient(0deg, #06152a 2%, rgba(6, 21, 42, .35) 52%, rgba(6, 21, 42, .48));
+    }
+    .hero-grid { opacity: .2; }
+    .hero-top-ribbon, .hero-ribbon { opacity: .3; }
+    .hero-content { padding: clamp(124px, 18vh, 152px) 0 0; }
+    .hero-copy { position: relative; z-index: 2; }
+    .hero .eyebrow { margin-bottom: 16px; }
+    .orbit-wrap {
+        z-index: 0;
+        top: 48%;
+        right: auto;
+        bottom: auto;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: .13;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-content { padding-top: 118px; }
+}
+
+@media (max-width: 760px) {
+    .hero-content { padding-top: clamp(148px, 20vh, 172px); }
+    .hero-actions .showreel { display: none; }
+}
+
+@media (max-width: 380px) {
+    .hero-content { padding-top: 138px; }
+}
