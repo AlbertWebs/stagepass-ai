@@ -506,3 +506,26 @@ h1 em { color: var(--gold); font-style: normal; }
 @media (max-width: 380px) {
     .hero-content { padding-top: 138px; }
 }
+
+@media (max-width: 760px) {
+    .hero-foot { padding-bottom: 12px; }
+    .proof-points {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0;
+    }
+    .proof-points > div {
+        min-width: 0;
+        flex: 1 1 20%;
+        gap: 4px;
+        padding-inline: 2px;
+        white-space: nowrap;
+    }
+    .proof-points svg { width: 18px; height: 18px; }
+    .proof-points span { font-size: clamp(6.5px, 1.8vw, 8px); }
+}
+
+@media (max-width: 360px) {
+    .proof-points > div:nth-child(5) { display: none; }
+}
