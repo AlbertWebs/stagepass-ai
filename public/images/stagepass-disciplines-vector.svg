@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="orbitGold" x1="108" y1="154" x2="501" y2="495" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8e5b20"/>
+      <stop offset=".5" stop-color="#d89a27"/>
+      <stop offset="1" stop-color="#8e5b20"/>
+    </linearGradient>
+  </defs>
+
+  <g stroke="url(#orbitGold)" stroke-width="1.5" opacity=".76">
+    <path d="M277 118a184 184 0 0 1 46 0"/>
+    <path d="M194 160a184 184 0 0 1 30-26"/>
+    <path d="M376 134a184 184 0 0 1 30 26"/>
+    <path d="M131 246a184 184 0 0 1 14-48"/>
+    <path d="M455 198a184 184 0 0 1 14 48"/>
+    <path d="M167 413a184 184 0 0 1-28-35"/>
+    <path d="M461 378a184 184 0 0 1-28 35"/>
+    <path d="M250 476a184 184 0 0 1-46-13"/>
+    <path d="M396 463a184 184 0 0 1-46 13"/>
+  </g>
+
+  <circle cx="300" cy="300" r="139" stroke="#0b4d8d" stroke-width="1.2" opacity=".65"/>
+  <circle cx="300" cy="300" r="127" stroke="#b57720" stroke-width="1.6" opacity=".8"/>
+  <g class="node">
+    <circle cx="300" cy="76" r="28"/>
+    <path d="M288 69h7l10-7v28l-10-7h-7zM310 69a9 9 0 0 1 0 14m4-19a16 16 0 0 1 0 24"/>
+    <text x="300" y="116">AUDIO</text>
+  </g>
+  <g class="node">
+    <circle cx="142" cy="171" r="28"/>
+    <rect x="129" y="160" width="26" height="19" rx="1"/>
+    <path d="M136 184h12m-6-5v5"/>
+    <text x="142" y="211">VISUAL</text>
+  </g>
+  <g class="node">
+    <circle cx="458" cy="171" r="28"/>
+    <path d="M458 157a10 10 0 0 0-6 18c2 1 2 3 2 5h8c0-2 0-4 2-5a10 10 0 0 0-6-18zM454 184h8m-7 4h6m-3-31v-3m-14 5-2-2m24 2 2-2"/>
+    <text x="458" y="211">LIGHTING</text>
+  </g>
+  <g class="node">
+    <circle cx="95" cy="370" r="28"/>
+    <path d="M82 360h26v6H82zm3 6v16m20-16v16m-23 0h26m-21-16 16 16m0-16-16 16"/>
+    <text x="95" y="410">RIGGING</text>
+  </g>
+  <g class="node">
+    <circle cx="505" cy="370" r="28"/>
+    <path d="M492 358h26v21h-26zM492 364h26m-20 0v15m14-15v15m-18-15 14 15m0-15-14 15"/>
+    <text x="505" y="410">SCENIC</text>
+  </g>
+  <g class="node">
+    <circle cx="205" cy="500" r="28"/>
+    <path d="m205 483 4 3 5-1 2 5 5 2-1 5 3 4-3 4 1 5-5 2-2 5-5-1-4 3-4-3-5 1-2-5-5-2 1-5-3-4 3-4-1-5 5-2 2-5 5 1z"/>
+    <circle cx="205" cy="499" r="6"/>
+    <text x="205" y="540">PRODUCTION</text>
+  </g>
+  <g class="node">
+    <circle cx="395" cy="500" r="28"/>
+    <path d="m384 510 3-8 16-16a4 4 0 0 1 6 6l-16 16-9 2zM400 489l6 6"/>
+    <text x="395" y="540">DESIGN</text>
+  </g>
+
+  <style>
+    .node { stroke: #edae24; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .node circle:first-child { fill: #071a34; fill-opacity: .94; stroke: #9a651d; stroke-width: 1.5; }
+    .node text { fill: #eef3fb; stroke: none; font: 700 12px Arial, Helvetica, sans-serif; text-anchor: middle; letter-spacing: .15px; }
+  </style>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 290" fill="none">
+  <defs>
+    <linearGradient id="fire" x1="80" y1="278" x2="1030" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#ff3e08"/><stop offset=".34" stop-color="#ff9b00"/><stop offset=".68" stop-color="#fff000"/><stop offset=".83" stop-color="#ff6b00"/><stop offset="1" stop-color="#ff2500"/></linearGradient>
+    <linearGradient id="blue" x1="80" y1="260" x2="1010" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#087cff"/><stop offset=".38" stop-color="#00d3ff"/><stop offset=".58" stop-color="#884bff"/><stop offset=".76" stop-color="#ff2d80"/><stop offset="1" stop-color="#ff9e00"/></linearGradient>
+    <filter id="glow" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="12" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="thinGlow" x="-20%" y="-100%" width="140%" height="300%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <path d="M12 282C214 220 423 211 606 169 810 122 929 39 1105 8" stroke="url(#blue)" stroke-opacity=".42" stroke-width="48" filter="url(#glow)"/>
+  <path d="M-7 281C194 227 414 222 603 176 803 127 934 53 1104 23" stroke="url(#fire)" stroke-opacity=".92" stroke-width="20" filter="url(#glow)"/>
+  <path d="M-7 278C194 224 414 219 603 173 803 124 934 50 1104 20" stroke="url(#fire)" stroke-width="6" filter="url(#thinGlow)"/>
+  <path d="M1 289C198 239 399 239 590 192 795 142 922 71 1094 43" stroke="#fff3a0" stroke-opacity=".8" stroke-width="2.5" filter="url(#thinGlow)"/>
+  <path d="M138 291C334 246 475 248 660 203 844 159 965 95 1105 69" stroke="url(#blue)" stroke-width="3" stroke-opacity=".9" filter="url(#thinGlow)"/>
+</svg>

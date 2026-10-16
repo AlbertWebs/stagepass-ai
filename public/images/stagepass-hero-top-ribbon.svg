@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" fill="none">
+  <defs>
+    <linearGradient id="amber" x1="0" y1="252" x2="1100" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#ffb600"/><stop offset=".32" stop-color="#ff7a00"/><stop offset=".56" stop-color="#fff000"/><stop offset=".75" stop-color="#ff3c08"/><stop offset="1" stop-color="#ff2a12"/></linearGradient>
+    <linearGradient id="electric" x1="0" y1="270" x2="1100" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#00b8ff"/><stop offset=".28" stop-color="#0874ff"/><stop offset=".58" stop-color="#4346ff"/><stop offset=".85" stop-color="#ff287d"/><stop offset="1" stop-color="#ff6b00"/></linearGradient>
+    <filter id="bloom" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="13" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="fine" x="-20%" y="-100%" width="140%" height="300%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <path d="M-30 260C130 199 273 150 389 94 539 22 712 45 875 1 1007-35 1105-37 1230-39" stroke="url(#electric)" stroke-opacity=".55" stroke-width="36" filter="url(#bloom)"/>
+  <path d="M-35 226C112 173 267 126 386 72 534 5 712 22 877-18 1004-49 1119-60 1234-58" stroke="url(#amber)" stroke-opacity=".9" stroke-width="18" filter="url(#bloom)"/>
+  <path d="M-35 223C112 170 267 123 386 69 534 2 712 19 877-21 1004-52 1119-63 1234-61" stroke="url(#amber)" stroke-width="5" filter="url(#fine)"/>
+  <path d="M-28 264C135 205 279 163 403 106 552 37 716 59 885 14 1014-20 1123-28 1235-31" stroke="#41d7ff" stroke-opacity=".75" stroke-width="3" filter="url(#fine)"/>
+  <path d="M-20 240C147 190 285 143 409 88 555 23 721 39 890-2 1030-37 1129-45 1235-48" stroke="#fff2aa" stroke-opacity=".8" stroke-width="2" filter="url(#fine)"/>
+</svg>
