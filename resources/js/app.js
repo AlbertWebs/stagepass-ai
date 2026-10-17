@@ -32,9 +32,30 @@ document.querySelector('.slide-prev')?.addEventListener('click', () => {
     }
 });
 
-const revealSections = document.querySelectorAll('main > section:not(.hero), .site-footer');
+const revealGroups = [
+    '.about-section > *',
+    '.services-copy',
+    '.services-grid > *',
+    '.industry-heading',
+    '.industry-grid > *',
+    '.work-intro',
+    '.project-track > .project-card',
+    '.slider-controls',
+    '.brand-strip > *',
+    '.contact-section > *',
+    '.site-footer > *',
+];
 
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealTargets = new Set();
+
+    revealGroups.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((element, index) => {
+            element.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 65}ms`);
+            revealTargets.add(element);
+        });
+    });
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -43,12 +64,12 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
             }
         });
     }, {
-        threshold: 0.01,
-        rootMargin: '0px 0px -4% 0px',
+        threshold: 0.12,
+        rootMargin: '0px 0px -8% 0px',
     });
 
-    revealSections.forEach((section) => {
-        section.classList.add('scroll-reveal');
-        revealObserver.observe(section);
+    revealTargets.forEach((element) => {
+        element.classList.add('scroll-reveal');
+        revealObserver.observe(element);
     });
 }
