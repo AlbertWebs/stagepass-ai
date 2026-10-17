@@ -538,9 +538,12 @@ h1 em { color: var(--gold); font-style: normal; }
 
     .hero-content {
         flex: 1 1 auto;
-        padding: clamp(150px, 25svh, 210px) 0 clamp(20px, 4svh, 32px);
+        display: flex;
+        align-items: flex-end;
+        padding: clamp(36px, 8svh, 72px) 0 clamp(14px, 2.5svh, 22px);
     }
 
+    .hero-copy { width: 100%; }
     .hero-foot { flex: 0 0 auto; }
 }
 
