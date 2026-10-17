@@ -31,3 +31,24 @@ document.querySelector('.slide-prev')?.addEventListener('click', () => {
         projectTrack.insertBefore(lastProject, projects.item(0));
     }
 });
+
+const revealSections = document.querySelectorAll('main > section:not(.hero), .site-footer');
+
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.01,
+        rootMargin: '0px 0px -4% 0px',
+    });
+
+    revealSections.forEach((section) => {
+        section.classList.add('scroll-reveal');
+        revealObserver.observe(section);
+    });
+}

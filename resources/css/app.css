@@ -529,3 +529,30 @@ h1 em { color: var(--gold); font-style: normal; }
 @media (max-width: 360px) {
     .proof-points > div:nth-child(5) { display: none; }
 }
+
+@media (max-width: 760px) {
+    .hero {
+        height: auto;
+        min-height: min(100svh, 530px);
+    }
+
+    .hero-content {
+        flex: 0 0 auto;
+        padding-bottom: clamp(26px, 5vh, 36px);
+    }
+
+    .hero-foot { flex: 0 0 auto; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 560ms ease-out, transform 560ms cubic-bezier(.2, .65, .3, 1);
+    }
+
+    .scroll-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
