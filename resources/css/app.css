@@ -164,7 +164,7 @@ h1 em { color: var(--gold); font-style: normal; }
 .footer-main, .footer-bottom { display: flex; align-items: center; justify-content: space-between; }
 .footer-main { min-height: 50px; padding-bottom: 11px; border-bottom: 1px solid rgba(93, 127, 170, .2); }
 .footer-main .brand-mark { width: 43px; height: 43px; }.footer-main .brand-copy strong { font-size: 17px; }.footer-main .brand-copy small { font-size: 7px; }
-.footer-disciplines { margin: 0 auto; padding: 0 25px; color: #b8c3d2; font-size: 8px; letter-spacing: .11em; text-transform: uppercase; }
+.footer-disciplines { margin: 0 auto; padding: 0 25px; color: #b8c3d2; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 .footer-disciplines i { padding: 0 4px; color: var(--gold); font-style: normal; }
 .social-links { display: flex; align-items: center; gap: 11px; padding-left: 20px; border-left: 1px solid rgba(134, 160, 193, .2); }
 .social-links a { width: 24px; height: 24px; display: grid; flex: none; place-items: center; color: #fff; border-radius: 50%; background: #176fd1; }
@@ -175,7 +175,7 @@ h1 em { color: var(--gold); font-style: normal; }
 .social-links .social-icon-play { fill: #040c19; }
 .social-links a:hover { color: var(--gold); }
 .social-links a:first-child:hover { color: #fff; background: #0a82e6; }
-.footer-bottom { min-height: 32px; color: #aeb9c9; font-size: 8px; }
+.footer-bottom { min-height: 32px; color: #aeb9c9; font-size: 9px; }
 .footer-bottom p { margin: 0; }.footer-bottom a { color: inherit; }.footer-bottom i { padding: 0 7px; color: #64758c; font-style: normal; }
 .footer-bottom p:last-child { position: relative; padding-left: 20px; border-left: 1px solid rgba(134, 160, 193, .2); line-height: 1.35; }.footer-bottom p:last-child span { position: absolute; bottom: -7px; left: 20px; width: 26px; height: 2px; margin: 0; }
 
@@ -427,9 +427,9 @@ h1 em { color: var(--gold); font-style: normal; }
     .site-footer { padding: 18px 20px 16px; }
     .footer-main { row-gap: 14px; }
     .footer-main .brand { width: auto; }
-    .footer-disciplines { width: 100%; margin: 0; padding: 0; font-size: 8px; line-height: 1.8; letter-spacing: .08em; text-align: center; }
+    .footer-disciplines { width: 100%; margin: 0; padding: 0; font-size: 9px; line-height: 14.4px; letter-spacing: .02em; text-align: center; }
     .social-links { gap: 9px; padding-left: 13px; }
-    .footer-bottom { gap: 9px 18px; padding-top: 13px; font-size: 9px; line-height: 1.5; }
+    .footer-bottom { gap: 9px 18px; padding-top: 13px; font-size: 10px; line-height: 13.5px; }
 }
 
 @media (max-width: 520px) {
@@ -467,7 +467,7 @@ h1 em { color: var(--gold); font-style: normal; }
     .contact-section { padding-inline: 18px; }
     .site-footer { padding-inline: 16px; }
     .social-links { gap: 7px; padding-left: 9px; }
-    .footer-disciplines { font-size: 7.5px; }
+    .footer-disciplines { font-size: 8.5px; }
 }
 
 /* Give the mobile hero a calmer backdrop and a clear gap below the brand. */
