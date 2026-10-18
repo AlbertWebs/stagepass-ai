@@ -6,8 +6,21 @@
     <meta name="theme-color" content="#050b14">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <meta name="description" content="Stagepass Audio Visual delivers world-class event technology and creative production across Africa.">
-    <title>Stagepass Audio Visual — We Engineer Extraordinary Experiences</title>
+    <meta name="description" content="Stagepass Audio Visual is a Nairobi event production company delivering professional AV, sound, LED screens, lighting, staging and creative production in Kenya and across Africa.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ route('home') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Stagepass Audio Visual">
+    <meta property="og:title" content="Stagepass Audio Visual | Event Production & AV Services in Kenya">
+    <meta property="og:description" content="Nairobi event production, professional AV, sound, LED screens, lighting, staging and creative production across Kenya and Africa.">
+    <meta property="og:url" content="{{ route('home') }}">
+    <meta property="og:image" content="{{ asset('images/stagepass-hero-branded.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stagepass Audio Visual | Event Production & AV Services in Kenya">
+    <meta name="twitter:description" content="Nairobi event production, professional AV, sound, LED screens, lighting, staging and creative production across Kenya and Africa.">
+    <meta name="twitter:image" content="{{ asset('images/stagepass-hero-branded.png') }}">
+    <title>Stagepass Audio Visual | Event Production & AV Services in Kenya</title>
+    <script type="application/ld+json">@json(['@context' => 'https://schema.org', '@type' => 'Organization', 'name' => 'Stagepass Audio-Visual Limited', 'url' => route('home'), 'logo' => asset('images/stagepass-logo-source.png'), 'email' => 'info@stagepass.co.ke', 'telephone' => '+254729171351', 'address' => ['@type' => 'PostalAddress', 'streetAddress' => 'Jacaranda Close, Off Ridgeways Road', 'addressLocality' => 'Nairobi', 'addressCountry' => 'KE'], 'areaServed' => ['Kenya', 'Africa'], 'sameAs' => ['https://stagepass.co.ke/']], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>:root { --hero-photo: url("{{ asset('images/stagepass-hero-branded.png') }}"); --about-photo: url("{{ asset('images/about-technician-branded.png') }}"); --event-sprite: url("{{ asset('images/event-contact-sheet.png') }}"); }</style>
