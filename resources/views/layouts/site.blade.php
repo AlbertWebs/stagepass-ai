@@ -5,20 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#050b14">
     <meta name="description" content="{{ $metaDescription }}">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="keywords" content="{{ $metaKeywords }}">
+    <meta name="author" content="StagePass Audio Visual Limited">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="geo.region" content="KE-110">
+    <meta name="geo.placename" content="Nairobi">
+    <meta name="geo.position" content="-1.2210922;36.8443046">
+    <meta name="ICBM" content="-1.2210922, 36.8443046">
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="en-KE" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta property="og:type" content="{{ $ogType ?? 'website' }}">
-    <meta property="og:site_name" content="Stagepass Audio Visual">
+    <meta property="og:site_name" content="StagePass Audio Visual Limited">
+    <meta property="og:locale" content="en_KE">
     <meta property="og:title" content="{{ $metaTitle }}">
     <meta property="og:description" content="{{ $metaDescription }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('images/stagepass-hero-branded.png') }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:image" content="{{ asset(config('site_seo.og_image')) }}">
+    <meta property="og:image:width" content="1672">
+    <meta property="og:image:height" content="941">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ $canonicalUrl }}">
     <meta name="twitter:title" content="{{ $metaTitle }}">
     <meta name="twitter:description" content="{{ $metaDescription }}">
-    <meta name="twitter:image" content="{{ asset('images/stagepass-hero-branded.png') }}">
+    <meta name="twitter:image" content="{{ asset(config('site_seo.og_image')) }}">
+    <meta name="twitter:site" content="@stagepass">
+    <meta name="twitter:creator" content="@stagepass">
     <title>{{ $metaTitle }}</title>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])

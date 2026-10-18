@@ -6,21 +6,36 @@
     <meta name="theme-color" content="#050b14">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <meta name="description" content="Stagepass Audio Visual is a Nairobi event production company delivering professional AV, sound, LED screens, lighting, staging and creative production in Kenya and across Africa.">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="{{ route('home') }}">
+    <meta name="description" content="StagePass Audio Visual Limited is Kenya's leading events and audio-visual company — offering professional sound systems, event production, video conferencing, stage lighting, LED screens and technical event support in Nairobi and across Kenya.">
+    <meta name="keywords" content="{{ config('site_seo.keywords') }}">
+    <meta name="author" content="StagePass Audio Visual Limited">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="geo.region" content="KE-110">
+    <meta name="geo.placename" content="Nairobi">
+    <meta name="geo.position" content="-1.2210922;36.8443046">
+    <meta name="ICBM" content="-1.2210922, 36.8443046">
+    <link rel="canonical" href="https://stagepass.co.ke">
+    <link rel="alternate" hreflang="en-KE" href="https://stagepass.co.ke">
+    <link rel="alternate" hreflang="x-default" href="https://stagepass.co.ke">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Stagepass Audio Visual">
-    <meta property="og:title" content="Stagepass Audio Visual | Event Production & AV Services in Kenya">
-    <meta property="og:description" content="Nairobi event production, professional AV, sound, LED screens, lighting, staging and creative production across Kenya and Africa.">
-    <meta property="og:url" content="{{ route('home') }}">
-    <meta property="og:image" content="{{ asset('images/stagepass-hero-branded.png') }}">
+    <meta property="og:site_name" content="StagePass Audio Visual Limited">
+    <meta property="og:locale" content="en_KE">
+    <meta property="og:title" content="The Best Audio Visual Company in Kenya — StagePass Audio Visual Limited">
+    <meta property="og:description" content="Kenya's trusted Audio Visual &amp; Event Production company — professional sound engineering, staging, LED screens, event technology and conferencing solutions.">
+    <meta property="og:url" content="https://stagepass.co.ke">
+    <meta property="og:image" content="{{ asset(config('site_seo.og_image')) }}">
+    <meta property="og:image:width" content="1672">
+    <meta property="og:image:height" content="941">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Stagepass Audio Visual | Event Production & AV Services in Kenya">
-    <meta name="twitter:description" content="Nairobi event production, professional AV, sound, LED screens, lighting, staging and creative production across Kenya and Africa.">
-    <meta name="twitter:image" content="{{ asset('images/stagepass-hero-branded.png') }}">
-    <title>Stagepass Audio Visual | Event Production & AV Services in Kenya</title>
-    <script type="application/ld+json">@json(['@context' => 'https://schema.org', '@type' => 'Organization', 'name' => 'Stagepass Audio-Visual Limited', 'url' => route('home'), 'logo' => asset('images/stagepass-logo-source.png'), 'email' => 'info@stagepass.co.ke', 'telephone' => '+254729171351', 'address' => ['@type' => 'PostalAddress', 'streetAddress' => 'Jacaranda Close, Off Ridgeways Road', 'addressLocality' => 'Nairobi', 'addressCountry' => 'KE'], 'areaServed' => ['Kenya', 'Africa'], 'sameAs' => ['https://stagepass.co.ke/']], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
+    <meta name="twitter:url" content="https://stagepass.co.ke">
+    <meta name="twitter:title" content="The Best Audio Visual Company in Kenya — StagePass Audio Visual Limited">
+    <meta name="twitter:description" content="Events &amp; Audio Visual production company in Kenya — sound systems, staging, lighting, LED screens, conferencing &amp; event technology.">
+    <meta name="twitter:image" content="{{ asset(config('site_seo.og_image')) }}">
+    <meta name="twitter:site" content="@stagepass">
+    <meta name="twitter:creator" content="@stagepass">
+    <title>The Best Audio Visual Company in Kenya — StagePass Audio Visual Limited</title>
+    <script type="application/ld+json">@json(['@context' => 'https://schema.org', '@type' => 'LocalBusiness', 'name' => 'StagePass Audio Visual Limited', 'url' => 'https://stagepass.co.ke', 'logo' => asset('images/stagepass-logo-source.png'), 'image' => asset(config('site_seo.og_image')), 'description' => "StagePass Audio Visual Limited provides professional audio visual, sound engineering, stage lighting, LED screens and event production services across Kenya.", 'address' => ['@type' => 'PostalAddress', 'streetAddress' => 'Jacaranda Close, Ridgeways', 'addressLocality' => 'Nairobi', 'addressRegion' => 'Nairobi', 'addressCountry' => 'KE'], 'geo' => ['@type' => 'GeoCoordinates', 'latitude' => config('site_seo.latitude'), 'longitude' => config('site_seo.longitude')], 'areaServed' => ['@type' => 'Country', 'name' => 'Kenya'], 'priceRange' => '$$', 'telephone' => '+254 729 171 351', 'email' => 'info@stagepass.co.ke', 'openingHours' => 'Mo-Fr 09:00-18:00, Sa 10:00-16:00', 'sameAs' => ['https://stagepass.co.ke/', 'https://ke.linkedin.com/company/stagepass-audio-visual-limited', 'https://facebook.com/stagepass', 'https://twitter.com/stagepass']], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>:root { --hero-photo: url("{{ asset('images/stagepass-hero-branded.png') }}"); --about-photo: url("{{ asset('images/about-technician-branded.png') }}"); --event-sprite: url("{{ asset('images/event-contact-sheet.png') }}"); }</style>

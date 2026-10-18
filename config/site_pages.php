@@ -152,4 +152,26 @@ return [
             ['eyebrow' => 'Policy updates', 'heading' => 'Changes to this policy', 'body' => 'We may update this policy as our website or practices change. The current version will be published on this page with its effective date. Effective date: 18 October 2026.'],
         ],
     ],
+    'audio-visual-company-kenya' => [
+        'uri' => '/audio-visual-company-kenya',
+        'name' => 'audio-visual-company-kenya',
+        'title' => 'The Best Audio Visual Company in Kenya | StagePass Audio Visual Limited',
+        'description' => 'StagePass Audio Visual Limited is Kenya’s leading events and audio-visual company, offering professional sound systems, event production, video conferencing, stage lighting, LED screens and technical event support in Nairobi and across Kenya.',
+        'keywords' => 'audio visual company Kenya, AV company Nairobi, event production Kenya, sound systems Kenya, stage lighting Kenya, video conferencing Kenya, event technology Kenya, professional event services Kenya',
+        'eyebrow' => 'Audio Visual Company in Kenya',
+        'heading' => 'The best audio visual company in Kenya for events that matter.',
+        'intro' => 'StagePass Audio Visual Limited is an event production and AV company based in Nairobi, Kenya. We bring sound systems, stage lighting, LED screens, video conferencing and technical event support together for conferences, launches, ceremonies and live experiences.',
+        'sections' => [
+            ['eyebrow' => 'Professional event services in Kenya', 'heading' => 'Audio visual technology and event production, planned together', 'body' => 'As an audio visual company in Kenya, StagePass supports event teams with integrated technical planning, production design, equipment and on-site delivery. We work with clients in Nairobi and across Kenya to shape the right production for the audience, venue and programme.', 'items' => [
+                ['title' => 'Professional sound systems', 'body' => 'Sound system planning and technical operation for clear, consistent audio at conferences, corporate events, performances and public gatherings.'],
+                ['title' => 'Event production in Kenya', 'body' => 'Production coordination from the initial event brief through preparation, setup and show execution, bringing technical disciplines into one plan.'],
+                ['title' => 'Stage lighting in Nairobi', 'body' => 'Lighting design and production that supports speakers, performers, audience atmosphere and the visual character of the venue.', 'url' => '/services/lighting', 'link' => 'Explore lighting'],
+                ['title' => 'LED screens and visual displays', 'body' => 'LED screens and event visuals planned around the content, room layout and audience sightlines.'],
+                ['title' => 'Video conferencing and livestreaming', 'body' => 'Audio-visual production support for hybrid meetings, remote presenters and events that connect audiences beyond the venue.'],
+                ['title' => 'Technical event support', 'body' => 'Experienced event technicians, staging, rigging, power coordination and equipment support for a wide range of professional events.'],
+            ]],
+            ['eyebrow' => 'Event technology Nairobi', 'heading' => 'One AV partner for your full production', 'body' => 'From corporate conferences and video conferencing to product launches, exhibitions and live productions, StagePass provides professional event services in Kenya with creative production and technical detail considered together. Share your event date, location and requirements with our Nairobi team to begin planning.'],
+            ['eyebrow' => 'Start a conversation', 'heading' => 'Plan your next event with StagePass', 'body' => 'Contact StagePass Audio Visual Limited for an event production quote, AV consultation or equipment discussion. We are based in Nairobi and support events throughout Kenya and the region.'],
+        ],
+    ],
 ];

@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-$sitePages = config('site_pages');
+$sitePages = config('site_pages', []);
+$canonicalOrigin = rtrim(config('site_seo.canonical_origin', 'https://stagepass.co.ke'), '/');
 
 Route::view('/', 'welcome')->name('home');
 
@@ -17,14 +18,14 @@ foreach ($sitePages as $slug => $page) {
             },
             'name' => $page['title'],
             'description' => $page['description'],
-            'url' => url()->current(),
+            'url' => $canonicalOrigin.$page['uri'],
             'isPartOf' => ['@type' => 'WebSite', 'name' => 'Stagepass Audio Visual', 'url' => route('home')],
             'publisher' => ['@type' => 'Organization', 'name' => 'Stagepass Audio-Visual Limited', 'url' => route('home')],
             'breadcrumb' => [
                 '@type' => 'BreadcrumbList',
                 'itemListElement' => [
                     ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => route('home')],
-                    ['@type' => 'ListItem', 'position' => 2, 'name' => $page['eyebrow'], 'item' => url()->current()],
+                    ['@type' => 'ListItem', 'position' => 2, 'name' => $page['eyebrow'], 'item' => $canonicalOrigin.$page['uri']],
                 ],
             ],
             ...in_array($page['name'], ['services', 'lighting'], true) ? [
@@ -36,13 +37,15 @@ foreach ($sitePages as $slug => $page) {
             ...$page,
             'metaTitle' => $page['title'],
             'metaDescription' => $page['description'],
+            'canonicalUrl' => $canonicalOrigin.$page['uri'],
+            'metaKeywords' => $page['keywords'] ?? config('site_seo.keywords'),
             'structuredData' => $structuredData,
         ]);
     })->name($page['name']);
 }
 
 Route::get('/sitemap.xml', function () use ($sitePages) {
-    $urls = [route('home'), ...array_map(fn (array $page): string => route($page['name']), array_values($sitePages))];
+    $urls = [$canonicalOrigin.'/', ...array_map(fn (array $page): string => $canonicalOrigin.$page['uri'], array_values($sitePages))];
 
     return response()->view('sitemap', ['urls' => $urls])->header('Content-Type', 'application/xml; charset=UTF-8');
 })->name('sitemap');
