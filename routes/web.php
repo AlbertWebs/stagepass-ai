@@ -8,7 +8,7 @@ $canonicalOrigin = rtrim(config('site_seo.canonical_origin', 'https://stagepass.
 Route::view('/', 'welcome')->name('home');
 
 foreach ($sitePages as $slug => $page) {
-    Route::get($page['uri'], function () use ($page) {
+    Route::get($page['uri'], function () use ($page, $canonicalOrigin) {
         $structuredData = [
             '@context' => 'https://schema.org',
             '@type' => match ($page['name']) {
@@ -44,7 +44,7 @@ foreach ($sitePages as $slug => $page) {
     })->name($page['name']);
 }
 
-Route::get('/sitemap.xml', function () use ($sitePages) {
+Route::get('/sitemap.xml', function () use ($sitePages, $canonicalOrigin) {
     $urls = [$canonicalOrigin.'/', ...array_map(fn (array $page): string => $canonicalOrigin.$page['uri'], array_values($sitePages))];
 
     return response()->view('sitemap', ['urls' => $urls])->header('Content-Type', 'application/xml; charset=UTF-8');
