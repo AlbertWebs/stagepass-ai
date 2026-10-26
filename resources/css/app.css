@@ -22,9 +22,9 @@ button { color: inherit; font: inherit; }
 .brand-copy strong { font-size: 21px; letter-spacing: .035em; line-height: 1; }
 .brand-copy small { font-size: 8px; letter-spacing: .47em; color: #cad5e6; }
 .main-nav { display: flex; align-items: center; justify-content: center; gap: clamp(17px, 2.2vw, 34px); height: 100%; }
-.main-nav a { position: relative; display: flex; align-items: center; height: 100%; color: #e2e8f0; font-size: 12px; font-weight: 600; transition: color .2s; }
+.main-nav a { position: relative; display: flex; align-items: center; height: auto; padding-block: 4px; color: #e2e8f0; font-size: 12px; font-weight: 600; transition: color .2s; }
 .main-nav a:hover, .main-nav a.is-active { color: #fff; }
-.main-nav a.is-active::after { position: absolute; bottom: 15px; left: 0; right: 0; height: 2px; content: ''; background: var(--gold); box-shadow: 0 0 12px #ffb800; }
+.main-nav a.is-active::after { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; content: ''; background: var(--gold); box-shadow: 0 0 12px #ffb800; }
 .header-actions { display: flex; align-items: center; gap: 14px; }
 .search-button { width: 39px; height: 39px; display: grid; place-items: center; border: 1px solid rgba(151, 177, 212, .28); border-radius: 50%; }
 .search-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
