@@ -72,7 +72,7 @@
     <script type="application/ld+json">@json($homeStructuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>:root { --hero-photo: url("{{ asset('images/stagepass-hero-branded.png') }}"); --about-photo: url("{{ asset('images/about-stagepass.webp') }}"); --event-sprite: url("{{ asset('images/event-contact-sheet.png') }}"); }</style>
+    <style>:root { --hero-photo: url("{{ asset('images/stagepass-hero-branded.png') }}"); --about-photo: url("{{ asset('images/about-stagepass-hall.webp') }}"); --event-sprite: url("{{ asset('images/event-contact-sheet.png') }}"); }</style>
 </head>
 <body>
     <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +160,7 @@
 
         <section class="about-section section-rule" id="about">
             <div class="about-copy section-copy"><p class="eyebrow">About Stagepass</p><h2>More than<br>technology.<br><em>A team that delivers.</em></h2><p>We are a team of creative thinkers, technical experts and event professionals committed to delivering exceptional experiences across Africa.</p><a class="button button-outline button-small" href="#contact">Learn More <svg><use href="#i-arrow"/></svg></a></div>
-            <div class="about-photo" role="img" aria-label="Stagepass event production with branded LED screens, stage lighting and auditorium seating"></div>
+            <div class="about-photo" role="img" aria-label="Stagepass branded LED stage and event lighting in a live auditorium"></div>
             <div class="about-highlights"><div><svg><use href="#i-diamond"/></svg><span><b>Years of</b><small>Experience</small></span></div><div><svg><use href="#i-team"/></svg><span><b>A passionate</b><small>Team</small></span></div><div><img class="africa-icon" src="/images/africa-map-icon.svg" alt=""><span><b>Projects across</b><small>Africa</small></span></div><div><svg><use href="#i-star"/></svg><span><b>Trusted by</b><small>Leading brands</small></span></div></div>
             <div class="africa-card"><div class="africa-map"><img src="/images/africa-map.svg" alt=""><svg class="africa-routes" viewBox="0 0 280 300" role="img" aria-label="Routes from Nairobi reaching destinations across Africa" xmlns="http://www.w3.org/2000/svg"><defs><marker id="africa-route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 8 4 0 8z"/></marker></defs><g class="africa-route-lines"><path d="M220 158 Q190 105 181 48"/><path d="M220 158 Q143 114 53 92"/><path d="M220 158 Q144 137 86 132"/><path d="M220 158 Q158 175 128 196"/><path d="M220 158 Q188 215 151 263"/><path d="M220 158 Q205 204 190 236"/><path d="M220 158 Q247 128 244 113"/></g><circle class="africa-nairobi-halo" cx="220" cy="158" r="8"/><circle class="africa-nairobi-dot" cx="220" cy="158" r="3.5"/></svg></div><p>Africa’s<br>event technology<br>partner</p></div>
         </section>
