@@ -113,7 +113,7 @@
             ['Exhibitions', 'scene-4', ['exhibitions.webp']],
             ['Hospitality', 'scene-5', []],
             ['Broadcast', 'scene-6', ['broadcast.webp']],
-            ['Sports', 'scene-3', ['sports-congress.webp', 'sports-event.webp']],
+            ['Sports', 'scene-3', ['sports-congress.webp']],
         ];
         $projects = [
             ['Dangote Groundbreaking Ceremony', 'Kenya', 'scene-4'], ['Safaricom @ 25', 'Kenya', 'scene-3'],
