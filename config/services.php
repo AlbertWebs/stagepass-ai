@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'instagram' => [
+        'user_id' => env('INSTAGRAM_GRAPH_API_USER_ID'),
+        'access_token' => env('INSTAGRAM_GRAPH_API_ACCESS_TOKEN'),
+        'api_version' => env('INSTAGRAM_GRAPH_API_VERSION', 'v25.0'),
+    ],
+
 ];

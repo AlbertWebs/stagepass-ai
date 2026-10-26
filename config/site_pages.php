@@ -99,24 +99,12 @@ return [
     'our-work' => [
         'uri' => '/our-work',
         'name' => 'our-work',
-        'title' => 'Our Work | Stagepass Event Technology & Production',
-        'description' => 'Discover how Stagepass teams plan and deliver live experiences, from conference stages and branded environments to ceremonies and entertainment productions.',
+        'title' => 'Our Work on Instagram | Stagepass Audio Visual',
+        'description' => 'Browse the latest Stagepass Instagram posts featuring event production, audio visual, staging, lighting, LED screens and live experiences across Kenya and Africa.',
         'eyebrow' => 'Our Work',
-        'heading' => 'The details behind a seamless live experience.',
-        'intro' => 'A finished event is the result of hundreds of considered decisions. Meet the production thinking, teamwork and technical craft behind selected Stagepass experiences.',
-        'sections' => [
-            ['eyebrow' => 'How we deliver', 'heading' => 'One connected production journey', 'body' => 'From the first conversation to the final cue, our team works across planning, preparation, setup and show execution. We coordinate technical disciplines around the audience journey and the purpose of the event.', 'items' => [
-                ['title' => 'Understand the brief', 'body' => 'We align on the event purpose, audience, programme, venue and practical requirements before shaping a production plan.'],
-                ['title' => 'Design the experience', 'body' => 'Creative and technical decisions come together across staging, screens, lighting, sound, branding and guest movement.'],
-                ['title' => 'Prepare and coordinate', 'body' => 'Equipment, crew, venue logistics and show details are brought into a coordinated plan for setup and delivery.'],
-                ['title' => 'Deliver the show', 'body' => 'Our production team supports technical operations and show execution, staying focused on the details that keep the event moving.'],
-            ]],
-            ['eyebrow' => 'Selected stories', 'heading' => 'Experiences made possible by teamwork', 'body' => 'Our portfolio includes the Dangote Groundbreaking Ceremony in Lamu, SAP Connect Day East Africa, corporate brand experiences, conferences and live entertainment. Each calls for its own mix of creative production and event technology.'],
-            ['eyebrow' => 'Explore selected projects', 'heading' => 'See the production range', 'items' => [
-                ['title' => 'Projects & event portfolio', 'body' => 'View selected ceremonies, corporate events, conferences and live productions.', 'url' => '/portfolio', 'link' => 'Browse portfolio'],
-                ['title' => 'Services & capabilities', 'body' => 'Explore the event technology and technical production disciplines we coordinate.', 'url' => '/services', 'link' => 'Explore services'],
-            ]],
-        ],
+        'heading' => 'Our work, as it happens.',
+        'intro' => 'Recent moments and productions from the Stagepass Instagram feed.',
+        'sections' => [],
     ],
     'contact' => [
         'uri' => '/contact',

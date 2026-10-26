@@ -1,14 +1,31 @@
 <?php
 
+use App\Http\Controllers\QuoteRequestController;
+use App\Services\InstagramFeedService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 $sitePages = config('site_pages', []);
 $canonicalOrigin = rtrim(config('site_seo.canonical_origin', 'https://stagepass.co.ke'), '/');
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', function (Request $request, InstagramFeedService $instagramFeed): View {
+    $firstChallengeNumber = random_int(2, 9);
+    $secondChallengeNumber = random_int(2, 9);
+    $request->session()->put('quote_challenge', $firstChallengeNumber + $secondChallengeNumber);
+
+    return view('welcome', [
+        'instagramPosts' => $instagramFeed->posts(),
+        'quoteChallenge' => $firstChallengeNumber.' + '.$secondChallengeNumber,
+    ]);
+})->name('home');
+
+Route::post('/quote-requests', QuoteRequestController::class)
+    ->middleware('throttle:quote-requests')
+    ->name('quote-requests.store');
 
 foreach ($sitePages as $slug => $page) {
-    Route::get($page['uri'], function () use ($page, $canonicalOrigin) {
+    Route::get($page['uri'], function (InstagramFeedService $instagramFeed) use ($page, $canonicalOrigin) {
         $structuredData = [
             '@context' => 'https://schema.org',
             '@type' => match ($page['name']) {
@@ -33,14 +50,23 @@ foreach ($sitePages as $slug => $page) {
             ] : [],
         ];
 
-        return view('pages.content', [
+        $viewData = [
             ...$page,
             'metaTitle' => $page['title'],
             'metaDescription' => $page['description'],
             'canonicalUrl' => $canonicalOrigin.$page['uri'],
             'metaKeywords' => $page['keywords'] ?? config('site_seo.keywords'),
             'structuredData' => $structuredData,
-        ]);
+        ];
+
+        if ($page['name'] === 'our-work') {
+            return view('pages.instagram-feed', [
+                ...$viewData,
+                'instagramPosts' => $instagramFeed->posts(),
+            ]);
+        }
+
+        return view('pages.content', $viewData);
     })->name($page['name']);
 }
 
