@@ -16,6 +16,12 @@ navigation?.querySelectorAll('a').forEach((link) => {
 const quoteDialog = document.querySelector('#quote-dialog');
 const quoteForm = quoteDialog?.querySelector('.quote-form');
 
+const closeQuoteDialog = () => {
+    if (quoteDialog instanceof HTMLDialogElement && quoteDialog.open && !quoteDialog.classList.contains('is-closing')) {
+        quoteDialog.classList.add('is-closing');
+    }
+};
+
 document.querySelectorAll('[data-quote-open]').forEach((button) => {
     button.addEventListener('click', () => {
         if (quoteDialog instanceof HTMLDialogElement && !quoteDialog.open) {
@@ -25,15 +31,28 @@ document.querySelectorAll('[data-quote-open]').forEach((button) => {
 });
 
 quoteDialog?.querySelector('[data-quote-close]')?.addEventListener('click', () => {
-    if (quoteDialog instanceof HTMLDialogElement) {
+    closeQuoteDialog();
+});
+
+quoteDialog?.addEventListener('click', (event) => {
+    if (event.target === quoteDialog) {
+        closeQuoteDialog();
+    }
+});
+
+quoteDialog?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeQuoteDialog();
+});
+
+quoteDialog?.addEventListener('animationend', (event) => {
+    if (event.target === quoteDialog && event.animationName === 'quote-dialog-exit' && quoteDialog instanceof HTMLDialogElement) {
         quoteDialog.close();
     }
 });
 
-quoteDialog?.addEventListener('click', (event) => {
-    if (event.target === quoteDialog && quoteDialog instanceof HTMLDialogElement) {
-        quoteDialog.close();
-    }
+quoteDialog?.addEventListener('close', () => {
+    quoteDialog.classList.remove('is-closing');
 });
 
 if (quoteDialog instanceof HTMLDialogElement && quoteDialog.hasAttribute('data-open-on-load')) {

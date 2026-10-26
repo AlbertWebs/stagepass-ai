@@ -203,6 +203,14 @@ h1 em { color: var(--gold); font-style: normal; }
 .contact-watermark { z-index: 1; margin: 0; justify-self: end; color: #f0f5fc; font-size: 13px; line-height: 1.5; letter-spacing: .29em; text-transform: uppercase; }
 .quote-dialog { width: min(620px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; overflow: auto; margin: auto; border: 1px solid rgba(128, 173, 225, .3); color: var(--white); background: #07142a; box-shadow: 0 28px 100px rgba(0, 0, 0, .62); }
 .quote-dialog::backdrop { background: rgba(1, 6, 16, .78); backdrop-filter: blur(8px); }
+.quote-dialog[open] { animation: quote-dialog-enter 420ms cubic-bezier(.2, .8, .2, 1) both; will-change: opacity, transform, filter; }
+.quote-dialog[open]::backdrop { animation: quote-backdrop-enter 420ms ease-out both; }
+.quote-dialog.is-closing { animation: quote-dialog-exit 220ms cubic-bezier(.4, 0, 1, 1) both; }
+.quote-dialog.is-closing::backdrop { animation: quote-backdrop-exit 220ms ease-in both; }
+@keyframes quote-dialog-enter { from { opacity: 0; transform: translateY(18px) scale(.975); filter: blur(5px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes quote-backdrop-enter { from { background: rgba(1, 6, 16, 0); backdrop-filter: blur(0); } to { background: rgba(1, 6, 16, .78); backdrop-filter: blur(8px); } }
+@keyframes quote-dialog-exit { from { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } to { opacity: 0; transform: translateY(10px) scale(.985); filter: blur(3px); } }
+@keyframes quote-backdrop-exit { from { background: rgba(1, 6, 16, .78); backdrop-filter: blur(8px); } to { background: rgba(1, 6, 16, 0); backdrop-filter: blur(0); } }
 .quote-dialog-panel { position: relative; padding: clamp(24px, 5vw, 42px); }
 .quote-dialog-close { position: absolute; top: 17px; right: 17px; display: grid; width: 38px; height: 38px; padding: 9px; place-items: center; border: 1px solid rgba(151, 179, 213, .34); border-radius: 50%; color: #f5f8ff; cursor: pointer; background: rgba(18, 43, 71, .72); }
 .quote-dialog-close:hover, .quote-dialog-close:focus-visible { border-color: var(--gold); color: var(--gold); }
