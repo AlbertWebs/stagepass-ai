@@ -16,21 +16,27 @@
     </section>
 
     <section class="instagram-feed wrap" aria-labelledby="instagram-feed-title">
-        <div class="instagram-feed-heading">
+        <div class="instagram-feed-heading" data-scroll-reveal>
             <div>
-                <p class="eyebrow">@stagepassav</p>
-                <h2 id="instagram-feed-title">Latest from Instagram</h2>
+                <p class="eyebrow">Field notes <span aria-hidden="true">·</span> @stagepassav</p>
+                <h2 id="instagram-feed-title">Work, in motion.</h2>
+                <p class="instagram-feed-intro">A living archive of the stages, people and details behind every production.</p>
             </div>
-            <a href="https://www.instagram.com/stagepassav/" target="_blank" rel="noopener noreferrer">Follow on Instagram <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <div class="instagram-feed-actions">
+                <span class="instagram-feed-count"><b>{{ str_pad((string) count($instagramPosts), 2, '0', STR_PAD_LEFT) }}</b> recent moments</span>
+                <a href="https://www.instagram.com/stagepassav/" target="_blank" rel="noopener noreferrer">Follow on Instagram <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            </div>
         </div>
 
         @if (count($instagramPosts) > 0)
-            <div class="instagram-feed-grid">
+            <div class="instagram-feed-grid work-gallery">
                 @foreach ($instagramPosts as $post)
                     @php($isVideo = ($post['media_type'] ?? '') === 'VIDEO' && isset($post['preview_url']))
                     <button
-                        class="instagram-feed-card instagram-media-trigger"
+                        class="instagram-feed-card instagram-media-trigger{{ $loop->first ? ' is-featured' : '' }}"
                         type="button"
+                        data-scroll-reveal
+                        style="--reveal-order: {{ $loop->index % 4 }}"
                         data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}"
                         data-media-url="{{ $post['media_url'] }}"
                         data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}"
@@ -39,6 +45,7 @@
                         aria-label="View {{ $isVideo ? 'video' : 'image' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 120) }}"
                     >
                         <img src="{{ $post['preview_url'] ?? $post['media_url'] }}" alt="{{ \Illuminate\Support\Str::limit($post['caption'], 180) }}" loading="lazy" decoding="async">
+                        <span class="instagram-feed-card-index" aria-hidden="true"><b>{{ sprintf('%02d', $loop->iteration) }}</b><i>/</i> STAGEPASS</span>
                         @if ($isVideo)
                             <span class="instagram-feed-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>
                         @endif

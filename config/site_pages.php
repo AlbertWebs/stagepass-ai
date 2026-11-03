@@ -50,6 +50,15 @@ return [
         'eyebrow' => 'Industries We Serve',
         'heading' => 'Different audiences. One standard of care.',
         'intro' => 'Every sector has its own audience, programme and technical demands. Stagepass adapts event technology and production planning to the brief, venue and people in the room.',
+        'gallery' => [
+            ['title' => 'Corporate', 'scene' => 'scene-1', 'images' => ['corporate-ceo-forum.webp']],
+            ['title' => 'Government', 'scene' => 'scene-2', 'images' => ['government-dangote-ceremony.webp']],
+            ['title' => 'Entertainment', 'scene' => 'scene-3', 'images' => ['entertainment-event.webp']],
+            ['title' => 'Exhibitions', 'scene' => 'scene-4', 'images' => ['exhibitions.webp']],
+            ['title' => 'Hospitality', 'scene' => 'scene-5', 'images' => ['hospitality-tatler-ballroom.webp']],
+            ['title' => 'Broadcast', 'scene' => 'scene-6', 'images' => ['broadcast.webp']],
+            ['title' => 'Sports', 'scene' => 'scene-3', 'images' => ['sports-congress.webp']],
+        ],
         'sections' => [
             ['eyebrow' => 'Tailored production', 'heading' => 'Event solutions shaped around your sector', 'body' => 'Our integrated event production capabilities support a range of event formats across Kenya and the wider region.', 'items' => [
                 ['title' => 'Corporate & conferences', 'body' => 'Audio, screens, staging and technical direction for conferences, meetings, launches and leadership events.'],
@@ -65,15 +74,20 @@ return [
     'about' => [
         'uri' => '/about',
         'name' => 'about',
-        'title' => 'About Stagepass Audio Visual | Nairobi Event Production Company',
-        'description' => 'Meet Stagepass Audio Visual, a Nairobi-based event technology, consulting, planning, design and implementation team serving Kenya and Africa.',
+        'title' => 'About Stagepass Audio Visual | Event Technology Across Africa',
+        'description' => 'Meet Stagepass Audio-Visual Limited, an integrated event technology, consulting, planning, design and implementation provider based in Nairobi and serving events across Africa.',
         'eyebrow' => 'About Stagepass',
-        'heading' => 'People, technology and impact.',
-        'intro' => 'Stagepass Audio-Visual Limited is an integrated technical, consulting, planning, design and implementation provider for professional events, based in Nairobi and operating across Africa.',
+        'heading' => 'Creative solutions. Technical excellence.',
+        'intro' => 'Stagepass Audio-Visual Limited is an integrated technical, consulting, planning, design and implementation provider for professional events. Based in Nairobi, we work across Africa to bring people, event technology and creative production together.',
         'sections' => [
-            ['eyebrow' => 'Who we are', 'heading' => 'Creative thinking backed by technical delivery', 'body' => 'We bring event professionals, creative thinkers and technical specialists together to plan and deliver live experiences. Our work spans audio-visual technology, sound, screens, lighting, content, digital and interactive technology, staging and scenic design.'],
-            ['eyebrow' => 'Our approach', 'heading' => 'From a clear brief to a coordinated show', 'body' => 'Good production starts with listening. We learn what the event needs to communicate, understand the venue and audience, then coordinate design, equipment and execution around the plan. Our aim is to make the technical experience feel seamless for clients, speakers, performers and guests.'],
-            ['eyebrow' => 'Our vision', 'heading' => 'Africa’s revolutionary events technology experts', 'body' => 'We are building an event technology partner that combines creative solutions with technical excellence, serving clients in Nairobi, Kenya and across the African region.'],
+            ['eyebrow' => 'Who we are', 'heading' => 'An end-to-end partner for professional events', 'body' => 'We bring technical consulting, event planning, design and implementation together under one team. From corporate presentations and conferences to large-scale live events, we help clients shape the technical experience and deliver it on site.', 'image' => 'images/about-fifa-congress.jpg', 'image_alt' => 'Stagepass production at the 73rd FIFA Congress in Kigali'],
+            ['eyebrow' => 'What we do', 'heading' => 'Event technology, design and delivery', 'body' => 'Stagepass specializes in audio-visual technology rentals and event production. We coordinate the creative and technical disciplines around the needs of the venue, programme and audience.', 'items' => [
+                ['title' => 'Plan & consult', 'body' => 'Technical consulting and event planning that turn the brief into a clear production approach.'],
+                ['title' => 'Design the experience', 'body' => 'Sound, screens, lighting, content management, digital and interactive technology, staging and scenic design.'],
+                ['title' => 'Implement on site', 'body' => 'Equipment, setup and complete implementation support from preparation through the live event.'],
+            ]],
+            ['eyebrow' => 'Our people', 'heading' => 'A skilled team, backed by trusted technology', 'body' => 'Our team brings the expertise and care needed to make the production work as one. We pair that experience with trusted audio-visual, staging and lighting brands to support each event’s requirements.', 'image' => 'images/about-technician-branded.png', 'image_alt' => 'Stagepass audio-visual technician operating a live event sound desk'],
+            ['eyebrow' => 'Our vision', 'heading' => 'To be Africa’s revolutionary events technology experts', 'body' => 'We work toward a future where African events are shaped by bold ideas, thoughtful planning and dependable technical execution.'],
         ],
     ],
     'portfolio' => [
@@ -99,11 +113,11 @@ return [
     'our-work' => [
         'uri' => '/our-work',
         'name' => 'our-work',
-        'title' => 'Our Work on Instagram | Stagepass Audio Visual',
+        'title' => 'Our Work | Live Event Production by Stagepass',
         'description' => 'Browse the latest Stagepass Instagram posts featuring event production, audio visual, staging, lighting, LED screens and live experiences across Kenya and Africa.',
         'eyebrow' => 'Our Work',
-        'heading' => 'Our work, as it happens.',
-        'intro' => 'Recent moments and productions from the Stagepass Instagram feed.',
+        'heading' => 'The moments we bring to life.',
+        'intro' => 'From the first impression to the final cue, explore the live experiences Stagepass creates with clients across Africa.',
         'sections' => [],
     ],
     'contact' => [

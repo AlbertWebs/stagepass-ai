@@ -48,5 +48,6 @@
     @include('partials.site-header')
     @yield('content')
     @include('partials.site-footer')
+    @include('partials.quote-dialog')
 </body>
 </html>

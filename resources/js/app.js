@@ -1,20 +1,224 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-nav');
 
-menuToggle?.addEventListener('click', () => {
-    const isOpen = navigation?.classList.toggle('is-open') ?? false;
+const setNavigationOpen = (isOpen) => {
+    if (!menuToggle || !navigation) {
+        return;
+    }
+
+    navigation.classList.toggle('is-open', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    document.body.classList.toggle('navigation-open', isOpen);
+};
+
+menuToggle?.addEventListener('click', () => {
+    setNavigationOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
 });
 
 navigation?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-        navigation.classList.remove('is-open');
-        menuToggle?.setAttribute('aria-expanded', 'false');
+        setNavigationOpen(false);
     });
 });
 
+document.querySelectorAll('.mobile-bottom-nav a').forEach((link) => {
+    link.addEventListener('click', () => {
+        setNavigationOpen(false);
+    });
+});
+
+navigation?.querySelector('[data-quote-open]')?.addEventListener('click', () => {
+    setNavigationOpen(false);
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navigation?.classList.contains('is-open')) {
+        setNavigationOpen(false);
+        menuToggle?.focus();
+    }
+});
+
+const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const pageTransitionDuration = 240;
+
+if (!reducedMotionPreference.matches) {
+    document.documentElement.classList.add('page-transition-entering');
+    document.documentElement.addEventListener('animationend', (event) => {
+        if (event.animationName === 'page-enter') {
+            document.documentElement.classList.remove('page-transition-entering');
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+            return;
+        }
+
+        if (!(event.target instanceof Element)) {
+            return;
+        }
+
+        const link = event.target.closest('a[href]');
+
+        if (!(link instanceof HTMLAnchorElement) || link.hasAttribute('download') || (link.target && link.target !== '_self')) {
+            return;
+        }
+
+        const destination = new URL(link.href, window.location.href);
+
+        if (destination.origin !== window.location.origin || (destination.pathname === window.location.pathname && destination.search === window.location.search)) {
+            return;
+        }
+
+        event.preventDefault();
+        document.documentElement.classList.add('page-transition-leaving');
+        window.setTimeout(() => window.location.assign(destination.href), pageTransitionDuration);
+    });
+
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            document.documentElement.classList.remove('page-transition-leaving');
+            document.documentElement.classList.add('page-transition-entering');
+        }
+    });
+}
+
+const scrollRevealTargets = document.querySelectorAll('[data-scroll-reveal]');
+
+if (!reducedMotionPreference.matches && scrollRevealTargets.length > 0 && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('has-scroll-motion');
+
+    const scrollRevealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+
+    scrollRevealTargets.forEach((target) => scrollRevealObserver.observe(target));
+}
+
+const aboutMap = document.querySelector('.about-reach-map');
+
+if (aboutMap instanceof HTMLElement) {
+    const showAboutMap = () => {
+        aboutMap.classList.add('is-map-loading');
+        window.setTimeout(() => {
+            aboutMap.classList.remove('is-map-loading');
+            aboutMap.classList.add('is-map-ready');
+        }, 1600);
+    };
+
+    if (reducedMotionPreference.matches) {
+        aboutMap.classList.add('is-map-ready');
+    } else if ('IntersectionObserver' in window) {
+        const aboutMapObserver = new IntersectionObserver((entries, observer) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                showAboutMap();
+                observer.disconnect();
+            }
+        }, { threshold: 0.2 });
+
+        aboutMapObserver.observe(aboutMap);
+    } else {
+        showAboutMap();
+    }
+}
+
 const quoteDialog = document.querySelector('#quote-dialog');
 const quoteForm = quoteDialog?.querySelector('.quote-form');
+const serviceDetailDialog = document.querySelector('#service-detail-dialog');
+const serviceDetailButtons = document.querySelectorAll('[data-service-open]');
+
+if (serviceDetailDialog instanceof HTMLDialogElement && serviceDetailButtons.length > 0) {
+    const serviceDetailTitle = serviceDetailDialog.querySelector('#service-detail-title');
+    const serviceDetailSummary = serviceDetailDialog.querySelector('#service-detail-summary');
+    const serviceDetailDelivery = serviceDetailDialog.querySelector('#service-detail-delivery');
+    const serviceDetailNumber = serviceDetailDialog.querySelector('[data-service-detail-number]');
+    const serviceDetailCounter = serviceDetailDialog.querySelector('[data-service-detail-counter]');
+    const serviceDetailClose = serviceDetailDialog.querySelector('[data-service-detail-close]');
+
+    serviceDetailButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            if (!(button instanceof HTMLButtonElement) || !serviceDetailTitle || !serviceDetailSummary || !serviceDetailDelivery || !serviceDetailNumber || !serviceDetailCounter) {
+                return;
+            }
+
+            const serviceNumber = String(index + 1).padStart(2, '0');
+            const serviceTotal = String(serviceDetailButtons.length).padStart(2, '0');
+
+            serviceDetailTitle.textContent = button.dataset.serviceTitle ?? '';
+            serviceDetailSummary.textContent = button.dataset.serviceSummary ?? '';
+            serviceDetailDelivery.textContent = button.dataset.serviceDelivery ?? '';
+            serviceDetailNumber.textContent = serviceNumber;
+            serviceDetailCounter.textContent = `${serviceNumber} / ${serviceTotal}`;
+            serviceDetailDialog.showModal();
+        });
+    });
+
+    serviceDetailClose?.addEventListener('click', () => {
+        serviceDetailDialog.close();
+    });
+
+    serviceDetailDialog.addEventListener('click', (event) => {
+        if (event.target === serviceDetailDialog) {
+            serviceDetailDialog.close();
+        }
+    });
+}
+
+const industryDetailDialog = document.querySelector('#industry-detail-dialog');
+const industryDetailButtons = document.querySelectorAll('[data-industry-open]');
+
+if (industryDetailDialog instanceof HTMLDialogElement && industryDetailButtons.length > 0) {
+    const industryDetailTitle = industryDetailDialog.querySelector('#industry-detail-title');
+    const industryDetailOverview = industryDetailDialog.querySelector('#industry-detail-overview');
+    const industryDetailFormats = industryDetailDialog.querySelector('#industry-detail-formats');
+    const industryDetailNeeds = industryDetailDialog.querySelector('#industry-detail-needs');
+    const industryDetailNumber = industryDetailDialog.querySelector('[data-industry-detail-number]');
+    const industryDetailCounter = industryDetailDialog.querySelector('[data-industry-detail-counter]');
+    const industryDetailClose = industryDetailDialog.querySelector('[data-industry-detail-close]');
+
+    industryDetailButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (!(button instanceof HTMLButtonElement) || !industryDetailTitle || !industryDetailOverview || !industryDetailFormats || !industryDetailNeeds || !industryDetailNumber || !industryDetailCounter) {
+                return;
+            }
+
+            industryDetailTitle.textContent = button.dataset.industryTitle ?? '';
+            industryDetailOverview.textContent = button.dataset.industryOverview ?? '';
+            industryDetailNeeds.textContent = button.dataset.industryNeeds ?? '';
+            industryDetailNumber.textContent = button.dataset.industryNumber ?? '';
+            industryDetailCounter.textContent = `${button.dataset.industryNumber ?? ''} / ${button.dataset.industryTotal ?? ''}`;
+
+            const formatItems = (button.dataset.industryFormats ?? '')
+                .split('||')
+                .filter(Boolean)
+                .map((format) => {
+                    const formatItem = document.createElement('li');
+                    formatItem.textContent = format;
+
+                    return formatItem;
+                });
+
+            industryDetailFormats.replaceChildren(...formatItems);
+            industryDetailDialog.showModal();
+        });
+    });
+
+    industryDetailClose?.addEventListener('click', () => {
+        industryDetailDialog.close();
+    });
+
+    industryDetailDialog.addEventListener('click', (event) => {
+        if (event.target === industryDetailDialog) {
+            industryDetailDialog.close();
+        }
+    });
+}
 
 const closeQuoteDialog = () => {
     if (quoteDialog instanceof HTMLDialogElement && quoteDialog.open && !quoteDialog.classList.contains('is-closing')) {
@@ -231,21 +435,24 @@ document.querySelectorAll('[data-industry-carousel]').forEach((carousel) => {
 });
 
 const projectTrack = document.querySelector('.project-track');
-const projectMarquee = projectTrack?.querySelector('.project-marquee');
+const projectMarquees = [...(projectTrack?.querySelectorAll('.project-marquee') ?? [])];
 
 const shiftProjectCarousel = (direction) => {
     if (projectTrack?.classList.contains('has-instagram-feed')) {
-        const carouselAnimation = projectMarquee?.getAnimations()[0];
-        const animationDuration = carouselAnimation?.effect?.getComputedTiming().duration;
-        const projectCount = Number(projectTrack.dataset.projectCount);
+        projectMarquees.forEach((projectMarquee) => {
+            const carouselAnimation = projectMarquee.getAnimations()[0];
+            const animationDuration = carouselAnimation?.effect?.getComputedTiming().duration;
+            const projectCount = Number(projectMarquee.closest('.project-lane')?.dataset.projectCount);
 
-        if (carouselAnimation && typeof animationDuration === 'number' && projectCount > 0) {
-            const currentTime = Number(carouselAnimation.currentTime ?? 0);
-            carouselAnimation.currentTime = ((currentTime + direction * animationDuration / projectCount) % animationDuration + animationDuration) % animationDuration;
-        } else {
-            const firstProject = projectTrack.querySelector('.project-card');
-            projectTrack.scrollBy({ left: direction * (firstProject?.getBoundingClientRect().width ?? 0), behavior: 'smooth' });
-        }
+            if (carouselAnimation && typeof animationDuration === 'number' && projectCount > 0) {
+                const currentTime = Number(carouselAnimation.currentTime ?? 0);
+                carouselAnimation.currentTime = ((currentTime + direction * animationDuration / projectCount) % animationDuration + animationDuration) % animationDuration;
+            } else {
+                const projectLane = projectMarquee.closest('.project-lane');
+                const firstProject = projectLane?.querySelector('.project-card');
+                projectLane?.scrollBy({ left: direction * (firstProject?.getBoundingClientRect().width ?? 0), behavior: 'smooth' });
+            }
+        });
 
         return;
     }
@@ -303,6 +510,74 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
         element.classList.add('scroll-reveal');
         revealObserver.observe(element);
     });
+}
+
+const aboutPhotoImage = document.querySelector('.about-photo-image');
+
+if (aboutPhotoImage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let aboutPhotoFrame = 0;
+
+    const updateAboutPhotoPosition = () => {
+        aboutPhotoFrame = 0;
+
+        const aboutPhotoBounds = aboutPhotoImage.parentElement?.getBoundingClientRect();
+
+        if (!aboutPhotoBounds) {
+            return;
+        }
+
+        const travelDistance = window.innerHeight + aboutPhotoBounds.height;
+        const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - aboutPhotoBounds.top) / travelDistance));
+        const verticalOffset = ((scrollProgress - 0.5) * 18).toFixed(2);
+
+        aboutPhotoImage.style.setProperty('--about-photo-offset', `${verticalOffset}px`);
+    };
+
+    const scheduleAboutPhotoPosition = () => {
+        if (aboutPhotoFrame === 0) {
+            aboutPhotoFrame = window.requestAnimationFrame(updateAboutPhotoPosition);
+        }
+    };
+
+    window.addEventListener('scroll', scheduleAboutPhotoPosition, { passive: true });
+    window.addEventListener('resize', scheduleAboutPhotoPosition, { passive: true });
+    updateAboutPhotoPosition();
+}
+
+const aboutEventCount = document.querySelector('[data-count-up]');
+const aboutEventCountValue = aboutEventCount?.querySelector('[data-count-value]');
+
+if (aboutEventCount && aboutEventCountValue && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const eventCountTarget = Number(aboutEventCount.dataset.countTo);
+    const eventCountDuration = 1400;
+
+    aboutEventCountValue.textContent = '0';
+
+    const eventCountObserver = new IntersectionObserver((entries, observer) => {
+        const entry = entries.find((observedEntry) => observedEntry.isIntersecting);
+
+        if (!entry) {
+            return;
+        }
+
+        observer.disconnect();
+
+        const animationStartedAt = performance.now();
+        const updateEventCount = (currentTime) => {
+            const progress = Math.min((currentTime - animationStartedAt) / eventCountDuration, 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+            aboutEventCountValue.textContent = Math.round(eventCountTarget * easedProgress).toLocaleString('en-US');
+
+            if (progress < 1) {
+                window.requestAnimationFrame(updateEventCount);
+            }
+        };
+
+        window.requestAnimationFrame(updateEventCount);
+    }, { threshold: 0.6 });
+
+    eventCountObserver.observe(aboutEventCount);
 }
 
 const instagramLightbox = document.querySelector('.instagram-lightbox');
@@ -366,3 +641,50 @@ instagramLightbox?.addEventListener('close', () => {
     instagramLightboxMedia?.querySelector('video')?.pause();
     instagramLightboxMedia?.replaceChildren();
 });
+
+const backToTop = document.querySelector('[data-back-to-top]');
+
+if (backToTop) {
+    let backToTopFrame = 0;
+
+    const updateBackToTopVisibility = () => {
+        backToTopFrame = 0;
+
+        if (window.scrollY < 480) {
+            backToTop.classList.remove('is-visible');
+            return;
+        }
+
+        const buttonBounds = backToTop.getBoundingClientRect();
+        const overlapsPageContent = [...document.querySelectorAll('h1, h2, h3, p, a, button, img, video, .project-card, .industry-card, .service-card, .contact-details')]
+            .some((element) => {
+                if (element === backToTop || backToTop.contains(element)) {
+                    return false;
+                }
+
+                const style = window.getComputedStyle(element);
+                const bounds = element.getBoundingClientRect();
+
+                if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) < 0.05 || bounds.width === 0 || bounds.height === 0) {
+                    return false;
+                }
+
+                return bounds.left < buttonBounds.right
+                    && bounds.right > buttonBounds.left
+                    && bounds.top < buttonBounds.bottom
+                    && bounds.bottom > buttonBounds.top;
+            });
+
+        backToTop.classList.toggle('is-visible', !overlapsPageContent);
+    };
+
+    const scheduleBackToTopVisibilityUpdate = () => {
+        if (backToTopFrame === 0) {
+            backToTopFrame = window.requestAnimationFrame(updateBackToTopVisibility);
+        }
+    };
+
+    window.addEventListener('scroll', scheduleBackToTopVisibilityUpdate, { passive: true });
+    window.addEventListener('resize', scheduleBackToTopVisibilityUpdate, { passive: true });
+    updateBackToTopVisibility();
+}

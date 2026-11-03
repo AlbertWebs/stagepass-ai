@@ -17,15 +17,44 @@ Route::get('/', function (Request $request, InstagramFeedService $instagramFeed)
     return view('welcome', [
         'instagramPosts' => $instagramFeed->posts(),
         'quoteChallenge' => $firstChallengeNumber.' + '.$secondChallengeNumber,
+        'isAlternateHome' => false,
     ]);
 })->name('home');
+
+Route::get('/home-1', function (Request $request, InstagramFeedService $instagramFeed): View {
+    $firstChallengeNumber = random_int(2, 9);
+    $secondChallengeNumber = random_int(2, 9);
+    $request->session()->put('quote_challenge', $firstChallengeNumber + $secondChallengeNumber);
+
+    return view('welcome', [
+        'instagramPosts' => $instagramFeed->posts(),
+        'quoteChallenge' => $firstChallengeNumber.' + '.$secondChallengeNumber,
+        'isAlternateHome' => true,
+    ]);
+})->name('home-1');
+
+Route::get('/home-one', function (Request $request, InstagramFeedService $instagramFeed): View {
+    $firstChallengeNumber = random_int(2, 9);
+    $secondChallengeNumber = random_int(2, 9);
+    $request->session()->put('quote_challenge', $firstChallengeNumber + $secondChallengeNumber);
+
+    return view('welcome', [
+        'instagramPosts' => $instagramFeed->posts(),
+        'quoteChallenge' => $firstChallengeNumber.' + '.$secondChallengeNumber,
+        'isAlternateHome' => true,
+    ]);
+})->name('home-one');
 
 Route::post('/quote-requests', QuoteRequestController::class)
     ->middleware('throttle:quote-requests')
     ->name('quote-requests.store');
 
 foreach ($sitePages as $slug => $page) {
-    Route::get($page['uri'], function (InstagramFeedService $instagramFeed) use ($page, $canonicalOrigin) {
+    Route::get($page['uri'], function (Request $request, InstagramFeedService $instagramFeed) use ($page, $canonicalOrigin) {
+        $firstChallengeNumber = random_int(2, 9);
+        $secondChallengeNumber = random_int(2, 9);
+        $request->session()->put('quote_challenge', $firstChallengeNumber + $secondChallengeNumber);
+
         $structuredData = [
             '@context' => 'https://schema.org',
             '@type' => match ($page['name']) {
@@ -57,6 +86,7 @@ foreach ($sitePages as $slug => $page) {
             'canonicalUrl' => $canonicalOrigin.$page['uri'],
             'metaKeywords' => $page['keywords'] ?? config('site_seo.keywords'),
             'structuredData' => $structuredData,
+            'quoteChallenge' => $firstChallengeNumber.' + '.$secondChallengeNumber,
         ];
 
         if ($page['name'] === 'our-work') {

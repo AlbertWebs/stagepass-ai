@@ -72,9 +72,9 @@
     <script type="application/ld+json">@json($homeStructuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>:root { --hero-photo: url("{{ asset('images/stagepass-hero-event.webp') }}"); --about-photo: url("{{ asset('images/about-stagepass-summit.webp') }}"); --event-sprite: url("{{ asset('images/event-contact-sheet.png') }}"); }</style>
+    <style>:root { --hero-photo: url("{{ asset('images/stagepass-hero-branded.png') }}"); --event-sprite: url("{{ asset('images/event-contact-sheet.png') }}"); }</style>
 </head>
-<body>
+<body class="home-page">
     <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"/></symbol>
         <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16.2 16.2 4.4 4.4"/></symbol>
@@ -95,29 +95,93 @@
         <symbol id="i-diamond" viewBox="0 0 24 24"><path d="M3 8 6.5 3h11L21 8l-9 13L3 8Z"/><path d="M3 8h18M6.5 3 9 8l3 13 3-13 2.5-5"/></symbol>
         <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
         <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7.1 3.5h3l1.4 4.1-2 1.6a15.5 15.5 0 0 0 5.3 5.3l1.6-2 4.1 1.4v3a2 2 0 0 1-2.2 2A16.8 16.8 0 0 1 5 5.7a2 2 0 0 1 2.1-2.2Z"/></symbol>
         <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
         <symbol id="i-rig" viewBox="0 0 24 24"><path d="M3 5h18M5 5v14m14-14v14M3 19h18M7 5l10 14m0-14L7 19M9 5v3m6-3v3m-6 8v3m6-3v3"/></symbol>
     </svg>
 
     @php
         $services = [
-            ['Audio Reinforcement', 'i-audio'], ['LED Screens & Displays', 'i-screen'], ['Lighting Design', 'i-bulb'],
-            ['Staging & Scenography', 'i-stage'], ['Rigging & Structures', 'i-rig'], ['Power & Generators', 'i-power'],
-            ['Livestream & Production', 'i-camera'], ['Fabrication & Branding', 'i-cube'], ['Equipment Rentals', 'i-case'],
-            ['Event Design & Consultancy', 'i-pen'],
+            ['name' => 'Audio Reinforcement', 'icon' => 'i-audio', 'summary' => 'Shape a sound system around the room, the audience and the programme—not just the equipment list. We plan for clear speech at the back of the room and a balanced experience for music, panels and live moments.', 'delivery' => 'From setup and checks to show-time mixing, our team keeps microphones, playback and cues moving as one sound picture.'],
+            ['name' => 'LED Screens & Displays', 'icon' => 'i-screen', 'summary' => 'Make the message visible from every seat. We plan LED display placement around the stage, audience sightlines, format and content so presenters and visuals work together.', 'delivery' => 'Screens and playback become part of the wider show flow, from opening graphics to speaker decks and live cues.'],
+            ['name' => 'Lighting Design', 'icon' => 'i-bulb', 'summary' => 'Use light to shape the room before anyone takes the stage. We plan looks around the venue, programme and camera needs, giving speakers visibility and key moments their own atmosphere.', 'delivery' => 'As the event moves from welcome to keynote to celebration, lighting cues help each transition feel intentional.'],
+            ['name' => 'Staging & Scenography', 'icon' => 'i-stage', 'summary' => 'Build the place where the story happens. Stage, scenic elements and room layout are shaped around the venue, audience flow, brand and programme.', 'delivery' => 'The result is a clear focal point that gives presenters space, supports the production plan and connects with the rest of the room.'],
+            ['name' => 'Rigging & Structures', 'icon' => 'i-rig', 'summary' => 'Put the visual ambition into the structure. We coordinate rigging and truss requirements around the venue, equipment positions and installation sequence.', 'delivery' => 'That planning helps lighting, screens and scenic elements work together while supporting careful, safe execution.'],
+            ['name' => 'Power & Generators', 'icon' => 'i-power', 'summary' => 'Give production a power plan before the first cue. We coordinate temporary power and generator support around the equipment and event schedule.', 'delivery' => 'Power becomes part of the production picture, with setup and live operations coordinated alongside the rest of the technical crew.'],
+            ['name' => 'Livestream & Production', 'icon' => 'i-camera', 'summary' => 'Let an audience join from beyond the room. We bring audio-visual production and show coordination to events that need to connect in person and online.', 'delivery' => 'From room sound and visuals to live cues and remote contributors, we plan the handoffs that help audiences follow along.'],
+            ['name' => 'Fabrication & Branding', 'icon' => 'i-cube', 'summary' => 'Turn a venue into a world that carries the brand. We bring together fabrication, signage and scenic details to shape arrivals, stages and guest touchpoints.', 'delivery' => 'Each element is planned in context with the space and event design, so the experience feels considered from first impression to final reveal.'],
+            ['name' => 'Equipment Rentals', 'icon' => 'i-case', 'summary' => 'Get equipment that fits the brief, venue and run of show. Stagepass provides audio-visual, lighting and staging rentals supported by technical advice and production planning.', 'delivery' => 'We help identify the right combination and coordinate it with setup and on-site needs, so each component has a place in the production.'],
+            ['name' => 'Event Design & Consultancy', 'icon' => 'i-pen', 'summary' => 'Start with the feeling you want guests to leave with. We help translate the event brief into a plan for the audience journey, programme, venue and technical experience.', 'delivery' => 'Creative design and technical consulting meet early, giving the production a direction that can be planned, built and delivered.'],
         ];
         $industries = [
-            ['Corporate', 'scene-1', ['corporate-ceo-forum.webp', 'corporate-business-summit.webp', 'corporate-forum-stage.webp']],
-            ['Government', 'scene-2', []],
-            ['Entertainment', 'scene-3', ['entertainment-event.webp', 'entertainment-production.webp', 'entertainment-concert.webp', 'entertainment-performance.webp']],
-            ['Exhibitions', 'scene-4', ['exhibitions.webp']],
-            ['Hospitality', 'scene-5', []],
-            ['Broadcast', 'scene-6', ['broadcast.webp']],
-            ['Sports', 'scene-3', ['sports-congress.webp']],
+            [
+                'name' => 'Corporate & Business Events',
+                'scene' => 'scene-1',
+                'images' => ['corporate-ceo-forum.webp'],
+                'overview' => 'A production blueprint for conferences, launches and business gatherings, shaped around clear communication and confident presentation.',
+                'formats' => ['Conferences & summits', 'Product launches', 'AGMs & shareholder meetings', 'Award ceremonies', 'Team-building events'],
+                'needs' => 'Sound systems, LED screens, stage lighting, live streaming and interpretation systems.',
+            ],
+            [
+                'name' => 'Entertainment & Live Shows',
+                'scene' => 'scene-3',
+                'images' => ['entertainment-event.webp'],
+                'overview' => 'A high-energy setup for live performance, balancing powerful sound, dynamic lighting and a stage that carries the show.',
+                'formats' => ['Concerts & music festivals', 'Comedy shows', 'Theatre productions', 'Cultural performances'],
+                'needs' => 'Line-array sound systems, moving lights, LED backdrops, special effects and stage design.',
+            ],
+            [
+                'name' => 'Exhibitions & Trade Shows',
+                'scene' => 'scene-4',
+                'images' => ['exhibitions.webp'],
+                'overview' => 'Make each stand and demonstration easier to discover with visual systems built for active exhibition floors.',
+                'formats' => ['Exhibition stands', 'Product demo booths', 'Brand activations', 'Expo pavilions'],
+                'needs' => 'Touch screens, video walls, digital signage, interactive displays and booth lighting.',
+            ],
+            [
+                'name' => 'Education & Training',
+                'scene' => 'scene-1',
+                'images' => ['education-wso2con-stage.webp'],
+                'overview' => 'Connect teaching spaces and audiences with presentation, recording and hybrid-learning systems.',
+                'formats' => ['University lecture halls', 'Training centers', 'E-learning environments', 'Graduation ceremonies'],
+                'needs' => 'Projectors, smart boards, recording systems, lecture capture and hybrid learning setups.',
+            ],
+            [
+                'name' => 'Religious Institutions',
+                'scene' => 'scene-5',
+                'images' => ['broadcast.webp'],
+                'overview' => 'Support weekly services and larger gatherings with intelligible sound, clear screens and broadcast-ready production.',
+                'formats' => ['Weekly worship services', 'Conferences & crusades', 'Religious festivals'],
+                'needs' => 'Installed sound systems, IMAG screens, stage lighting and live broadcast systems.',
+            ],
+            [
+                'name' => 'Hospitality & Tourism',
+                'scene' => 'scene-5',
+                'images' => ['hospitality-tatler-ballroom.webp'],
+                'overview' => 'Adapt the production to the character of each venue, from refined ballrooms to open-air destinations.',
+                'formats' => ['Hotel conferences', 'Destination weddings', 'Gala dinners', 'Resort entertainment'],
+                'needs' => 'Ballroom AV, ambient lighting, outdoor sound systems and projection mapping.',
+            ],
+            [
+                'name' => 'Healthcare & Medical',
+                'scene' => 'scene-2',
+                'images' => ['healthcare-heart-event.webp'],
+                'overview' => 'Help specialist audiences follow presentations and training through dependable display, recording and broadcast systems.',
+                'formats' => ['Medical conferences', 'Hospital auditoriums', 'Surgical training broadcasts'],
+                'needs' => 'Presentation systems, live surgery streaming, recording systems and interpretation systems.',
+            ],
+            [
+                'name' => 'Government & Public Sector',
+                'scene' => 'scene-2',
+                'images' => ['government-dangote-ceremony.webp'],
+                'overview' => 'Plan high-visibility public events with production requirements coordinated from the room to the broadcast audience.',
+                'formats' => ['National celebrations', 'Policy summits', 'State functions', 'Public forums'],
+                'needs' => 'Large-scale sound systems, LED screens, live broadcasting and security-compliant AV solutions.',
+            ],
         ];
         $projects = [
-            ['Dangote Groundbreaking Ceremony', 'Kenya', 'scene-4'], ['Safaricom @ 25', 'Kenya', 'scene-3'],
-            ['Africa CEO Forum', 'Rwanda', 'scene-1'], ['Trace Africa – Le Concert', 'Kenya', 'scene-6'],
+            ['Safaricom Dealer Conference', 'Nairobi, Kenya', 'scene-3'], ['Corporate Gala Awards', 'Nairobi, Kenya', 'scene-5'],
+            ['Government Summit', 'Kigali, Rwanda', 'scene-2'], ['Brand Activation', 'Nairobi, Kenya', 'scene-4'],
         ];
         $clientLogos = [
             ['Huawei', 'client-01.png'], ['Microsoft', 'client-02.png'], ['Visa', 'client-03.png'],
@@ -133,68 +197,116 @@
 
     <header class="site-header">
         <a class="brand" href="#home" aria-label="Stagepass Audio Visual home"><span class="brand-logo"><img src="/images/stagepass-logo-source.png" alt="Stagepass Audio Visual"></span></a>
-        <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button>
-        <nav class="main-nav" aria-label="Main navigation">
-            <a class="is-active" href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#industries">Industries</a><a href="#work">Our Work</a><a href="#contact">Contact</a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="main-navigation" aria-expanded="false"><span></span><span></span></button>
+        <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+            <div class="navigation-links">
+                <p class="menu-eyebrow">Stagepass <span>/</span> Explore</p>
+                <a class="is-active" href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#industries">Industries</a><a href="#work">Our Work</a><a href="#contact">Contact</a>
+            </div>
+            <aside class="menu-contact-panel" aria-label="Contact Stagepass">
+                <div class="menu-contact-topline"><span class="menu-live-dot"></span><span>Nairobi <i>/</i> Across Africa</span><b>SP&nbsp; / &nbsp;01</b></div>
+                <p class="menu-contact-kicker">Make room for extraordinary</p>
+                <h2>Let’s make your<br>next event <em>unforgettable.</em></h2>
+                <a class="menu-contact-detail" href="tel:+254729171351"><span class="menu-contact-icon"><svg><use href="#i-phone"/></svg></span><span><small>Call our production team</small><b>+254 729 171 351</b></span><svg class="menu-detail-arrow"><use href="#i-arrow"/></svg></a>
+                <div class="menu-contact-detail menu-location-detail"><span class="menu-contact-icon"><svg><use href="#i-pin"/></svg></span><span><small>Based in Nairobi</small><b>Jacaranda Close, Off Ridgeways Road</b><b>Nairobi, Kenya</b></span></div>
+                <button class="menu-quote-button" type="button" data-quote-open><span>Request a Quote</span><span class="menu-quote-arrow"><svg><use href="#i-arrow"/></svg></span></button>
+                <p class="menu-contact-footnote">People <i>•</i> Technology <i>•</i> Impact</p>
+            </aside>
         </nav>
-        <div class="header-actions"><a class="search-button" href="#work" aria-label="Explore our work"><svg><use href="#i-search"/></svg></a><button class="button button-outline" type="button" data-quote-open>Get a Quotation <svg><use href="#i-arrow"/></svg></button></div>
+        <div class="header-actions"><button class="button button-outline" type="button" data-quote-open>@if ($isAlternateHome) Get AV Quote @else Get a Quotation @endif <svg><use href="#i-arrow"/></svg></button></div>
     </header>
 
     <main>
         <section class="hero" id="home">
-            <div class="hero-photo" role="img" aria-label="The Top Leaders Summit stage with Stagepass AV’s blue LED production screen and stage lighting"></div>
+            <div class="hero-photo" role="img" aria-label="Stagepass event production across conferences, live shows and branded experiences">
+                <span class="hero-image-slide is-active" style="--hero-image: url('{{ asset('images/fifa-congress-hero.jpg?v=20261030-hq') }}')" aria-hidden="true"></span>
+            </div>
             <img class="hero-top-ribbon" src="/images/stagepass-hero-top-ribbon.svg" alt="" aria-hidden="true">
             <div class="hero-grid"></div>
             <div class="hero-content wrap">
                 <div class="hero-copy">
                     <p class="eyebrow">People <i></i> Technology <i></i> Impact</p>
-                    <h1>We engineer<br><em>extraordinary</em><br>experiences<span class="blue-dot">.</span></h1>
-                    <p class="hero-description">Stagepass Audio Visual delivers world-class event technology and creative production across Africa, transforming ideas into unforgettable experiences.</p>
-                    <div class="hero-actions"><a class="button button-primary" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a><a class="showreel" href="https://www.youtube.com/@STAGEPASSAV-KE" target="_blank" rel="noopener noreferrer"><span><svg><use href="#i-play"/></svg></span>Watch Showreel</a></div>
+                    <h1 class="hero-headline">We Create the Most<br>Engaging Events<br>in the World Using<br><em>Technology &amp;<br>Scenography</em></h1>
+                    <p class="hero-description">World-class audiovisual technology, creative production and immersive experiences for events across Africa.</p>
+                    <div class="hero-actions"><a class="button button-primary" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a></div>
                 </div>
                 <div class="orbit-wrap" role="img" aria-label="Stagepass audio, visual, lighting, scenic, design, production and rigging"><img class="orbit-center" src="/images/stagepass-disciplines-transparent.png" alt=""><img class="orbit-vectors" src="/images/stagepass-disciplines-vector.svg" alt=""></div>
             </div>
             <img class="hero-ribbon" src="/images/stagepass-hero-ribbon.svg" alt="" aria-hidden="true">
-            <div class="hero-foot wrap"><div class="proof-points"><div><svg><use href="#i-bulb"/></svg><span>Innovative<br>Solutions</span></div><div><svg><use href="#i-team"/></svg><span>Expert<br>Team</span></div><div><svg><use href="#i-diamond"/></svg><span>Premium<br>Quality</span></div><div><svg><use href="#i-shield"/></svg><span>Safety<br>Focused</span></div><div><svg><use href="#i-team"/></svg><span>Client<br>Driven</span></div></div><p class="speed-tag">The future<br>with speed<br>together<span></span></p></div>
+            <div class="hero-foot wrap">
+                <div class="proof-points hero-proof-points" aria-label="Why Stagepass">
+                    <div><svg><use href="#i-bulb"/></svg><span>Innovative<br>Solutions</span></div>
+                    <div><svg><use href="#i-globe"/></svg><span>Pan Africa<br>Reach</span></div>
+                    <div><svg><use href="#i-team"/></svg><span>Expert<br>Team</span></div>
+                    <div><svg><use href="#i-shield"/></svg><span>Reliable<br>Support</span></div>
+                </div>
+                <a class="hero-scroll-cue" href="#about"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14l-7 7m0 0-7-7m7 7V3"/></svg></span><b>Scroll to discover</b><i></i></a>
+            </div>
         </section>
 
         <section class="about-section section-rule" id="about">
-            <div class="about-copy section-copy"><p class="eyebrow">About Stagepass</p><h2>More than<br>technology.<br><em>A team that delivers.</em></h2><p>We are a team of creative thinkers, technical experts and event professionals committed to delivering exceptional experiences across Africa.</p><a class="button button-outline button-small" href="#contact">Learn More <svg><use href="#i-arrow"/></svg></a></div>
-            <div class="about-photo" role="img" aria-label="Stagepass AV delivers a branded leaders summit stage with LED screens and seating"></div>
-            <div class="about-highlights"><div><svg><use href="#i-diamond"/></svg><span><b>Years of</b><small>Experience</small></span></div><div><svg><use href="#i-team"/></svg><span><b>A passionate</b><small>Team</small></span></div><div><img class="africa-icon" src="/images/africa-map-icon.svg" alt=""><span><b>Projects across</b><small>Africa</small></span></div><div><svg><use href="#i-star"/></svg><span><b>Trusted by</b><small>Leading brands</small></span></div></div>
-            <div class="africa-card"><div class="africa-map"><img src="/images/africa-map.svg" alt=""><svg class="africa-routes" viewBox="0 0 280 300" role="img" aria-label="Routes from Nairobi reaching destinations across Africa" xmlns="http://www.w3.org/2000/svg"><defs><marker id="africa-route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 8 4 0 8z"/></marker></defs><g class="africa-route-lines"><path d="M220 158 Q190 105 181 48"/><path d="M220 158 Q143 114 53 92"/><path d="M220 158 Q144 137 86 132"/><path d="M220 158 Q158 175 128 196"/><path d="M220 158 Q188 215 151 263"/><path d="M220 158 Q205 204 190 236"/><path d="M220 158 Q247 128 244 113"/></g><circle class="africa-nairobi-halo" cx="220" cy="158" r="8"/><circle class="africa-nairobi-dot" cx="220" cy="158" r="3.5"/></svg></div><p>Africa’s<br>event technology<br>partner</p></div>
+            <div class="about-copy section-copy"><p class="eyebrow">About Stagepass</p><h2>More than<br>technology.<br><em>A team that delivers.</em></h2><p class="about-description"><strong>StagePass Audio-Visual Limited is an integrated technical, consulting, planning, design and implementation provider for professional event planning and design based in Nairobi and operating within Africa.</strong></p><p class="about-description"><strong>We specialize in rentals of audio-visual technology including sound, screens, lighting, content management, digital and Interactive technology and scenic design.</strong></p><div class="about-proof-actions"><div class="about-proof" data-count-up data-count-to="2362"><span class="about-proof-number"><span data-count-value>2,362</span><sup>+</sup></span><span class="about-proof-label">Successful<br>Events</span></div><a class="button button-outline button-small" href="#services">Explore Our Services <svg><use href="#i-arrow"/></svg></a></div></div>
+            <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.jpg') }}" width="4160" height="2340" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
+            <div class="about-reach">
+                <h3 class="about-reach-title">Africa’s event<br>technology partner</h3>
+                <div class="about-reach-map">
+                    <div class="africa-map"><img src="/images/africa-map.svg" alt=""><svg class="africa-routes" viewBox="0 0 280 300" role="img" aria-label="Routes from Nairobi reaching destinations across Africa" xmlns="http://www.w3.org/2000/svg"><defs><marker id="africa-route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 8 4 0 8z"/></marker></defs><g class="africa-route-lines"><path d="M220 158 Q190 105 181 48"/><path d="M220 158 Q143 114 53 92"/><path d="M220 158 Q144 137 86 132"/><path d="M220 158 Q158 175 128 196"/><path d="M220 158 Q188 215 151 263"/><path d="M220 158 Q205 204 190 236"/><path d="M220 158 Q247 128 244 113"/></g><circle class="africa-nairobi-halo" cx="220" cy="158" r="8"/><circle class="africa-nairobi-dot" cx="220" cy="158" r="3.5"/></svg></div>
+                    <div class="about-map-preloader" aria-hidden="true"><span></span><small>Mapping Africa</small></div>
+                </div>
+                <div class="about-highlights">
+                    <div><svg><use href="#i-diamond"/></svg><span><b>Years of</b><small>Experience</small></span></div>
+                    <div><svg><use href="#i-team"/></svg><span><b>A passionate</b><small>Team</small></span></div>
+                    <div><svg><use href="#i-star"/></svg><span><b>Trusted by</b><small>Leading brands</small></span></div>
+                    <div><svg><use href="#i-cube"/></svg><span><b>Innovative</b><small>Solutions</small></span></div>
+                </div>
+            </div>
         </section>
 
         <section class="services-section section-rule" id="services">
-            <div class="section-copy services-copy"><p class="eyebrow">Our Services</p><h2>One partner.<br><em>Every solution.</em></h2><p>From concept to execution, we provide end-to-end event technology and production services tailored to your needs.</p><a class="button button-outline button-small" href="#contact">View All Services <svg><use href="#i-arrow"/></svg></a></div>
+            <div class="section-copy services-copy"><p class="eyebrow">Our Services</p><h2>One partner.<br><em>Every solution.</em></h2><p>From concept to execution, we provide end-to-end event technology and production services tailored to your needs.</p><a class="button button-outline button-small" href="#industries">See All Industries <svg><use href="#i-arrow"/></svg></a></div>
             <div class="services-grid">
-                @foreach ($services as [$service, $icon])
-                    <a href="#contact" class="service-card"><svg><use href="#{{ $icon }}"/></svg><span>{{ $service }}</span></a>
+                @foreach ($services as $service)
+                    <button class="service-card" type="button" data-service-open aria-haspopup="dialog" aria-controls="service-detail-dialog" data-service-title="{{ $service['name'] }}" data-service-summary="{{ $service['summary'] }}" data-service-delivery="{{ $service['delivery'] }}"><svg><use href="#{{ $service['icon'] }}"/></svg><span>{{ $service['name'] }}</span><small class="service-card-cue">Explore details <b aria-hidden="true">↗</b></small></button>
                 @endforeach
             </div>
         </section>
 
+        <dialog class="service-detail-dialog" id="service-detail-dialog" aria-labelledby="service-detail-title">
+            <div class="service-detail-panel">
+                <button class="service-detail-close" type="button" data-service-detail-close aria-label="Close service details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+                <div class="service-detail-orbit" aria-hidden="true"><span class="service-detail-orbit-caption">STAGEPASS / FIELD SYSTEMS</span><span class="service-detail-orbit-ring"></span><strong data-service-detail-number>01</strong><span class="service-detail-orbit-coordinate">LIVE SERVICE BLUEPRINT</span></div>
+                <div class="service-detail-copy">
+                    <p class="eyebrow"><span>Inside the experience</span><span data-service-detail-counter>01 / 10</span></p>
+                    <h2 id="service-detail-title">Audio Reinforcement</h2>
+                    <p id="service-detail-summary"></p>
+                    <p id="service-detail-delivery"></p>
+                    <button class="button button-outline service-detail-cta" type="button" data-quote-open>Build this into my event <svg><use href="#i-arrow"/></svg></button>
+                </div>
+            </div>
+        </dialog>
+
         <section class="industries-section section-rule" id="industries">
-            <div class="industry-heading"><div class="section-copy"><p class="eyebrow">Industries We Serve</p><h2>Every industry.<br>Exceptional experiences.</h2></div><a class="button button-outline button-small" href="#contact">View All Industries <svg><use href="#i-arrow"/></svg></a><p class="industry-note">Different sectors.<br>One standard.<br>Excellence.</p></div>
+            <div class="industry-heading"><div class="section-copy"><p class="eyebrow">Industries We Serve</p><h2>Every industry.<br>Exceptional experiences.</h2></div><a class="button button-outline button-small" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a><p class="industry-note">Different sectors.<br>One standard.<br>Excellence.</p></div>
             <div class="industry-grid">
-                @foreach ($industries as [$industry, $scene, $industryImages])
-                    <div class="industry-card {{ $scene }} {{ count($industryImages) > 0 ? 'industry-card-gallery' : '' }}" @if (count($industryImages) > 1) data-industry-carousel role="group" aria-label="{{ $industry }} image carousel" @endif>
-                        @if (count($industryImages) > 0)
-                            <div class="industry-gallery">
-                                @foreach ($industryImages as $image)
-                                    <img class="industry-slide {{ $loop->first ? 'is-active' : '' }}" src="{{ asset('images/industries/'.$image) }}" alt="{{ $industry }} event production, image {{ $loop->iteration }} of {{ count($industryImages) }}" loading="lazy" decoding="async">
+                @foreach ($industries as $industry)
+                    <div class="industry-card {{ $industry['scene'] }} {{ count($industry['images']) > 0 ? 'industry-card-gallery' : '' }}" @if (count($industry['images']) > 1) data-industry-carousel role="group" aria-label="{{ $industry['name'] }} image carousel" @endif>
+                        @if (count($industry['images']) > 0)
+                            <div class="industry-gallery" style="--industry-backdrop: url('{{ asset('images/industries/'.$industry['images'][0]) }}')">
+                                @foreach ($industry['images'] as $image)
+                                    <img class="industry-slide {{ $loop->first ? 'is-active' : '' }}" src="{{ asset('images/industries/'.$image) }}" alt="{{ $industry['name'] }} event production, image {{ $loop->iteration }} of {{ count($industry['images']) }}" loading="lazy" decoding="async">
                                 @endforeach
                             </div>
                         @endif
                         <span class="industry-card-shade" aria-hidden="true"></span>
                         <div class="industry-card-footer">
-                            <a class="industry-card-label" href="#contact">{{ $industry }}</a>
+                            <span class="industry-card-label">{{ $industry['name'] }}</span>
+                            <button class="industry-card-open" type="button" data-industry-open aria-haspopup="dialog" aria-controls="industry-detail-dialog" aria-label="Explore {{ $industry['name'] }} solutions" data-industry-title="{{ $industry['name'] }}" data-industry-overview="{{ $industry['overview'] }}" data-industry-formats="{{ implode('||', $industry['formats']) }}" data-industry-needs="{{ $industry['needs'] }}" data-industry-number="{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}" data-industry-total="{{ str_pad((string) count($industries), 2, '0', STR_PAD_LEFT) }}">Open sector playbook <b aria-hidden="true">↗</b></button>
                         </div>
-                        @if (count($industryImages) > 1)
-                            <div class="industry-carousel-pagination" role="group" aria-label="{{ $industry }} image selection">
+                        @if (count($industry['images']) > 1)
+                            <div class="industry-carousel-pagination" role="group" aria-label="{{ $industry['name'] }} image selection">
                                 <div class="industry-carousel-dots">
-                                    @foreach ($industryImages as $image)
-                                        <button type="button" data-industry-slide="{{ $loop->index }}" aria-label="Show {{ $industry }} image {{ $loop->iteration }}" aria-current="{{ $loop->first ? 'true' : 'false' }}"></button>
+                                    @foreach ($industry['images'] as $image)
+                                        <button type="button" data-industry-slide="{{ $loop->index }}" aria-label="Show {{ $industry['name'] }} image {{ $loop->iteration }}" aria-current="{{ $loop->first ? 'true' : 'false' }}"></button>
                                     @endforeach
                                 </div>
                             </div>
@@ -204,27 +316,50 @@
             </div>
         </section>
 
+        <dialog class="service-detail-dialog industry-detail-dialog" id="industry-detail-dialog" aria-labelledby="industry-detail-title">
+            <div class="service-detail-panel industry-detail-panel">
+                <button class="service-detail-close" type="button" data-industry-detail-close aria-label="Close industry playbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+                <div class="industry-detail-visual" aria-hidden="true">
+                    <p>STAGEPASS / SECTOR BLUEPRINT</p>
+                    <div class="industry-detail-radar"><span data-industry-detail-number>01</span><i></i><b></b></div>
+                    <small>DESIGNED AROUND THE AUDIENCE</small>
+                </div>
+                <div class="service-detail-copy industry-detail-copy">
+                    <p class="eyebrow"><span>Industry playbook</span><span data-industry-detail-counter>01 / 09</span></p>
+                    <h2 id="industry-detail-title">Corporate &amp; Business Events</h2>
+                    <p id="industry-detail-overview"></p>
+                    <div class="industry-detail-facts">
+                        <div><h3>Event formats</h3><ul id="industry-detail-formats"></ul></div>
+                        <div><h3>Production blueprint</h3><p id="industry-detail-needs"></p></div>
+                    </div>
+                    <button class="button button-outline service-detail-cta" type="button" data-quote-open>Plan this experience <svg><use href="#i-arrow"/></svg></button>
+                </div>
+            </div>
+        </dialog>
+
         <section class="work-section section-rule" id="work">
-            <div class="work-intro section-copy"><p class="eyebrow">Our Work</p><h2>Ideas brought<br>to <em>life.</em></h2><p>A showcase of the events, experiences and productions we have delivered across Africa.</p><a class="button button-outline button-small" href="#contact">View Our Work <svg><use href="#i-arrow"/></svg></a></div>
+            <div class="work-intro section-copy"><p class="eyebrow">Our Work</p><h2>Ideas brought<br>to <em>life.</em></h2><p>A showcase of the events, experiences and productions we have delivered across Africa.</p><a class="button button-outline button-small" href="#contact">Plan Your Event <svg><use href="#i-arrow"/></svg></a></div>
             <div class="project-track {{ count($instagramPosts) > 0 ? 'has-instagram-feed' : 'is-static' }}" aria-label="{{ count($instagramPosts) > 0 ? 'Recent Instagram projects' : 'Selected projects' }}" data-project-count="{{ count($instagramPosts) }}">
                 @if (count($instagramPosts) > 0)
-                    <div class="project-marquee">
-                        @foreach ([false, true] as $isDuplicate)
-                            <div class="project-feed-group" @if ($isDuplicate) aria-hidden="true" @endif>
-                                @foreach ($instagramPosts as $post)
-                                    @php($isVideo = ($post['media_type'] ?? '') === 'VIDEO' && isset($post['preview_url']))
-                                    <button class="project-card project-card-instagram instagram-media-trigger" type="button" data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}" data-media-url="{{ $post['media_url'] }}" data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}" data-caption="{{ $post['caption'] }}" data-permalink="{{ $post['permalink'] }}" aria-label="View Instagram {{ $isVideo ? 'video' : 'photo' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 100) }}" @if ($isDuplicate) tabindex="-1" @endif>
-                                        <span class="project-image"><img class="project-feed-image" src="{{ $post['preview_url'] ?? $post['media_url'] }}" alt="{{ \Illuminate\Support\Str::limit($post['caption'], 140) }}" loading="lazy" decoding="async">@if ($isVideo)<span class="project-feed-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>@endif</span>
-                                        <strong>{{ \Illuminate\Support\Str::limit($post['caption'] ?: 'Stagepass event production', 58) }}</strong>
-                                        <small>{{ $isVideo ? 'Video' : 'Instagram' }} · @stagepassav</small>
-                                    </button>
-                                @endforeach
-                            </div>
-                        @endforeach
+                    <div class="project-lane project-lane-forward" role="group" aria-label="Instagram projects moving forward" data-project-count="{{ count($instagramPosts) }}">
+                        <div class="project-marquee">
+                            @foreach ([false, true] as $isDuplicate)
+                                <div class="project-feed-group" @if ($isDuplicate) aria-hidden="true" @endif>
+                                    @foreach ($instagramPosts as $post)
+                                        @php($isVideo = ($post['media_type'] ?? '') === 'VIDEO' && isset($post['preview_url']))
+                                        <button class="project-card project-card-instagram instagram-media-trigger" type="button" data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}" data-media-url="{{ $post['media_url'] }}" data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}" data-caption="{{ $post['caption'] }}" data-permalink="{{ $post['permalink'] }}" aria-label="View Instagram {{ $isVideo ? 'video' : 'photo' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 100) }}" @if ($isDuplicate) tabindex="-1" @endif>
+                                            <span class="project-image"><img class="project-feed-image" src="{{ $post['preview_url'] ?? $post['media_url'] }}" alt="{{ \Illuminate\Support\Str::limit($post['caption'], 140) }}" loading="lazy" decoding="async">@if ($isVideo)<span class="project-feed-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>@endif</span>
+                                            <strong>{{ \Illuminate\Support\Str::limit($post['caption'] ?: 'Stagepass event production', 58) }}</strong>
+                                            <small>{{ $isVideo ? 'Video' : 'Instagram' }} · @stagepassav</small>
+                                        </button>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @else
                     @foreach ($projects as [$project, $location, $scene])
-                        <a class="project-card {{ $scene }}" href="#contact"><span class="project-image"></span><strong>{{ $project }}</strong><small>{{ $location }}</small></a>
+                        <article class="project-card {{ $scene }}"><span class="project-image"></span><strong>{{ $project }}</strong><small>{{ $location }}</small></article>
                     @endforeach
                 @endif
                 <div class="slider-controls"><button type="button" class="slide-prev" aria-label="Previous projects">←</button><button type="button" class="slide-next" aria-label="Next projects">→</button></div>
@@ -247,73 +382,20 @@
                     </div>
                 </div>
             </div>
-            <p class="more-brands">And many more<br>across Africa<span></span></p>
         </section>
 
         <section class="contact-section section-rule" id="contact">
             <div class="contact-copy"><h2>Let’s create<br>what’s next.</h2><p>Tell us about your event and our team will get back to you.</p><button class="button button-gold" type="button" data-quote-open>Get a Quotation <svg><use href="#i-arrow"/></svg></button></div>
-            <div class="contact-details"><a href="mailto:info@stagepass.co.ke"><svg><use href="#i-mail"/></svg><span><b>info@stagepass.co.ke</b><small>Let’s bring your vision to life.</small></span></a><a href="https://www.stagepass.co.ke"><svg><use href="#i-globe"/></svg><span><b>www.stagepass.co.ke</b><small>Explore. Experience. Excellence.</small></span></a><a href="https://maps.google.com/?q=Jacaranda+Close+Nairobi+Kenya"><svg><use href="#i-pin"/></svg><span><b>Jacaranda Close, Off Ridgeways Road</b><small>Nairobi, Kenya</small></span></a></div>
+            <div class="contact-details"><a href="mailto:info@stagepass.co.ke"><svg><use href="#i-mail"/></svg><span><b>info@stagepass.co.ke</b><small>Let’s bring your vision to life.</small></span></a><a href="tel:+254729171351"><svg><use href="#i-phone"/></svg><span><b>+254 729 171 351</b><small>Call our event production team.</small></span></a><a href="https://maps.google.com/?q=Jacaranda+Close+Nairobi+Kenya"><svg><use href="#i-pin"/></svg><span><b>Jacaranda Close, Off Ridgeways Road</b><small>Nairobi, Kenya</small></span></a></div>
             <p class="contact-watermark">The future<br>with speed<br>together<span></span></p>
         </section>
     </main>
 
-    <dialog class="quote-dialog" id="quote-dialog" aria-labelledby="quote-dialog-title" @if ($errors->any() || session('quote_submitted') || session('quote_delivery_unavailable')) data-open-on-load @endif>
-        <div class="quote-dialog-panel">
-            <button class="quote-dialog-close" type="button" data-quote-close aria-label="Close quotation form"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
-            <p class="eyebrow">Start a conversation</p>
-            <h2 id="quote-dialog-title">Get your AV quotation</h2>
-            <p class="quote-dialog-intro">Tell us a little about your event and our team will be in touch.</p>
+    @include('partials.quote-dialog')
 
-            @if (session('quote_submitted'))
-                <div class="quote-alert quote-alert-success" role="status">Thanks for reaching out. Your quotation request has been sent to our team.</div>
-                <a class="quote-contact-link" href="mailto:info@stagepass.co.ke">Need a faster response? Email info@stagepass.co.ke</a>
-            @else
-                @if (session('quote_delivery_unavailable'))
-                    <div class="quote-alert quote-alert-error" role="alert">Online quote delivery is not configured yet. Please email <a href="mailto:info@stagepass.co.ke">info@stagepass.co.ke</a>; your form details are still filled in below.</div>
-                @endif
 
-                @if ($errors->any())
-                    <div class="quote-alert quote-alert-error" role="alert">Please check the highlighted details and try again.</div>
-                @endif
 
-                <form class="quote-form" method="POST" action="{{ route('quote-requests.store') }}">
-                    @csrf
-                    <div class="quote-alert" data-quote-feedback role="status" hidden></div>
-                    <a class="quote-contact-link" data-quote-email-fallback href="mailto:info@stagepass.co.ke" hidden>Email info@stagepass.co.ke</a>
-                    <div class="quote-form-grid">
-                        <label class="quote-form-field" for="quote-name"><span class="quote-form-label">Name <span>*</span></span>
-                            <input id="quote-name" name="name" type="text" value="{{ old('name') }}" autocomplete="name" maxlength="100" required @error('name') aria-invalid="true" @enderror>
-                            @error('name')<small class="quote-field-error">{{ $message }}</small>@enderror
-                        </label>
-                        <label class="quote-form-field" for="quote-email"><span class="quote-form-label">Email <span>*</span></span>
-                            <input id="quote-email" name="email" type="email" value="{{ old('email') }}" autocomplete="email" maxlength="254" required @error('email') aria-invalid="true" @enderror>
-                            @error('email')<small class="quote-field-error">{{ $message }}</small>@enderror
-                        </label>
-                        <label class="quote-form-field" for="quote-phone"><span class="quote-form-label">Phone number <span>*</span></span>
-                            <input id="quote-phone" name="phone" type="tel" value="{{ old('phone') }}" autocomplete="tel" maxlength="32" required @error('phone') aria-invalid="true" @enderror>
-                            @error('phone')<small class="quote-field-error">{{ $message }}</small>@enderror
-                        </label>
-                        <label class="quote-form-field" for="quote-organization"><span class="quote-form-label">Company or organisation</span>
-                            <input id="quote-organization" name="organization" type="text" value="{{ old('organization') }}" autocomplete="organization" maxlength="150">
-                        </label>
-                        <label class="quote-form-field quote-form-field-wide" for="quote-message"><span class="quote-form-label">Event details <span>*</span></span>
-                            <textarea id="quote-message" name="message" rows="4" maxlength="3000" required @error('message') aria-invalid="true" @enderror>{{ old('message') }}</textarea>
-                            @error('message')<small class="quote-field-error">{{ $message }}</small>@enderror
-                        </label>
-                        <label class="quote-form-field quote-form-field-wide" for="quote-challenge"><span class="quote-form-label">Spam check: what is {{ $quoteChallenge }}? <span>*</span></span>
-                            <input id="quote-challenge" name="challenge" type="number" inputmode="numeric" required @error('challenge') aria-invalid="true" @enderror>
-                            @error('challenge')<small class="quote-field-error">{{ $message }}</small>@enderror
-                        </label>
-                    </div>
-                    <div class="quote-form-honeypot" aria-hidden="true"><label for="quote-company-website">Leave this field empty</label><input id="quote-company-website" name="company_website" type="text" value="" tabindex="-1" autocomplete="off"></div>
-                    <button class="button button-gold quote-submit" type="submit">Send quotation request <svg><use href="#i-arrow"/></svg></button>
-                    <p class="quote-privacy-note">Your details are only used to respond to this quotation request.</p>
-                </form>
-            @endif
-        </div>
-    </dialog>
-
-    <footer class="site-footer"><div class="footer-main"><a class="brand" href="#home" aria-label="Stagepass Audio Visual home"><span class="brand-logo"><img src="/images/stagepass-logo-source.png" alt="Stagepass Audio Visual"></span></a><p class="footer-disciplines">Audio <i>•</i> Visual <i>•</i> Scenic <i>•</i> Lighting <i>•</i> Rigging <i>•</i> Design <i>•</i> Production</p><div class="social-links"><a href="#contact" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5h3V19H5zM6.5 4a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5ZM10 8.5h2.9v1.4c.6-1 1.6-1.7 3.2-1.7 2.8 0 3.9 1.7 3.9 4.7V19h-3v-5.4c0-1.5-.2-2.8-1.8-2.8s-2.2 1.1-2.2 2.8V19h-3z"/></svg></a><a href="#contact" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-icon-dot" cx="17.6" cy="6.7" r="1"/></svg></a><a href="#contact" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.1a3 3 0 0 0-2.1-2.2C19 4.4 12 4.4 12 4.4s-7 0-8.9.5A3 3 0 0 0 1 7.1 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.2c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.2 31 31 0 0 0 .5-4.9 31 31 0 0 0-.5-4.9Z"/><path class="social-icon-play" d="m10 8.5 6 3.5-6 3.5z"/></svg></a><a href="#contact" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.4-.1-2.8-.1-2.8 0-4.8 1.7-4.8 4.9v1.7H6.5v3.2h2.7V21z"/></svg></a></div></div><div class="footer-bottom"><p>© 2026 Stagepass Audio Visual. All Rights Reserved.</p><p><a href="#contact">Privacy Policy</a><i>|</i><a href="#contact">Terms of Use</a></p><p>Designed for<br>a greater tomorrow<span></span></p></div></footer>
+    @include('partials.site-footer')
     @include('partials.instagram-lightbox')
 </body>
 </html>
