@@ -1100,6 +1100,13 @@ html.page-transition-leaving { animation: page-leave 240ms cubic-bezier(.4, 0, 1
 }
 @media (min-width: 761px) {
     .about-reach { grid-column: 3 / 5; grid-row: 1; }
+    .about-reach-title {
+        position: absolute;
+        top: 72%;
+        right: clamp(16px, 2.2vw, 38px);
+        left: clamp(16px, 2.2vw, 38px);
+        transform: translateY(-50%);
+    }
 }
 
 @media (max-width: 1120px) and (min-width: 761px) {
