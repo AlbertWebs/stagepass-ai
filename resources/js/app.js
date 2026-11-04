@@ -101,33 +101,6 @@ if (!reducedMotionPreference.matches && scrollRevealTargets.length > 0 && 'Inter
     scrollRevealTargets.forEach((target) => scrollRevealObserver.observe(target));
 }
 
-const aboutMap = document.querySelector('.about-reach-map');
-
-if (aboutMap instanceof HTMLElement) {
-    const showAboutMap = () => {
-        aboutMap.classList.add('is-map-loading');
-        window.setTimeout(() => {
-            aboutMap.classList.remove('is-map-loading');
-            aboutMap.classList.add('is-map-ready');
-        }, 1600);
-    };
-
-    if (reducedMotionPreference.matches) {
-        aboutMap.classList.add('is-map-ready');
-    } else if ('IntersectionObserver' in window) {
-        const aboutMapObserver = new IntersectionObserver((entries, observer) => {
-            if (entries.some((entry) => entry.isIntersecting)) {
-                showAboutMap();
-                observer.disconnect();
-            }
-        }, { threshold: 0.2 });
-
-        aboutMapObserver.observe(aboutMap);
-    } else {
-        showAboutMap();
-    }
-}
-
 const quoteDialog = document.querySelector('#quote-dialog');
 const quoteForm = quoteDialog?.querySelector('.quote-form');
 const serviceDetailDialog = document.querySelector('#service-detail-dialog');

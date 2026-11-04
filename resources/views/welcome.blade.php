@@ -270,10 +270,6 @@
             <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.jpg') }}" width="4160" height="2340" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
             <div class="about-reach">
                 <h3 class="about-reach-title">Africa’s event<br>technology partner</h3>
-                <div class="about-reach-map">
-                    <div class="africa-map"><img src="/images/africa-map.svg" alt=""><svg class="africa-routes" viewBox="0 0 280 300" role="img" aria-label="Routes from Nairobi reaching destinations across Africa" xmlns="http://www.w3.org/2000/svg"><defs><marker id="africa-route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 8 4 0 8z"/></marker></defs><g class="africa-route-lines"><path d="M220 158 Q190 105 181 48"/><path d="M220 158 Q143 114 53 92"/><path d="M220 158 Q144 137 86 132"/><path d="M220 158 Q158 175 128 196"/><path d="M220 158 Q188 215 151 263"/><path d="M220 158 Q205 204 190 236"/><path d="M220 158 Q247 128 244 113"/></g><circle class="africa-nairobi-halo" cx="220" cy="158" r="8"/><circle class="africa-nairobi-dot" cx="220" cy="158" r="3.5"/></svg></div>
-                    <div class="about-map-preloader" aria-hidden="true"><span></span><small>Mapping Africa</small></div>
-                </div>
                 <div class="about-highlights">
                     <div><svg><use href="#i-diamond"/></svg><span><b>Years of</b><small>Experience</small></span></div>
                     <div><svg><use href="#i-team"/></svg><span><b>A passionate</b><small>Team</small></span></div>
