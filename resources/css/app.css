@@ -1316,7 +1316,7 @@ body.home-page .site-header .header-actions { display: none; }
     grid-template-columns: 42px 1px minmax(0, 1fr);
     align-items: start;
     gap: clamp(10px, .8vw, 15px);
-    min-height: 51%;
+    min-height: 48%;
     padding: 18px clamp(12px, 1vw, 18px) 14px;
 }
 .industry-card-icon {
@@ -1403,7 +1403,7 @@ body.home-page .site-header .header-actions { display: none; }
     .industry-card-footer {
         grid-template-columns: 38px 1px minmax(0, 1fr);
         gap: 11px;
-        min-height: 49%;
+        min-height: 46%;
         padding: 18px 15px 14px;
     }
     .industry-card-icon { width: 34px; }
