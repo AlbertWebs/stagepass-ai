@@ -98,6 +98,11 @@
         <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7.1 3.5h3l1.4 4.1-2 1.6a15.5 15.5 0 0 0 5.3 5.3l1.6-2 4.1 1.4v3a2 2 0 0 1-2.2 2A16.8 16.8 0 0 1 5 5.7a2 2 0 0 1 2.1-2.2Z"/></symbol>
         <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
         <symbol id="i-rig" viewBox="0 0 24 24"><path d="M3 5h18M5 5v14m14-14v14M3 19h18M7 5l10 14m0-14L7 19M9 5v3m6-3v3m-6 8v3m6-3v3"/></symbol>
+        <symbol id="i-booth" viewBox="0 0 24 24"><path d="M3 20h18M5 20V9h14v11M3 6h18v3H3zM8 12v4m8-4v4"/></symbol>
+        <symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c3.5 2.7 8.5 2.7 12 0v-5m4-2v6"/></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M10 5h4m-2-2v2m-7 16h14"/></symbol>
+        <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 3-8 2 2h3"/><path d="M12 22a10 10 0 1 1 10-10"/></symbol>
+        <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5h16v16M2 21h20M8 9h1m6 0h1M8 13h1m6 0h1M8 17h1m6 0h1M11 21v-4h2v4"/></symbol>
     </svg>
 
     @php
@@ -116,64 +121,80 @@
         $industries = [
             [
                 'name' => 'Corporate & Business Events',
+                'icon' => 'i-team',
                 'scene' => 'scene-1',
                 'images' => ['corporate-ceo-forum.webp'],
+                'description' => 'Conferences, summits, product launches and brand experiences.',
                 'overview' => 'A production blueprint for conferences, launches and business gatherings, shaped around clear communication and confident presentation.',
                 'formats' => ['Conferences & summits', 'Product launches', 'AGMs & shareholder meetings', 'Award ceremonies', 'Team-building events'],
                 'needs' => 'Sound systems, LED screens, stage lighting, live streaming and interpretation systems.',
             ],
             [
                 'name' => 'Entertainment & Live Shows',
+                'icon' => 'i-audio',
                 'scene' => 'scene-3',
                 'images' => ['entertainment-event.webp'],
+                'description' => 'Concerts, festivals, tours and large-scale live productions.',
                 'overview' => 'A high-energy setup for live performance, balancing powerful sound, dynamic lighting and a stage that carries the show.',
                 'formats' => ['Concerts & music festivals', 'Comedy shows', 'Theatre productions', 'Cultural performances'],
                 'needs' => 'Line-array sound systems, moving lights, LED backdrops, special effects and stage design.',
             ],
             [
                 'name' => 'Exhibitions & Trade Shows',
+                'icon' => 'i-booth',
                 'scene' => 'scene-4',
                 'images' => ['exhibitions.webp'],
+                'description' => 'Custom booths, AV, branding and immersive experiences.',
                 'overview' => 'Make each stand and demonstration easier to discover with visual systems built for active exhibition floors.',
                 'formats' => ['Exhibition stands', 'Product demo booths', 'Brand activations', 'Expo pavilions'],
                 'needs' => 'Touch screens, video walls, digital signage, interactive displays and booth lighting.',
             ],
             [
                 'name' => 'Education & Training',
+                'icon' => 'i-cap',
                 'scene' => 'scene-1',
                 'images' => ['education-wso2con-stage.webp'],
+                'description' => 'Learning environments, graduations and capacity-building events.',
                 'overview' => 'Connect teaching spaces and audiences with presentation, recording and hybrid-learning systems.',
                 'formats' => ['University lecture halls', 'Training centers', 'E-learning environments', 'Graduation ceremonies'],
                 'needs' => 'Projectors, smart boards, recording systems, lecture capture and hybrid learning setups.',
             ],
             [
                 'name' => 'Religious Institutions',
+                'icon' => 'i-diamond',
                 'scene' => 'scene-5',
                 'images' => ['broadcast.webp'],
+                'description' => 'Worship events, crusades and faith-based gatherings.',
                 'overview' => 'Support weekly services and larger gatherings with intelligible sound, clear screens and broadcast-ready production.',
                 'formats' => ['Weekly worship services', 'Conferences & crusades', 'Religious festivals'],
                 'needs' => 'Installed sound systems, IMAG screens, stage lighting and live broadcast systems.',
             ],
             [
                 'name' => 'Hospitality & Tourism',
+                'icon' => 'i-bell',
                 'scene' => 'scene-5',
                 'images' => ['hospitality-tatler-ballroom.webp'],
+                'description' => 'Gala dinners, awards, destination events and high-end hospitality.',
                 'overview' => 'Adapt the production to the character of each venue, from refined ballrooms to open-air destinations.',
                 'formats' => ['Hotel conferences', 'Destination weddings', 'Gala dinners', 'Resort entertainment'],
                 'needs' => 'Ballroom AV, ambient lighting, outdoor sound systems and projection mapping.',
             ],
             [
                 'name' => 'Healthcare & Medical',
+                'icon' => 'i-pulse',
                 'scene' => 'scene-2',
                 'images' => ['healthcare-heart-event.webp'],
+                'description' => 'Conferences, medical forums and health awareness events.',
                 'overview' => 'Help specialist audiences follow presentations and training through dependable display, recording and broadcast systems.',
                 'formats' => ['Medical conferences', 'Hospital auditoriums', 'Surgical training broadcasts'],
                 'needs' => 'Presentation systems, live surgery streaming, recording systems and interpretation systems.',
             ],
             [
                 'name' => 'Government & Public Sector',
+                'icon' => 'i-building',
                 'scene' => 'scene-2',
                 'images' => ['government-dangote-ceremony.webp'],
+                'description' => 'National events, forums, summits and public engagements.',
                 'overview' => 'Plan high-visibility public events with production requirements coordinated from the room to the broadcast audience.',
                 'formats' => ['National celebrations', 'Policy summits', 'State functions', 'Public forums'],
                 'needs' => 'Large-scale sound systems, LED screens, live broadcasting and security-compliant AV solutions.',
@@ -286,7 +307,7 @@
         </dialog>
 
         <section class="industries-section section-rule" id="industries">
-            <div class="industry-heading"><div class="section-copy"><p class="eyebrow">Industries We Serve</p><h2>Every industry.<br>Exceptional experiences.</h2></div><a class="button button-outline button-small" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a><p class="industry-note">Different sectors.<br>One standard.<br>Excellence.</p></div>
+            <div class="industry-heading"><div class="section-copy"><p class="eyebrow">Industries We Serve</p><h2>Every industry.<br><em>Exceptional</em> experiences.</h2></div><a class="button button-outline button-small" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a><p class="industry-note">Different sectors.<br>One standard.<br>Excellence.</p></div>
             <div class="industry-grid">
                 @foreach ($industries as $industry)
                     <div class="industry-card {{ $industry['scene'] }} {{ count($industry['images']) > 0 ? 'industry-card-gallery' : '' }}" @if (count($industry['images']) > 1) data-industry-carousel role="group" aria-label="{{ $industry['name'] }} image carousel" @endif>
@@ -299,8 +320,13 @@
                         @endif
                         <span class="industry-card-shade" aria-hidden="true"></span>
                         <div class="industry-card-footer">
-                            <span class="industry-card-label">{{ $industry['name'] }}</span>
-                            <button class="industry-card-open" type="button" data-industry-open aria-haspopup="dialog" aria-controls="industry-detail-dialog" aria-label="Explore {{ $industry['name'] }} solutions" data-industry-title="{{ $industry['name'] }}" data-industry-overview="{{ $industry['overview'] }}" data-industry-formats="{{ implode('||', $industry['formats']) }}" data-industry-needs="{{ $industry['needs'] }}" data-industry-number="{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}" data-industry-total="{{ str_pad((string) count($industries), 2, '0', STR_PAD_LEFT) }}">Open sector playbook <b aria-hidden="true">↗</b></button>
+                            <span class="industry-card-icon" aria-hidden="true"><svg><use href="#{{ $industry['icon'] }}"/></svg></span>
+                            <span class="industry-card-divider" aria-hidden="true"></span>
+                            <div class="industry-card-copy">
+                                <span class="industry-card-label">{{ $industry['name'] }}</span>
+                                <p class="industry-card-description">{{ $industry['description'] }}</p>
+                                <button class="industry-card-open" type="button" data-industry-open aria-haspopup="dialog" aria-controls="industry-detail-dialog" aria-label="Explore {{ $industry['name'] }}" data-industry-title="{{ $industry['name'] }}" data-industry-overview="{{ $industry['overview'] }}" data-industry-formats="{{ implode('||', $industry['formats']) }}" data-industry-needs="{{ $industry['needs'] }}" data-industry-number="{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}" data-industry-total="{{ str_pad((string) count($industries), 2, '0', STR_PAD_LEFT) }}">Explore Sector <b aria-hidden="true">→</b></button>
+                            </div>
                         </div>
                         @if (count($industry['images']) > 1)
                             <div class="industry-carousel-pagination" role="group" aria-label="{{ $industry['name'] }} image selection">
