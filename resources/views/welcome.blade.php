@@ -270,12 +270,6 @@
             <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.jpg') }}" width="4160" height="2340" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
             <div class="about-reach">
                 <h3 class="about-reach-title">Africa’s event<br>technology partner</h3>
-                <div class="about-highlights">
-                    <div><svg><use href="#i-diamond"/></svg><span><b>Years of</b><small>Experience</small></span></div>
-                    <div><svg><use href="#i-team"/></svg><span><b>A passionate</b><small>Team</small></span></div>
-                    <div><svg><use href="#i-star"/></svg><span><b>Trusted by</b><small>Leading brands</small></span></div>
-                    <div><svg><use href="#i-cube"/></svg><span><b>Innovative</b><small>Solutions</small></span></div>
-                </div>
             </div>
         </section>
 
