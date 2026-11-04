@@ -1083,7 +1083,7 @@ html.page-transition-leaving { animation: page-leave 240ms cubic-bezier(.4, 0, 1
     gap: 0;
     overflow: hidden;
     padding: clamp(48px, 5vw, 64px) clamp(16px, 2.2vw, 38px) 24px;
-    border-left: 1px solid rgba(0, 127, 255, .33);
+    border-left: 0;
     background: radial-gradient(ellipse at 56% 48%, rgba(0, 110, 220, .18), transparent 66%), #07162c;
 }
 .about-reach-title {
