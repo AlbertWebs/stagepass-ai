@@ -101,6 +101,65 @@ if (!reducedMotionPreference.matches && scrollRevealTargets.length > 0 && 'Inter
     scrollRevealTargets.forEach((target) => scrollRevealObserver.observe(target));
 }
 
+const aboutTypewriter = document.querySelector('[data-about-typewriter]');
+const aboutTypewriterLines = Array.from(aboutTypewriter?.querySelectorAll('[data-typewriter-line]') ?? []);
+
+if (aboutTypewriter instanceof HTMLElement && aboutTypewriterLines.length > 0 && !reducedMotionPreference.matches && 'IntersectionObserver' in window) {
+    aboutTypewriter.classList.add('is-typewriter-pending');
+
+    const aboutTypewriterObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries.some((entry) => entry.isIntersecting)) {
+            return;
+        }
+
+        observer.disconnect();
+        aboutTypewriter.classList.remove('is-typewriter-pending');
+        aboutTypewriter.classList.add('is-typewriter-typing');
+        aboutTypewriterLines.forEach((line) => {
+            line.textContent = '';
+        });
+
+        const typeLine = (lineIndex) => {
+            const line = aboutTypewriterLines[lineIndex];
+            const characters = Array.from(line?.dataset.typewriterLine ?? '');
+
+            if (!line || characters.length === 0) {
+                aboutTypewriter.classList.remove('is-typewriter-typing');
+                aboutTypewriter.classList.add('is-typewriter-complete');
+                return;
+            }
+
+            line.classList.add('is-current');
+            let characterIndex = 0;
+
+            const typeNextCharacter = () => {
+                characterIndex += 1;
+                line.textContent = characters.slice(0, characterIndex).join('');
+
+                if (characterIndex < characters.length) {
+                    window.setTimeout(typeNextCharacter, 62);
+                    return;
+                }
+
+                line.classList.remove('is-current');
+                if (lineIndex + 1 < aboutTypewriterLines.length) {
+                    window.setTimeout(() => typeLine(lineIndex + 1), 240);
+                    return;
+                }
+
+                aboutTypewriter.classList.remove('is-typewriter-typing');
+                aboutTypewriter.classList.add('is-typewriter-complete');
+            };
+
+            typeNextCharacter();
+        };
+
+        typeLine(0);
+    }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
+
+    aboutTypewriterObserver.observe(aboutTypewriter);
+}
+
 const quoteDialog = document.querySelector('#quote-dialog');
 const quoteForm = quoteDialog?.querySelector('.quote-form');
 const serviceDetailDialog = document.querySelector('#service-detail-dialog');

@@ -1098,6 +1098,19 @@ html.page-transition-leaving { animation: page-leave 240ms cubic-bezier(.4, 0, 1
     text-shadow: 0 2px 14px rgba(0, 0, 0, .76);
     text-transform: uppercase;
 }
+.about-reach-title [data-typewriter-line] { display: inline-block; min-height: 1.06em; }
+.about-reach-title.is-typewriter-pending [data-typewriter-line] { visibility: hidden; }
+.about-reach-title.is-typewriter-typing [data-typewriter-line].is-current::after {
+    display: inline-block;
+    width: .055em;
+    height: .84em;
+    margin-inline-start: .08em;
+    background: var(--gold);
+    content: '';
+    vertical-align: -.06em;
+    animation: about-typewriter-caret .78s steps(2, start) infinite;
+}
+@keyframes about-typewriter-caret { to { visibility: hidden; } }
 @media (min-width: 761px) {
     .about-reach { grid-column: 3 / 5; grid-row: 1; }
     .about-reach-title {
