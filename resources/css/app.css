@@ -1068,9 +1068,11 @@ html.page-transition-leaving { animation: page-leave 240ms cubic-bezier(.4, 0, 1
 }
 
 .about-photo-frame::after {
-    background: linear-gradient(90deg, rgba(2, 8, 18, .9), rgba(2, 8, 18, .76) 52%, rgba(2, 8, 18, .32)),
-        linear-gradient(0deg, rgba(2, 8, 18, .74), rgba(2, 8, 18, .2) 72%);
+    background: linear-gradient(90deg, rgba(2, 8, 18, .96) 0%, rgba(2, 8, 18, .84) 28%, rgba(2, 8, 18, .48) 54%, rgba(2, 8, 18, .12) 82%, rgba(2, 8, 18, .04) 100%),
+        linear-gradient(0deg, rgba(2, 8, 18, .24), rgba(2, 8, 18, .04) 72%);
 }
+
+.about-photo-image { filter: brightness(.84) saturate(.84); }
 
 .about-reach {
     position: relative;
@@ -1093,6 +1095,7 @@ html.page-transition-leaving { animation: page-leave 240ms cubic-bezier(.4, 0, 1
     font-weight: 700;
     line-height: 1.06;
     text-align: center;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .76);
     text-transform: uppercase;
 }
 @media (min-width: 761px) {
@@ -1891,5 +1894,5 @@ body.home-page .site-header .menu-contact-footnote i { padding-inline: 4px; colo
 .home-page .about-photo-framed .about-photo-frame { inset: 0; }
 .home-page .about-copy,
 .home-page .about-reach { position: relative; z-index: 1; }
-.home-page .about-reach { background: linear-gradient(90deg, rgba(7, 22, 44, .46), rgba(7, 22, 44, .7)); }
+.home-page .about-reach { background: transparent; }
 .home-page .africa-card { background: radial-gradient(ellipse at 50% 40%, rgba(0, 95, 195, .2), transparent 67%), rgba(7, 22, 44, .5); }
