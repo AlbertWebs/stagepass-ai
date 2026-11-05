@@ -103,6 +103,7 @@
         <symbol id="i-bell" viewBox="0 0 24 24"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M10 5h4m-2-2v2m-7 16h14"/></symbol>
         <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 3-8 2 2h3"/><path d="M12 22a10 10 0 1 1 10-10"/></symbol>
         <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5h16v16M2 21h20M8 9h1m6 0h1M8 13h1m6 0h1M8 17h1m6 0h1M11 21v-4h2v4"/></symbol>
+        <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4ZM8 6H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4m-4 1v4m-4 3h8m-7-3h6v3H9z"/></symbol>
     </svg>
 
     @php
@@ -123,7 +124,7 @@
                 'name' => 'Corporate & Business Events',
                 'icon' => 'i-team',
                 'scene' => 'scene-1',
-                'images' => ['corporate-ceo-forum.webp'],
+                'images' => ['africa-ceo-forum-corporate.webp'],
                 'description' => 'Conferences, summits, product launches and brand experiences.',
                 'overview' => 'A production blueprint for conferences, launches and business gatherings, shaped around clear communication and confident presentation.',
                 'formats' => ['Conferences & summits', 'Product launches', 'AGMs & shareholder meetings', 'Award ceremonies', 'Team-building events'],
@@ -143,7 +144,7 @@
                 'name' => 'Exhibitions & Trade Shows',
                 'icon' => 'i-booth',
                 'scene' => 'scene-4',
-                'images' => ['exhibitions.webp'],
+                'images' => ['o2-bar-exhibition-booth.webp'],
                 'description' => 'Custom booths, AV, branding and immersive experiences.',
                 'overview' => 'Make each stand and demonstration easier to discover with visual systems built for active exhibition floors.',
                 'formats' => ['Exhibition stands', 'Product demo booths', 'Brand activations', 'Expo pavilions'],
@@ -183,7 +184,7 @@
                 'name' => 'Healthcare & Medical',
                 'icon' => 'i-pulse',
                 'scene' => 'scene-2',
-                'images' => ['healthcare-heart-event.webp'],
+                'images' => ['medico-marketing-healthcare.webp'],
                 'description' => 'Conferences, medical forums and health awareness events.',
                 'overview' => 'Help specialist audiences follow presentations and training through dependable display, recording and broadcast systems.',
                 'formats' => ['Medical conferences', 'Hospital auditoriums', 'Surgical training broadcasts'],
@@ -198,6 +199,16 @@
                 'overview' => 'Plan high-visibility public events with production requirements coordinated from the room to the broadcast audience.',
                 'formats' => ['National celebrations', 'Policy summits', 'State functions', 'Public forums'],
                 'needs' => 'Large-scale sound systems, LED screens, live broadcasting and security-compliant AV solutions.',
+            ],
+            [
+                'name' => 'Sports & Recreation',
+                'icon' => 'i-trophy',
+                'scene' => 'scene-3',
+                'images' => ['sports-recreation.webp'],
+                'description' => 'Stadium ceremonies, fan experiences and live sports production.',
+                'overview' => 'Bring stadiums and sporting venues to life for ceremonies, fan activations and major sporting events, with production shaped around the match-day experience.',
+                'formats' => ['Opening & closing ceremonies', 'Fan zones & activations', 'Award ceremonies', 'Stadium concerts'],
+                'needs' => 'Stadium sound systems, large-scale LED screens, broadcast-ready production, stage lighting and live show coordination.',
             ],
         ];
         $projects = [
@@ -267,7 +278,7 @@
 
         <section class="about-section section-rule" id="about">
             <div class="about-copy section-copy"><p class="eyebrow">About Stagepass</p><h2>More than<br>technology.<br><em>A team that delivers.</em></h2><p class="about-description"><strong>StagePass Audio-Visual Limited is an integrated technical, consulting, planning, design and implementation provider for professional event planning and design based in Nairobi and operating within Africa.</strong></p><p class="about-description"><strong>We specialize in rentals of audio-visual technology including sound, screens, lighting, content management, digital and Interactive technology and scenic design.</strong></p><div class="about-proof-actions"><div class="about-proof" data-count-up data-count-to="2362"><span class="about-proof-number"><span data-count-value>2,362</span><sup>+</sup></span><span class="about-proof-label">Successful<br>Events</span></div><a class="button button-outline button-small" href="#services">Explore Our Services <svg><use href="#i-arrow"/></svg></a></div></div>
-            <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.jpg') }}" width="4160" height="2340" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
+            <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.webp') }}" width="1920" height="1080" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
             <div class="about-reach">
                 <h3 class="about-reach-title" data-about-typewriter aria-label="Africa’s event technology partner"><span data-typewriter-line="Africa’s event" aria-hidden="true">Africa’s event</span><br aria-hidden="true"><span data-typewriter-line="technology partner" aria-hidden="true">technology partner</span></h3>
             </div>

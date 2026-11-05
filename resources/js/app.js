@@ -213,6 +213,19 @@ if (industryDetailDialog instanceof HTMLDialogElement && industryDetailButtons.l
     const industryDetailNumber = industryDetailDialog.querySelector('[data-industry-detail-number]');
     const industryDetailCounter = industryDetailDialog.querySelector('[data-industry-detail-counter]');
     const industryDetailClose = industryDetailDialog.querySelector('[data-industry-detail-close]');
+    const closeIndustryDetailDialog = () => {
+        if (!industryDetailDialog.open || industryDetailDialog.classList.contains('is-closing')) {
+            return;
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            industryDetailDialog.close();
+
+            return;
+        }
+
+        industryDetailDialog.classList.add('is-closing');
+    };
 
     industryDetailButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -237,30 +250,79 @@ if (industryDetailDialog instanceof HTMLDialogElement && industryDetailButtons.l
                 });
 
             industryDetailFormats.replaceChildren(...formatItems);
+            industryDetailDialog.classList.remove('is-closing');
             industryDetailDialog.showModal();
         });
     });
 
     industryDetailClose?.addEventListener('click', () => {
-        industryDetailDialog.close();
+        closeIndustryDetailDialog();
     });
 
     industryDetailDialog.addEventListener('click', (event) => {
         if (event.target === industryDetailDialog) {
+            closeIndustryDetailDialog();
+        }
+    });
+
+    industryDetailDialog.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        closeIndustryDetailDialog();
+    });
+
+    industryDetailDialog.addEventListener('animationend', (event) => {
+        if (event.target === industryDetailDialog && event.animationName === 'industry-detail-exit') {
             industryDetailDialog.close();
         }
+    });
+
+    industryDetailDialog.addEventListener('close', () => {
+        industryDetailDialog.classList.remove('is-closing');
     });
 }
 
 const closeQuoteDialog = () => {
-    if (quoteDialog instanceof HTMLDialogElement && quoteDialog.open && !quoteDialog.classList.contains('is-closing')) {
-        quoteDialog.classList.add('is-closing');
+    if (!(quoteDialog instanceof HTMLDialogElement) || !quoteDialog.open || quoteDialog.classList.contains('is-closing')) {
+        return;
     }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        quoteDialog.close();
+
+        return;
+    }
+
+    const quoteCloseButton = quoteDialog.querySelector('[data-quote-close]');
+    const dialogRect = quoteDialog.getBoundingClientRect();
+    const closeRect = quoteCloseButton?.getBoundingClientRect();
+
+    if (closeRect) {
+        const closeCenterX = closeRect.left + closeRect.width / 2;
+        const closeCenterY = closeRect.top + closeRect.height / 2;
+        const dialogCenterX = dialogRect.left + dialogRect.width / 2;
+        const dialogCenterY = dialogRect.top + dialogRect.height / 2;
+        const quotePanelRect = quoteDialog.querySelector('.quote-dialog-panel')?.getBoundingClientRect();
+
+        quoteDialog.style.setProperty('--quote-collapse-x', `${closeCenterX - dialogCenterX}px`);
+        quoteDialog.style.setProperty('--quote-collapse-y', `${closeCenterY - dialogCenterY}px`);
+
+        if (quotePanelRect) {
+            quoteDialog.style.setProperty('--quote-singularity-x', `${((closeCenterX - quotePanelRect.left) / quotePanelRect.width) * 100}%`);
+            quoteDialog.style.setProperty('--quote-singularity-y', `${((closeCenterY - quotePanelRect.top) / quotePanelRect.height) * 100}%`);
+        }
+    }
+
+    quoteDialog.classList.add('is-closing');
 };
 
 document.querySelectorAll('[data-quote-open]').forEach((button) => {
     button.addEventListener('click', () => {
         if (quoteDialog instanceof HTMLDialogElement && !quoteDialog.open) {
+            quoteDialog.classList.remove('is-closing');
+            quoteDialog.style.removeProperty('--quote-collapse-x');
+            quoteDialog.style.removeProperty('--quote-collapse-y');
+            quoteDialog.style.removeProperty('--quote-singularity-x');
+            quoteDialog.style.removeProperty('--quote-singularity-y');
             quoteDialog.showModal();
         }
     });
@@ -289,6 +351,10 @@ quoteDialog?.addEventListener('animationend', (event) => {
 
 quoteDialog?.addEventListener('close', () => {
     quoteDialog.classList.remove('is-closing');
+    quoteDialog.style.removeProperty('--quote-collapse-x');
+    quoteDialog.style.removeProperty('--quote-collapse-y');
+    quoteDialog.style.removeProperty('--quote-singularity-x');
+    quoteDialog.style.removeProperty('--quote-singularity-y');
 });
 
 if (quoteDialog instanceof HTMLDialogElement && quoteDialog.hasAttribute('data-open-on-load')) {
