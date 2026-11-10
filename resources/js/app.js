@@ -682,6 +682,35 @@ const instagramLightbox = document.querySelector('.instagram-lightbox');
 const instagramLightboxMedia = instagramLightbox?.querySelector('.instagram-lightbox-media');
 const instagramLightboxCaption = instagramLightbox?.querySelector('.instagram-lightbox-caption');
 const instagramLightboxLink = instagramLightbox?.querySelector('.instagram-lightbox-link');
+let instagramVideoFallbackTimer = null;
+
+const createInstagramVideoEmbed = (permalink, caption) => {
+    try {
+        const postUrl = new URL(permalink);
+
+        if (!['instagram.com', 'www.instagram.com'].includes(postUrl.hostname)) {
+            return null;
+        }
+
+        const embed = document.createElement('iframe');
+        const postPath = postUrl.pathname.replace(/\/+$/, '');
+
+        embed.src = `${postUrl.origin}${postPath}/embed/?autoplay=1`;
+        embed.title = caption || 'Instagram video';
+        embed.allow = 'autoplay; encrypted-media; picture-in-picture; web-share';
+        embed.allowFullscreen = true;
+        embed.loading = 'eager';
+        embed.referrerPolicy = 'strict-origin-when-cross-origin';
+        embed.style.width = '100%';
+        embed.style.height = '100%';
+        embed.style.border = '0';
+        embed.style.background = '#020711';
+
+        return embed;
+    } catch {
+        return null;
+    }
+};
 
 document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
     card.addEventListener('click', () => {
@@ -698,18 +727,43 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
             return;
         }
 
+        window.clearTimeout(instagramVideoFallbackTimer);
         instagramLightboxMedia.replaceChildren();
 
         if (card.dataset.mediaType === 'VIDEO') {
             const video = document.createElement('video');
+            const source = document.createElement('source');
             video.controls = true;
             video.playsInline = true;
             video.autoplay = true;
+            video.muted = true;
             video.preload = 'metadata';
             video.poster = previewUrl;
-            video.src = mediaUrl;
             video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
+            source.src = mediaUrl;
+            source.type = 'video/mp4';
+            video.append(source);
+            video.addEventListener('loadedmetadata', () => window.clearTimeout(instagramVideoFallbackTimer), { once: true });
+            video.addEventListener('error', () => {
+                const embed = createInstagramVideoEmbed(permalink, caption);
+                window.clearTimeout(instagramVideoFallbackTimer);
+
+                if (embed && video.isConnected) {
+                    video.replaceWith(embed);
+                }
+            }, { once: true });
             instagramLightboxMedia.append(video);
+            video.load();
+            video.play().catch(() => {});
+            instagramVideoFallbackTimer = window.setTimeout(() => {
+                if (video.isConnected && video.readyState === HTMLMediaElement.HAVE_NOTHING) {
+                    const embed = createInstagramVideoEmbed(permalink, caption);
+
+                    if (embed) {
+                        video.replaceWith(embed);
+                    }
+                }
+            }, 8000);
         } else {
             const image = document.createElement('img');
             image.src = mediaUrl;
@@ -736,6 +790,7 @@ instagramLightbox?.addEventListener('click', (event) => {
 });
 
 instagramLightbox?.addEventListener('close', () => {
+    window.clearTimeout(instagramVideoFallbackTimer);
     instagramLightboxMedia?.querySelector('video')?.pause();
     instagramLightboxMedia?.replaceChildren();
 });
