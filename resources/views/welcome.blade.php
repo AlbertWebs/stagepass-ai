@@ -347,9 +347,7 @@
             <div class="service-detail-panel industry-detail-panel">
                 <button class="service-detail-close" type="button" data-industry-detail-close aria-label="Close industry playbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
                 <div class="industry-detail-visual" aria-hidden="true">
-                    <p>STAGEPASS / SECTOR BLUEPRINT</p>
                     <div class="industry-detail-radar"><span data-industry-detail-number>01</span><i></i><b></b></div>
-                    <small>DESIGNED AROUND THE AUDIENCE</small>
                 </div>
                 <div class="service-detail-copy industry-detail-copy">
                     <p class="eyebrow"><span>Industry playbook</span><span data-industry-detail-counter>01 / 09</span></p>
