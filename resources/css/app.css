@@ -862,17 +862,23 @@ h1 em { color: var(--gold); font-style: normal; }
 .instagram-feed-overlay > span { display: -webkit-box; overflow: hidden; color: #e5edf8; font-size: 12px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }
 .instagram-feed-empty { padding: 30px; border: 1px solid rgba(21, 112, 211, .33); color: #bac8dc; text-align: center; }
 .instagram-feed-empty a { color: var(--gold); font-weight: 700; }
-.instagram-lightbox { position: fixed; top: 50%; left: 50%; width: min(1000px, calc(100vw - 40px)); max-width: none; max-height: min(90dvh, 900px); padding: 0; overflow: hidden; margin: 0; transform: translate(-50%, -50%); border: 1px solid rgba(177, 203, 232, .24); color: #f4f7fc; background: #071329; box-shadow: 0 26px 100px rgba(0,0,0,.55); }
+.instagram-lightbox { position: fixed; top: 50%; left: 50%; width: min(1120px, calc(100vw - 48px)); max-width: none; max-height: min(88dvh, 820px); padding: 0; overflow: hidden; margin: 0; transform: translate(-50%, -50%); border: 1px solid rgba(255, 184, 0, .42); color: #f4f7fc; background: #061329; box-shadow: 0 28px 100px rgba(0,0,0,.64), 0 0 55px rgba(0,112,230,.14); }
 .instagram-lightbox::backdrop { background: rgba(1, 6, 16, .84); backdrop-filter: blur(9px); }
-.instagram-lightbox-panel { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); max-height: min(90dvh, 900px); }
+.instagram-lightbox-panel { position: relative; display: grid; min-height: min(68dvh, 700px); grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr); max-height: min(88dvh, 820px); overflow: hidden; background: radial-gradient(ellipse at 78% 15%, rgba(0,112,230,.16), transparent 50%), linear-gradient(125deg, #071831, #061329 68%); }
 .instagram-lightbox-close { position: absolute; z-index: 2; top: 12px; right: 12px; display: grid; width: 42px; height: 42px; padding: 10px; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: #fff; cursor: pointer; background: rgba(3,11,25,.75); }
 .instagram-lightbox-close:hover, .instagram-lightbox-close:focus-visible { color: var(--gold); border-color: var(--gold); }
 .instagram-lightbox-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 1.8; }
-.instagram-lightbox-media { display: grid; width: 100%; min-width: 0; height: min(68dvh, 700px); min-height: 200px; max-height: min(90dvh, 900px); place-items: center; overflow: hidden; background: #020711; }
-.instagram-lightbox-media img, .instagram-lightbox-media video { display: block; width: 100%; height: 100%; max-height: min(90dvh, 900px); object-fit: contain; }
-.instagram-lightbox-details { display: flex; min-width: 0; padding: 18px 24px 22px; flex-direction: row; align-items: end; justify-content: space-between; gap: 24px; }
-.instagram-lightbox-caption { max-height: 15vh; margin: 0; overflow: auto; color: #d5e0ee; font-size: 14px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
-.instagram-lightbox-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); font-size: 13px; font-weight: 700; }
+.instagram-lightbox-media { position: relative; display: grid; width: 100%; min-width: 0; min-height: 0; height: 100%; place-items: center; overflow: hidden; background: #020711; }
+.instagram-lightbox-media img, .instagram-lightbox-media video, .instagram-lightbox-media iframe { display: block; width: 100%; height: 100%; max-height: min(88dvh, 820px); border: 0; object-fit: contain; }
+.instagram-lightbox-media iframe { background: #020711; }
+.instagram-lightbox-loading { position: absolute; z-index: 1; inset: 0; display: grid; align-content: center; justify-items: center; gap: 14px; padding: 24px; color: #c8d5e6; font-size: 12px; letter-spacing: .08em; text-align: center; text-transform: uppercase; background: rgba(2, 7, 17, .82); pointer-events: none; }
+.instagram-lightbox-loading::before { width: 30px; height: 30px; border: 2px solid rgba(255,184,0,.22); border-top-color: var(--gold); border-radius: 50%; content: ''; animation: instagram-media-spin .8s linear infinite; }
+@keyframes instagram-media-spin { to { transform: rotate(360deg); } }
+.instagram-lightbox-details { display: flex; min-width: 0; padding: 56px clamp(26px, 3.2vw, 48px) 38px; flex-direction: column; align-items: start; justify-content: center; gap: 18px; }
+.instagram-lightbox-eyebrow { margin: 0; color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.instagram-lightbox-heading { margin: 0; color: #f6f9fd; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.08; letter-spacing: -.035em; text-transform: uppercase; }
+.instagram-lightbox-caption { max-height: 28vh; margin: 0; overflow: auto; color: #bdcadd; font-size: 14px; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+.instagram-lightbox-link { min-height: 48px; margin-top: 8px; }
 .instagram-lightbox-link svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
 .inner-site .site-footer { padding-inline: clamp(36px, 6.25vw, 128px); }
 .inner-site .footer-bottom a { color: inherit; }
@@ -894,12 +900,14 @@ h1 em { color: var(--gold); font-style: normal; }
     .instagram-feed { width: calc(100% - 40px); padding-block: 28px 52px; }
     .instagram-feed-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
     .instagram-feed-overlay > span { font-size: 11px; }
-    .instagram-lightbox { width: min(640px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); }
-    .instagram-lightbox-panel { grid-template-columns: 1fr; max-height: calc(100dvh - 24px); overflow: auto; }
-    .instagram-lightbox-media { min-height: 0; height: min(62dvh, 620px); }
-    .instagram-lightbox-media img, .instagram-lightbox-media video { height: 100%; }
-    .instagram-lightbox-details { min-height: 0; padding: 16px 20px 18px; flex-direction: column; align-items: start; gap: 12px; }
-    .instagram-lightbox-caption { max-height: 16vh; }
+    .instagram-lightbox { width: min(700px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); }
+    .instagram-lightbox-panel { min-height: 0; grid-template-columns: minmax(0, 1fr); max-height: calc(100dvh - 24px); overflow: auto; }
+    .instagram-lightbox-media { min-height: 0; height: min(52dvh, 520px); flex: none; }
+    .instagram-lightbox-media img, .instagram-lightbox-media video, .instagram-lightbox-media iframe { height: 100%; }
+    .instagram-lightbox-details { min-height: 0; padding: 22px 22px 25px; gap: 12px; }
+    .instagram-lightbox-heading { font-size: clamp(23px, 6vw, 30px); }
+    .instagram-lightbox-caption { max-height: 20vh; }
+    .instagram-lightbox-link { margin-top: 4px; }
     .inner-site .site-footer { padding-inline: 20px; }
 }
 

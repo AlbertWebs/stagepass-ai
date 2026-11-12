@@ -682,6 +682,7 @@ const instagramLightbox = document.querySelector('.instagram-lightbox');
 const instagramLightboxMedia = instagramLightbox?.querySelector('.instagram-lightbox-media');
 const instagramLightboxCaption = instagramLightbox?.querySelector('.instagram-lightbox-caption');
 const instagramLightboxLink = instagramLightbox?.querySelector('.instagram-lightbox-link');
+const instagramLightboxMediaKind = instagramLightbox?.querySelector('[data-instagram-media-kind]');
 let instagramVideoFallbackTimer = null;
 
 const createInstagramVideoEmbed = (permalink, caption) => {
@@ -732,36 +733,47 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
 
         if (card.dataset.mediaType === 'VIDEO') {
             const video = document.createElement('video');
-            const source = document.createElement('source');
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'instagram-lightbox-loading';
+            loadingMessage.setAttribute('role', 'status');
+            loadingMessage.setAttribute('aria-live', 'polite');
+            loadingMessage.textContent = 'Loading video';
             video.controls = true;
             video.playsInline = true;
             video.autoplay = true;
-            video.muted = true;
-            video.preload = 'metadata';
+            video.preload = 'auto';
             video.poster = previewUrl;
             video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
-            source.src = mediaUrl;
-            source.type = 'video/mp4';
-            video.append(source);
-            video.addEventListener('loadedmetadata', () => window.clearTimeout(instagramVideoFallbackTimer), { once: true });
-            video.addEventListener('error', () => {
+            video.src = mediaUrl;
+            const showInstagramEmbed = () => {
                 const embed = createInstagramVideoEmbed(permalink, caption);
                 window.clearTimeout(instagramVideoFallbackTimer);
 
                 if (embed && video.isConnected) {
                     video.replaceWith(embed);
+                    loadingMessage.textContent = 'Opening Instagram player';
+                    instagramLightboxMedia.append(loadingMessage);
+                    embed.addEventListener('load', () => loadingMessage.remove(), { once: true });
+                } else if (video.isConnected) {
+                    loadingMessage.textContent = 'This video could not load. Open it on Instagram.';
+                    video.replaceWith(loadingMessage);
                 }
+            };
+            video.addEventListener('loadeddata', () => {
+                window.clearTimeout(instagramVideoFallbackTimer);
+                loadingMessage.remove();
             }, { once: true });
-            instagramLightboxMedia.append(video);
+            video.addEventListener('error', () => {
+                showInstagramEmbed();
+            }, { once: true });
+            instagramLightboxMedia.append(loadingMessage, video);
             video.load();
-            video.play().catch(() => {});
+            video.play().catch(() => {
+                loadingMessage.textContent = 'Tap play to start the video';
+            });
             instagramVideoFallbackTimer = window.setTimeout(() => {
-                if (video.isConnected && video.readyState === HTMLMediaElement.HAVE_NOTHING) {
-                    const embed = createInstagramVideoEmbed(permalink, caption);
-
-                    if (embed) {
-                        video.replaceWith(embed);
-                    }
+                if (video.isConnected && video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+                    showInstagramEmbed();
                 }
             }, 8000);
         } else {
@@ -773,6 +785,9 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
 
         instagramLightboxCaption.textContent = caption;
         instagramLightboxLink.href = permalink;
+        if (instagramLightboxMediaKind) {
+            instagramLightboxMediaKind.textContent = card.dataset.mediaType === 'VIDEO' ? 'Video' : 'Photo';
+        }
         instagramLightbox.showModal();
     });
 });
