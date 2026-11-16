@@ -119,98 +119,7 @@
             ['name' => 'Equipment Rentals', 'icon' => 'i-case', 'summary' => 'Get equipment that fits the brief, venue and run of show. Stagepass provides audio-visual, lighting and staging rentals supported by technical advice and production planning.', 'delivery' => 'We help identify the right combination and coordinate it with setup and on-site needs, so each component has a place in the production.'],
             ['name' => 'Event Design & Consultancy', 'icon' => 'i-pen', 'summary' => 'Start with the feeling you want guests to leave with. We help translate the event brief into a plan for the audience journey, programme, venue and technical experience.', 'delivery' => 'Creative design and technical consulting meet early, giving the production a direction that can be planned, built and delivered.'],
         ];
-        $industries = [
-            [
-                'name' => 'Corporate & Business Events',
-                'icon' => 'i-team',
-                'scene' => 'scene-1',
-                'images' => ['africa-ceo-forum-corporate.webp'],
-                'description' => 'Conferences, summits, product launches and brand experiences.',
-                'overview' => 'A production blueprint for conferences, launches and business gatherings, shaped around clear communication and confident presentation.',
-                'formats' => ['Conferences & summits', 'Product launches', 'AGMs & shareholder meetings', 'Award ceremonies', 'Team-building events'],
-                'needs' => 'Sound systems, LED screens, stage lighting, live streaming and interpretation systems.',
-            ],
-            [
-                'name' => 'Entertainment & Live Shows',
-                'icon' => 'i-audio',
-                'scene' => 'scene-3',
-                'images' => ['entertainment-event.webp'],
-                'description' => 'Concerts, festivals, tours and large-scale live productions.',
-                'overview' => 'A high-energy setup for live performance, balancing powerful sound, dynamic lighting and a stage that carries the show.',
-                'formats' => ['Concerts & music festivals', 'Comedy shows', 'Theatre productions', 'Cultural performances'],
-                'needs' => 'Line-array sound systems, moving lights, LED backdrops, special effects and stage design.',
-            ],
-            [
-                'name' => 'Exhibitions & Trade Shows',
-                'icon' => 'i-booth',
-                'scene' => 'scene-4',
-                'images' => ['o2-bar-exhibition-booth.webp'],
-                'description' => 'Custom booths, AV, branding and immersive experiences.',
-                'overview' => 'Make each stand and demonstration easier to discover with visual systems built for active exhibition floors.',
-                'formats' => ['Exhibition stands', 'Product demo booths', 'Brand activations', 'Expo pavilions'],
-                'needs' => 'Touch screens, video walls, digital signage, interactive displays and booth lighting.',
-            ],
-            [
-                'name' => 'Education & Training',
-                'icon' => 'i-cap',
-                'scene' => 'scene-1',
-                'images' => ['education-citizens-of-the-future.webp'],
-                'description' => 'Learning environments, graduations and capacity-building events.',
-                'overview' => 'Connect teaching spaces and audiences with presentation, recording and hybrid-learning systems.',
-                'formats' => ['University lecture halls', 'Training centers', 'E-learning environments', 'Graduation ceremonies'],
-                'needs' => 'Projectors, smart boards, recording systems, lecture capture and hybrid learning setups.',
-            ],
-            [
-                'name' => 'Religious Institutions',
-                'icon' => 'i-diamond',
-                'scene' => 'scene-5',
-                'images' => ['broadcast.webp'],
-                'description' => 'Worship events, crusades and faith-based gatherings.',
-                'overview' => 'Support weekly services and larger gatherings with intelligible sound, clear screens and broadcast-ready production.',
-                'formats' => ['Weekly worship services', 'Conferences & crusades', 'Religious festivals'],
-                'needs' => 'Installed sound systems, IMAG screens, stage lighting and live broadcast systems.',
-            ],
-            [
-                'name' => 'Hospitality & Tourism',
-                'icon' => 'i-bell',
-                'scene' => 'scene-5',
-                'images' => ['hospitality-stagepass-event.webp'],
-                'description' => 'Gala dinners, awards, destination events and high-end hospitality.',
-                'overview' => 'Adapt the production to the character of each venue, from refined ballrooms to open-air destinations.',
-                'formats' => ['Hotel conferences', 'Destination weddings', 'Gala dinners', 'Resort entertainment'],
-                'needs' => 'Ballroom AV, ambient lighting, outdoor sound systems and projection mapping.',
-            ],
-            [
-                'name' => 'Healthcare & Medical',
-                'icon' => 'i-pulse',
-                'scene' => 'scene-2',
-                'images' => ['medico-marketing-healthcare.webp'],
-                'description' => 'Conferences, medical forums and health awareness events.',
-                'overview' => 'Help specialist audiences follow presentations and training through dependable display, recording and broadcast systems.',
-                'formats' => ['Medical conferences', 'Hospital auditoriums', 'Surgical training broadcasts'],
-                'needs' => 'Presentation systems, live surgery streaming, recording systems and interpretation systems.',
-            ],
-            [
-                'name' => 'Government & Public Sector',
-                'icon' => 'i-building',
-                'scene' => 'scene-2',
-                'images' => ['government-dangote-ceremony.webp'],
-                'description' => 'National events, forums, summits and public engagements.',
-                'overview' => 'Plan high-visibility public events with production requirements coordinated from the room to the broadcast audience.',
-                'formats' => ['National celebrations', 'Policy summits', 'State functions', 'Public forums'],
-                'needs' => 'Large-scale sound systems, LED screens, live broadcasting and security-compliant AV solutions.',
-            ],
-            [
-                'name' => 'Sports & Recreation',
-                'icon' => 'i-trophy',
-                'scene' => 'scene-3',
-                'images' => ['sports-recreation.webp'],
-                'description' => 'Stadium ceremonies, fan experiences and live sports production.',
-                'overview' => 'Bring stadiums and sporting venues to life for ceremonies, fan activations and major sporting events, with production shaped around the match-day experience.',
-                'formats' => ['Opening & closing ceremonies', 'Fan zones & activations', 'Award ceremonies', 'Stadium concerts'],
-                'needs' => 'Stadium sound systems, large-scale LED screens, broadcast-ready production, stage lighting and live show coordination.',
-            ],
-        ];
+        $industries = config('site_industries');
         $projects = [
             ['Safaricom Dealer Conference', 'Nairobi, Kenya', 'scene-3'], ['Corporate Gala Awards', 'Nairobi, Kenya', 'scene-5'],
             ['Government Summit', 'Kigali, Rwanda', 'scene-2'], ['Brand Activation', 'Nairobi, Kenya', 'scene-4'],
@@ -249,40 +158,42 @@
     </header>
 
     <main>
-        <section class="hero" id="home">
-            <div class="hero-photo" role="img" aria-label="Stagepass event production across conferences, live shows and branded experiences">
-                <span class="hero-image-slide is-active" style="--hero-image: url('{{ asset('images/fifa-congress-hero.jpg?v=20261030-hq') }}')" aria-hidden="true"></span>
-            </div>
-            <img class="hero-top-ribbon" src="/images/stagepass-hero-top-ribbon.svg" alt="" aria-hidden="true">
-            <div class="hero-grid"></div>
-            <div class="hero-content wrap">
-                <div class="hero-copy">
-                    <p class="eyebrow">People <i></i> Technology <i></i> Impact</p>
-                    <h1 class="hero-headline">We Create the Most<br>Engaging Events<br>in the World Using<br><em>Technology &amp;<br>Scenography</em></h1>
-                    <p class="hero-description">World-class audiovisual technology, creative production and immersive experiences for events across Africa.</p>
-                    <div class="hero-actions"><a class="button button-primary" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a></div>
+        <div class="opening-cascade">
+            <section class="hero" id="home">
+                <div class="hero-photo" role="img" aria-label="Stagepass event production across conferences, live shows and branded experiences">
+                    <span class="hero-image-slide is-active" style="--hero-image: url('{{ asset('images/fifa-congress-hero.jpg?v=20261030-hq') }}')" aria-hidden="true"></span>
                 </div>
-                <div class="orbit-wrap" role="img" aria-label="Stagepass audio, visual, lighting, scenic, design, production and rigging"><img class="orbit-center" src="/images/stagepass-disciplines-transparent.png" alt=""><img class="orbit-vectors" src="/images/stagepass-disciplines-vector.svg" alt=""></div>
-            </div>
-            <img class="hero-ribbon" src="/images/stagepass-hero-ribbon.svg" alt="" aria-hidden="true">
-            <div class="hero-foot wrap">
-                <div class="proof-points hero-proof-points" aria-label="Why Stagepass">
-                    <div><svg><use href="#i-bulb"/></svg><span>Innovative<br>Solutions</span></div>
-                    <div><svg><use href="#i-globe"/></svg><span>Pan Africa<br>Reach</span></div>
-                    <div><svg><use href="#i-team"/></svg><span>Expert<br>Team</span></div>
-                    <div><svg><use href="#i-shield"/></svg><span>Reliable<br>Support</span></div>
+                <img class="hero-top-ribbon" src="/images/stagepass-hero-top-ribbon.svg" alt="" aria-hidden="true">
+                <div class="hero-grid"></div>
+                <div class="hero-content wrap">
+                    <div class="hero-copy">
+                        <p class="eyebrow">People <i></i> Technology <i></i> Impact</p>
+                        <h1 class="hero-headline">We Create the Most<br>Engaging Events<br>in the World Using<br><em>Technology &amp;<br>Scenography</em></h1>
+                        <p class="hero-description">World-class audiovisual technology, creative production and immersive experiences for events across Africa.</p>
+                        <div class="hero-actions"><a class="button button-primary" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a></div>
+                    </div>
+                    <div class="orbit-wrap" role="img" aria-label="Stagepass audio, visual, lighting, scenic, design, production and rigging"><img class="orbit-center" src="/images/stagepass-disciplines-transparent.png" alt=""><img class="orbit-vectors" src="/images/stagepass-disciplines-vector.svg" alt=""></div>
                 </div>
-                <a class="hero-scroll-cue" href="#about"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14l-7 7m0 0-7-7m7 7V3"/></svg></span><b>Scroll to discover</b><i></i></a>
-            </div>
-        </section>
+                <img class="hero-ribbon" src="/images/stagepass-hero-ribbon.svg" alt="" aria-hidden="true">
+                <div class="hero-foot wrap">
+                    <div class="proof-points hero-proof-points" aria-label="Why Stagepass">
+                        <div><svg><use href="#i-bulb"/></svg><span>Innovative<br>Solutions</span></div>
+                        <div><svg><use href="#i-globe"/></svg><span>Pan Africa<br>Reach</span></div>
+                        <div><svg><use href="#i-team"/></svg><span>Expert<br>Team</span></div>
+                        <div><svg><use href="#i-shield"/></svg><span>Reliable<br>Support</span></div>
+                    </div>
+                    <a class="hero-scroll-cue" href="#about"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14l-7 7m0 0-7-7m7 7V3"/></svg></span><b>Scroll to discover</b><i></i></a>
+                </div>
+            </section>
 
-        <section class="about-section section-rule" id="about">
-            <div class="about-copy section-copy"><p class="eyebrow">About Stagepass</p><h2>More than<br>technology.<br><em>A team that delivers.</em></h2><p class="about-description"><strong>StagePass Audio-Visual Limited is an integrated technical, consulting, planning, design and implementation provider for professional event planning and design based in Nairobi and operating within Africa.</strong></p><p class="about-description"><strong>We specialize in rentals of audio-visual technology including sound, screens, lighting, content management, digital and Interactive technology and scenic design.</strong></p><div class="about-proof-actions"><div class="about-proof" data-count-up data-count-to="2362"><span class="about-proof-number"><span data-count-value>2,362</span><sup>+</sup></span><span class="about-proof-label">Successful<br>Events</span></div><a class="button button-outline button-small" href="#services">Explore Our Services <svg><use href="#i-arrow"/></svg></a></div></div>
-            <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.webp') }}" width="1920" height="1080" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
-            <div class="about-reach">
-                <h3 class="about-reach-title" data-about-typewriter aria-label="Africa’s event technology partner"><span data-typewriter-line="Africa’s event" aria-hidden="true">Africa’s event</span><br aria-hidden="true"><span data-typewriter-line="technology partner" aria-hidden="true">technology partner</span></h3>
-            </div>
-        </section>
+            <section class="about-section section-rule" id="about">
+                <div class="about-copy section-copy"><p class="eyebrow">About Stagepass</p><h2>More than<br>technology.<br><em>A team that delivers.</em></h2><p class="about-description"><strong>StagePass Audio-Visual Limited is an integrated technical, consulting, planning, design and implementation provider for professional event planning and design based in Nairobi and operating within Africa.</strong></p><p class="about-description"><strong>We specialize in rentals of audio-visual technology including sound, screens, lighting, content management, digital and Interactive technology and scenic design.</strong></p><div class="about-proof-actions"><div class="about-proof" data-count-up data-count-to="2362"><span class="about-proof-number"><span data-count-value>2,362</span><sup>+</sup></span><span class="about-proof-label">Successful<br>Events</span></div><a class="button button-outline button-small" href="#services">Explore Our Services <svg><use href="#i-arrow"/></svg></a></div></div>
+                <div class="about-photo{{ $isAlternateHome ? ' about-photo-framed' : '' }}" role="group" aria-label="Stagepass event production"><div class="about-photo-frame"><span class="about-photo-accent brand-gradient-x" aria-hidden="true"></span><img class="about-photo-image" src="{{ asset('images/home-about-stagepass.webp') }}" width="1920" height="1080" alt="Stagepass branded LED screen and event stage setup" loading="lazy" decoding="async"></div></div>
+                <div class="about-reach">
+                    <h3 class="about-reach-title" data-about-typewriter aria-label="Africa’s event technology partner"><span data-typewriter-line="Africa’s event" aria-hidden="true">Africa’s event</span><br aria-hidden="true"><span data-typewriter-line="technology partner" aria-hidden="true">technology partner</span></h3>
+                </div>
+            </section>
+        </div>
 
         <section class="services-section section-rule" id="services">
             <div class="section-copy services-copy"><p class="eyebrow">Our Services</p><h2>One partner.<br><em>Every solution.</em></h2><p>From concept to execution, we provide end-to-end event technology and production services tailored to your needs.</p><a class="button button-outline button-small" href="#industries">See All Industries <svg><use href="#i-arrow"/></svg></a></div>
@@ -307,60 +218,7 @@
             </div>
         </dialog>
 
-        <section class="industries-section section-rule" id="industries">
-            <div class="industry-heading"><div class="section-copy"><p class="eyebrow">Industries We Serve</p><h2>Every industry.<br><em>Exceptional</em> experiences.</h2></div><a class="button button-outline button-small" href="#work">Explore Our Work <svg><use href="#i-arrow"/></svg></a><p class="industry-note">Different sectors.<br>One standard.<br>Excellence.</p></div>
-            <div class="industry-grid">
-                @foreach ($industries as $industry)
-                    <div class="industry-card {{ $industry['scene'] }} {{ count($industry['images']) > 0 ? 'industry-card-gallery' : '' }}" @if (count($industry['images']) > 1) data-industry-carousel role="group" aria-label="{{ $industry['name'] }} image carousel" @endif>
-                        @if (count($industry['images']) > 0)
-                            <div class="industry-gallery" style="--industry-backdrop: url('{{ asset('images/industries/'.$industry['images'][0]) }}')">
-                                @foreach ($industry['images'] as $image)
-                                    <img class="industry-slide {{ $loop->first ? 'is-active' : '' }}" src="{{ asset('images/industries/'.$image) }}" alt="{{ $industry['name'] }} event production, image {{ $loop->iteration }} of {{ count($industry['images']) }}" loading="lazy" decoding="async">
-                                @endforeach
-                            </div>
-                        @endif
-                        <span class="industry-card-shade" aria-hidden="true"></span>
-                        <div class="industry-card-footer">
-                            <span class="industry-card-icon" aria-hidden="true"><svg><use href="#{{ $industry['icon'] }}"/></svg></span>
-                            <span class="industry-card-divider" aria-hidden="true"></span>
-                            <div class="industry-card-copy">
-                                <span class="industry-card-label">{{ $industry['name'] }}</span>
-                                <p class="industry-card-description">{{ $industry['description'] }}</p>
-                                <button class="industry-card-open" type="button" data-industry-open aria-haspopup="dialog" aria-controls="industry-detail-dialog" aria-label="Explore {{ $industry['name'] }}" data-industry-title="{{ $industry['name'] }}" data-industry-overview="{{ $industry['overview'] }}" data-industry-formats="{{ implode('||', $industry['formats']) }}" data-industry-needs="{{ $industry['needs'] }}" data-industry-number="{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}" data-industry-total="{{ str_pad((string) count($industries), 2, '0', STR_PAD_LEFT) }}">Explore Sector <b aria-hidden="true">→</b></button>
-                            </div>
-                        </div>
-                        @if (count($industry['images']) > 1)
-                            <div class="industry-carousel-pagination" role="group" aria-label="{{ $industry['name'] }} image selection">
-                                <div class="industry-carousel-dots">
-                                    @foreach ($industry['images'] as $image)
-                                        <button type="button" data-industry-slide="{{ $loop->index }}" aria-label="Show {{ $industry['name'] }} image {{ $loop->iteration }}" aria-current="{{ $loop->first ? 'true' : 'false' }}"></button>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        </section>
-
-        <dialog class="service-detail-dialog industry-detail-dialog" id="industry-detail-dialog" aria-labelledby="industry-detail-title">
-            <div class="service-detail-panel industry-detail-panel">
-                <button class="service-detail-close" type="button" data-industry-detail-close aria-label="Close industry playbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
-                <div class="industry-detail-visual" aria-hidden="true">
-                    <div class="industry-detail-radar"><span data-industry-detail-number>01</span><i></i><b></b></div>
-                </div>
-                <div class="service-detail-copy industry-detail-copy">
-                    <p class="eyebrow"><span>Industry playbook</span><span data-industry-detail-counter>01 / 09</span></p>
-                    <h2 id="industry-detail-title">Corporate &amp; Business Events</h2>
-                    <p id="industry-detail-overview"></p>
-                    <div class="industry-detail-facts">
-                        <div><h3>Event formats</h3><ul id="industry-detail-formats"></ul></div>
-                        <div><h3>Production blueprint</h3><p id="industry-detail-needs"></p></div>
-                    </div>
-                    <button class="button button-outline service-detail-cta" type="button" data-quote-open>Plan this experience <svg><use href="#i-arrow"/></svg></button>
-                </div>
-            </div>
-        </dialog>
+        @include('partials.industries-section', ['industries' => $industries, 'isHomePage' => true])
 
         <section class="work-section section-rule" id="work">
             <div class="work-intro section-copy"><p class="eyebrow">Our Work</p><h2>Ideas brought<br>to <em>life.</em></h2><p>A showcase of the events, experiences and productions we have delivered across Africa.</p><a class="button button-outline button-small" href="#contact">Plan Your Event <svg><use href="#i-arrow"/></svg></a></div>
@@ -372,7 +230,7 @@
                                 <div class="project-feed-group" @if ($isDuplicate) aria-hidden="true" @endif>
                                     @foreach ($instagramPosts as $post)
                                         @php($isVideo = ($post['media_type'] ?? '') === 'VIDEO' && isset($post['preview_url']))
-                                        <button class="project-card project-card-instagram instagram-media-trigger" type="button" data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}" data-media-url="{{ $post['media_url'] }}" data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}" data-caption="{{ $post['caption'] }}" data-permalink="{{ $post['permalink'] }}" aria-label="View Instagram {{ $isVideo ? 'video' : 'photo' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 100) }}" @if ($isDuplicate) tabindex="-1" @endif>
+                                        <button class="project-card project-card-instagram instagram-media-trigger" type="button" data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}" data-media-url="{{ $post['media_url'] }}" @if ($isVideo) data-video-url="{{ route('instagram.video', ['mediaId' => $post['id']]) }}" @endif data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}" data-caption="{{ $post['caption'] }}" data-permalink="{{ $post['permalink'] }}" aria-label="View Instagram {{ $isVideo ? 'video' : 'photo' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 100) }}" @if ($isDuplicate) tabindex="-1" @endif>
                                             <span class="project-image"><img class="project-feed-image" src="{{ $post['preview_url'] ?? $post['media_url'] }}" alt="{{ \Illuminate\Support\Str::limit($post['caption'], 140) }}" loading="lazy" decoding="async">@if ($isVideo)<span class="project-feed-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>@endif</span>
                                             <strong>{{ \Illuminate\Support\Str::limit($post['caption'] ?: 'Stagepass event production', 58) }}</strong>
                                             <small>{{ $isVideo ? 'Video' : 'Instagram' }} · @stagepassav</small>

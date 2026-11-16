@@ -611,8 +611,12 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 }
 
 const aboutPhotoImage = document.querySelector('.about-photo-image');
+const aboutCascadeSection = aboutPhotoImage?.closest('.about-section');
+const openingCascade = document.querySelector('.opening-cascade');
+const openingHeroPhoto = openingCascade?.querySelector('.hero-photo');
+const openingHeroContent = openingCascade?.querySelector('.hero-content');
 
-if (aboutPhotoImage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (aboutPhotoImage && aboutCascadeSection && openingHeroPhoto && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let aboutPhotoFrame = 0;
 
     const updateAboutPhotoPosition = () => {
@@ -623,6 +627,14 @@ if (aboutPhotoImage && !window.matchMedia('(prefers-reduced-motion: reduce)').ma
         if (!aboutPhotoBounds) {
             return;
         }
+
+        const aboutSectionBounds = aboutCascadeSection.getBoundingClientRect();
+        const cascadeDistance = Math.max(window.innerHeight * 0.86, 1);
+        const cascadeProgress = Math.max(0, Math.min(1, (window.innerHeight - aboutSectionBounds.top) / cascadeDistance));
+        openingHeroPhoto.style.setProperty('--opening-photo-scale', (1 + cascadeProgress * 0.055).toFixed(3));
+        openingHeroPhoto.style.setProperty('--opening-photo-opacity', (1 - cascadeProgress * 0.42).toFixed(3));
+        openingHeroContent?.style.setProperty('--opening-copy-opacity', (1 - cascadeProgress * 0.62).toFixed(3));
+        aboutPhotoImage.style.setProperty('--about-photo-scale', (1 + cascadeProgress * 0.025).toFixed(3));
 
         const travelDistance = window.innerHeight + aboutPhotoBounds.height;
         const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - aboutPhotoBounds.top) / travelDistance));
@@ -682,36 +694,6 @@ const instagramLightbox = document.querySelector('.instagram-lightbox');
 const instagramLightboxMedia = instagramLightbox?.querySelector('.instagram-lightbox-media');
 const instagramLightboxCaption = instagramLightbox?.querySelector('.instagram-lightbox-caption');
 const instagramLightboxLink = instagramLightbox?.querySelector('.instagram-lightbox-link');
-const instagramLightboxMediaKind = instagramLightbox?.querySelector('[data-instagram-media-kind]');
-let instagramVideoFallbackTimer = null;
-
-const createInstagramVideoEmbed = (permalink, caption) => {
-    try {
-        const postUrl = new URL(permalink);
-
-        if (!['instagram.com', 'www.instagram.com'].includes(postUrl.hostname)) {
-            return null;
-        }
-
-        const embed = document.createElement('iframe');
-        const postPath = postUrl.pathname.replace(/\/+$/, '');
-
-        embed.src = `${postUrl.origin}${postPath}/embed/?autoplay=1`;
-        embed.title = caption || 'Instagram video';
-        embed.allow = 'autoplay; encrypted-media; picture-in-picture; web-share';
-        embed.allowFullscreen = true;
-        embed.loading = 'eager';
-        embed.referrerPolicy = 'strict-origin-when-cross-origin';
-        embed.style.width = '100%';
-        embed.style.height = '100%';
-        embed.style.border = '0';
-        embed.style.background = '#020711';
-
-        return embed;
-    } catch {
-        return null;
-    }
-};
 
 document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
     card.addEventListener('click', () => {
@@ -719,7 +701,7 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
             return;
         }
 
-        const mediaUrl = card.dataset.mediaUrl;
+        const mediaUrl = card.dataset.mediaType === 'VIDEO' ? card.dataset.videoUrl : card.dataset.mediaUrl;
         const previewUrl = card.dataset.previewUrl;
         const permalink = card.dataset.permalink;
         const caption = card.dataset.caption ?? '';
@@ -728,54 +710,18 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
             return;
         }
 
-        window.clearTimeout(instagramVideoFallbackTimer);
         instagramLightboxMedia.replaceChildren();
 
         if (card.dataset.mediaType === 'VIDEO') {
             const video = document.createElement('video');
-            const loadingMessage = document.createElement('div');
-            loadingMessage.className = 'instagram-lightbox-loading';
-            loadingMessage.setAttribute('role', 'status');
-            loadingMessage.setAttribute('aria-live', 'polite');
-            loadingMessage.textContent = 'Loading video';
             video.controls = true;
             video.playsInline = true;
             video.autoplay = true;
-            video.preload = 'auto';
+            video.preload = 'metadata';
             video.poster = previewUrl;
-            video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
             video.src = mediaUrl;
-            const showInstagramEmbed = () => {
-                const embed = createInstagramVideoEmbed(permalink, caption);
-                window.clearTimeout(instagramVideoFallbackTimer);
-
-                if (embed && video.isConnected) {
-                    video.replaceWith(embed);
-                    loadingMessage.textContent = 'Opening Instagram player';
-                    instagramLightboxMedia.append(loadingMessage);
-                    embed.addEventListener('load', () => loadingMessage.remove(), { once: true });
-                } else if (video.isConnected) {
-                    loadingMessage.textContent = 'This video could not load. Open it on Instagram.';
-                    video.replaceWith(loadingMessage);
-                }
-            };
-            video.addEventListener('loadeddata', () => {
-                window.clearTimeout(instagramVideoFallbackTimer);
-                loadingMessage.remove();
-            }, { once: true });
-            video.addEventListener('error', () => {
-                showInstagramEmbed();
-            }, { once: true });
-            instagramLightboxMedia.append(loadingMessage, video);
-            video.load();
-            video.play().catch(() => {
-                loadingMessage.textContent = 'Tap play to start the video';
-            });
-            instagramVideoFallbackTimer = window.setTimeout(() => {
-                if (video.isConnected && video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
-                    showInstagramEmbed();
-                }
-            }, 8000);
+            video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
+            instagramLightboxMedia.append(video);
         } else {
             const image = document.createElement('img');
             image.src = mediaUrl;
@@ -785,9 +731,6 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
 
         instagramLightboxCaption.textContent = caption;
         instagramLightboxLink.href = permalink;
-        if (instagramLightboxMediaKind) {
-            instagramLightboxMediaKind.textContent = card.dataset.mediaType === 'VIDEO' ? 'Video' : 'Photo';
-        }
         instagramLightbox.showModal();
     });
 });
@@ -805,7 +748,6 @@ instagramLightbox?.addEventListener('click', (event) => {
 });
 
 instagramLightbox?.addEventListener('close', () => {
-    window.clearTimeout(instagramVideoFallbackTimer);
     instagramLightboxMedia?.querySelector('video')?.pause();
     instagramLightboxMedia?.replaceChildren();
 });

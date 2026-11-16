@@ -37,7 +37,7 @@ class InstagramFeedService
                     ->connectTimeout(3)
                     ->timeout(8)
                     ->get("https://graph.facebook.com/{$apiVersion}/{$userId}/media", [
-                        'fields' => 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,children{media_type,media_url,thumbnail_url}',
+                        'fields' => 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,children{id,media_type,media_url,thumbnail_url}',
                         'limit' => 50,
                     ])
                     ->throw();
@@ -67,7 +67,7 @@ class InstagramFeedService
                         }
 
                         $posts[] = [
-                            'id' => (string) ($mediaItem['id'] ?? ''),
+                            'id' => (string) ($selectedMedia['id'] ?? $mediaItem['id'] ?? ''),
                             'caption' => is_string($mediaItem['caption'] ?? null) ? $mediaItem['caption'] : 'View this Stagepass Instagram post',
                             'media_type' => is_string($selectedType) ? $selectedType : 'IMAGE',
                             'media_url' => $mediaUrl,
@@ -83,6 +83,56 @@ class InstagramFeedService
             });
         } catch (ConnectionException|RequestException) {
             return $stalePosts;
+        }
+    }
+
+    public function videoUrl(string $mediaId): ?string
+    {
+        $accessToken = config('services.instagram.access_token');
+
+        if (! is_string($accessToken) || $accessToken === '') {
+            return null;
+        }
+
+        $apiVersion = config('services.instagram.api_version', 'v25.0');
+        $apiVersion = is_string($apiVersion) && preg_match('/^v\d+\.\d+$/', $apiVersion) === 1 ? $apiVersion : 'v25.0';
+
+        try {
+            $response = Http::withToken($accessToken)
+                ->acceptJson()
+                ->connectTimeout(3)
+                ->timeout(8)
+                ->get("https://graph.facebook.com/{$apiVersion}/{$mediaId}", [
+                    'fields' => 'media_type,media_url,children{id,media_type,media_url}',
+                ])
+                ->throw();
+
+            $mediaType = $response->json('media_type');
+            $mediaUrl = $response->json('media_url');
+
+            if ($mediaType === 'CAROUSEL_ALBUM') {
+                $children = $response->json('children.data', []);
+                $video = is_array($children)
+                    ? collect($children)->first(fn (mixed $child): bool => is_array($child) && ($child['media_type'] ?? null) === 'VIDEO')
+                    : null;
+
+                $mediaType = is_array($video) ? ($video['media_type'] ?? null) : null;
+                $mediaUrl = is_array($video) ? ($video['media_url'] ?? null) : null;
+            }
+
+            $mediaHost = is_string($mediaUrl) ? parse_url($mediaUrl, PHP_URL_HOST) : null;
+
+            if ($mediaType !== 'VIDEO' || ! is_string($mediaUrl) || ! str_starts_with($mediaUrl, 'https://') || ! is_string($mediaHost)) {
+                return null;
+            }
+
+            if (! str_ends_with($mediaHost, '.cdninstagram.com') && ! str_ends_with($mediaHost, '.fbcdn.net')) {
+                return null;
+            }
+
+            return $mediaUrl;
+        } catch (ConnectionException|RequestException) {
+            return null;
         }
     }
 }

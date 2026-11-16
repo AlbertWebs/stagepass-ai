@@ -3,7 +3,7 @@
 ## Target
 
 - Site: <https://sp.designekta.com/>
-- Server: `ubuntu@13.50.244.3` (AWS EC2)
+- Server: `ubuntu@16.192.198.92` (AWS EC2)
 - Application directory: `/var/www/stagepass-ai`
 - Nginx document root: `/var/www/stagepass-ai/public`
 - PHP-FPM socket: `/run/php/php8.5-fpm.sock`
@@ -21,7 +21,7 @@ ssh -F /dev/null \
   -i ./econfirm.pem \
   -o IdentitiesOnly=yes \
   -o StrictHostKeyChecking=accept-new \
-  ubuntu@13.50.244.3
+  ubuntu@16.192.198.92
 ```
 
 The key currently has mode `0400`, which is suitable for OpenSSH.
@@ -43,7 +43,7 @@ Run these steps from the local project root:
 2. Create a private backup on the server:
 
    ```sh
-   ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@13.50.244.3 \
+   ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@16.192.198.92 \
      'umask 077; backup="/home/ubuntu/backups/stagepass-ai-$(date +%Y%m%d-%H%M%S).tar.gz"; tar -C /var/www -czf "$backup" stagepass-ai && chmod 600 "$backup" && echo "$backup"'
    ```
 
@@ -71,7 +71,7 @@ Run these steps from the local project root:
    --exclude='AGENTS.md' \
    --exclude='CLAUDE.md' \
    --exclude='public/hot' \
-     ./ ubuntu@13.50.244.3:/var/www/stagepass-ai/
+     ./ ubuntu@16.192.198.92:/var/www/stagepass-ai/
    ```
 
    Review the preview, especially the files already modified on the server. If it is correct, repeat the same command without `-n` to sync the files. Do not add `--delete`: this server contains files that are not present in the local checkout.
@@ -79,7 +79,7 @@ Run these steps from the local project root:
 4. Install locked production PHP dependencies and refresh Laravel caches:
 
    ```sh
-   ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@13.50.244.3 \
+   ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@16.192.198.92 \
      'cd /var/www/stagepass-ai && composer install --no-dev --optimize-autoloader --no-interaction && php artisan optimize'
    ```
 
@@ -96,13 +96,13 @@ No database migration was identified for this site update. If a later release ad
 Use the backup path printed in step 2. A full restore also restores `.env` and `storage` to their backup-time state; copy out any newer environment or upload data before restoring. To inspect an archive without restoring it:
 
 ```sh
-ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@13.50.244.3 \
+ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@16.192.198.92 \
   'tar -tzf /home/ubuntu/backups/REPLACE_WITH_BACKUP.tar.gz | head -40'
 ```
 
 After confirming the backup filename, a full restore is:
 
 ```sh
-ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@13.50.244.3 \
+ssh -F /dev/null -i ./econfirm.pem -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new ubuntu@16.192.198.92 \
   'tar -C /var/www -xzf /home/ubuntu/backups/REPLACE_WITH_BACKUP.tar.gz'
 ```

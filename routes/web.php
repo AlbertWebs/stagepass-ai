@@ -49,6 +49,14 @@ Route::post('/quote-requests', QuoteRequestController::class)
     ->middleware('throttle:quote-requests')
     ->name('quote-requests.store');
 
+Route::get('/instagram/video/{mediaId}', function (string $mediaId, InstagramFeedService $instagramFeed) {
+    $videoUrl = $instagramFeed->videoUrl($mediaId);
+
+    abort_if($videoUrl === null, 404);
+
+    return redirect()->away($videoUrl)->header('Cache-Control', 'no-store');
+})->whereNumber('mediaId')->middleware('throttle:60,1')->name('instagram.video');
+
 foreach ($sitePages as $slug => $page) {
     Route::get($page['uri'], function (Request $request, InstagramFeedService $instagramFeed) use ($page, $canonicalOrigin) {
         $firstChallengeNumber = random_int(2, 9);
