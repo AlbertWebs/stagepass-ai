@@ -952,6 +952,8 @@ h1 em { color: var(--gold); font-style: normal; }
 .instagram-lightbox { position: fixed; top: 50%; left: 50%; width: min(1120px, calc(100vw - 40px)); max-width: none; max-height: min(88dvh, 820px); padding: 0; overflow: hidden; margin: 0; transform: translate(-50%, -50%); border: 1px solid rgba(177, 203, 232, .24); color: #f4f7fc; background: #071329; box-shadow: 0 26px 100px rgba(0,0,0,.55); }
 .instagram-lightbox::backdrop { background: rgba(1, 6, 16, .84); backdrop-filter: blur(9px); }
 .instagram-lightbox-panel { position: relative; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr); height: min(68dvh, 700px); max-height: min(88dvh, 820px); }
+.instagram-lightbox--short-caption .instagram-lightbox-panel { grid-template-columns: minmax(0, 1fr); }
+.instagram-lightbox--short-caption .instagram-lightbox-details { display: none; }
 .instagram-lightbox-close { position: absolute; z-index: 2; top: 12px; right: 12px; display: grid; width: 42px; height: 42px; padding: 10px; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: #fff; cursor: pointer; background: rgba(3,11,25,.75); }
 .instagram-lightbox-close:hover, .instagram-lightbox-close:focus-visible { color: var(--gold); border-color: var(--gold); }
 .instagram-lightbox-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 1.8; }

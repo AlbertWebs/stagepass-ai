@@ -704,6 +704,7 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
         const previewUrl = card.dataset.previewUrl;
         const permalink = card.dataset.permalink;
         const caption = card.dataset.caption ?? '';
+        const captionWordCount = caption.trim().split(/\s+/).filter(Boolean).length;
 
         if (!permalink || (!mediaUrl && card.dataset.mediaType !== 'VIDEO') || !previewUrl) {
             return;
@@ -734,6 +735,7 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
         }
 
         instagramLightboxCaption.textContent = caption;
+        instagramLightbox.classList.toggle('instagram-lightbox--short-caption', captionWordCount <= 7);
         instagramLightboxLink.href = permalink;
         instagramLightbox.showModal();
     });
@@ -743,6 +745,10 @@ instagramLightbox?.querySelector('.instagram-lightbox-close')?.addEventListener(
     if (instagramLightbox instanceof HTMLDialogElement) {
         instagramLightbox.close();
     }
+});
+
+instagramLightbox?.addEventListener('close', () => {
+    instagramLightbox.classList.remove('instagram-lightbox--short-caption');
 });
 
 instagramLightbox?.addEventListener('click', (event) => {
