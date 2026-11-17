@@ -960,8 +960,8 @@ h1 em { color: var(--gold); font-style: normal; }
 .instagram-lightbox-media { position: relative; display: grid; width: 100%; min-width: 0; height: 100%; min-height: 0; place-items: center; overflow: hidden; background: #020711; }
 .instagram-lightbox-media img, .instagram-lightbox-media video, .instagram-lightbox-media iframe { display: block; width: 100%; height: 100%; border: 0; object-fit: cover; }
 .instagram-lightbox-media iframe { overflow: hidden; overscroll-behavior: none; }
-.instagram-lightbox-embed-play { position: absolute; z-index: 1; top: 76%; left: 50%; display: grid; width: 76px; height: 76px; transform: translate(-50%, -50%); place-items: center; border: 1px solid rgba(255,255,255,.78); border-radius: 50%; color: #fff; background: rgba(3,11,25,.58); box-shadow: 0 4px 24px rgba(0,0,0,.35); pointer-events: none; }
-.instagram-lightbox-embed-play svg { width: 34px; height: 34px; margin-left: 4px; fill: currentColor; }
+.instagram-lightbox-embed-play { position: absolute; z-index: 1; top: 50%; left: 50%; display: grid; width: 68px; height: 68px; transform: translate(-50%, -50%); place-items: center; border: 1px solid rgba(255,255,255,.9); border-radius: 50%; color: #fff; background: rgba(8,18,34,.38); box-shadow: 0 0 0 7px rgba(255,255,255,.12), 0 8px 28px rgba(0,0,0,.3); backdrop-filter: blur(5px); pointer-events: none; }
+.instagram-lightbox-embed-play svg { width: 26px; height: 26px; margin-left: 3px; fill: currentColor; }
 .instagram-lightbox-details { display: flex; min-width: 0; min-height: 0; padding: 42px 32px 30px; flex-direction: column; align-items: start; justify-content: space-between; gap: 24px; }
 .instagram-lightbox-caption { max-height: none; margin: 0; overflow: auto; color: #d5e0ee; font-size: 14px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
 .instagram-lightbox-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); font-size: 13px; font-weight: 700; }
