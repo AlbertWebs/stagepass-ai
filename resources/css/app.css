@@ -260,7 +260,7 @@ h1 em { color: var(--gold); font-style: normal; }
 .industry-detail-facts > div:nth-child(2) p::before { position: absolute; top: .65em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 9px rgba(255, 184, 0, .7); content: ''; }
 @keyframes industry-radar-spin { to { transform: rotate(360deg); } }
 
-.work-section { min-height: 223px; display: grid; grid-template-columns: 27% 73%; align-items: stretch; padding: 0 max(36px, calc((100vw - 1160px) / 2)); background: linear-gradient(110deg, #061329, #07172d); }
+.work-section { min-height: 223px; display: grid; grid-template-columns: 27% 73%; align-items: stretch; padding: 0 var(--section-gutter); background: linear-gradient(110deg, #061329, #07172d); }
 .work-intro { padding: 21px 24px 19px 0; }
 .work-intro .eyebrow { margin-bottom: 14px; font-size: clamp(10px, .85vw, 12px); }
 .work-intro h2 { font-size: 27px; }
@@ -633,7 +633,7 @@ h1 em { color: var(--gold); font-style: normal; }
     .industry-card { height: clamp(145px, 38vw, 190px); }
     .industry-card-label { padding: 9px 8px; font-size: 10px; }
 
-    .work-section { padding: 0 20px 24px; }
+    .work-section { padding: 0 var(--section-gutter) 24px; }
     .work-intro { padding: 25px 0 15px; }
     .work-intro > p:not(.eyebrow) { font-size: 13px; }
     .project-track { gap: 10px; padding-top: 14px; }
