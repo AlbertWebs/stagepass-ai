@@ -54,7 +54,7 @@
                             <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.6" cy="6.7" r="1"/></svg>
                             <span>{{ \Illuminate\Support\Str::limit($post['caption'], 150) }}</span>
                         </span>
-                    </a>
+                    </button>
                 @endforeach
             </div>
         @else
