@@ -694,39 +694,71 @@ const instagramLightboxMedia = instagramLightbox?.querySelector('.instagram-ligh
 const instagramLightboxCaption = instagramLightbox?.querySelector('.instagram-lightbox-caption');
 const instagramLightboxLink = instagramLightbox?.querySelector('.instagram-lightbox-link');
 
+const instagramEmbedUrl = (permalink) => {
+    try {
+        const url = new URL(permalink);
+        const match = url.pathname.match(/^\/(reel|p|tv)\/([^/]+)\/?$/);
+
+        if (url.hostname !== 'www.instagram.com' || !match) {
+            return null;
+        }
+
+        return `https://www.instagram.com/${match[1]}/${encodeURIComponent(match[2])}/embed/?hidecaption=true`;
+    } catch {
+        return null;
+    }
+};
+
+const appendInstagramVideo = (mediaUrl, previewUrl, permalink, caption) => {
+    if (mediaUrl) {
+        const video = document.createElement('video');
+        video.controls = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.preload = 'metadata';
+        video.poster = previewUrl;
+        video.src = mediaUrl;
+        video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
+        instagramLightboxMedia.append(video);
+        return;
+    }
+
+    const embedUrl = instagramEmbedUrl(permalink);
+
+    if (!embedUrl) {
+        return;
+    }
+
+    const frame = document.createElement('iframe');
+    frame.src = embedUrl;
+    frame.title = caption || 'Stagepass Instagram video';
+    frame.allow = 'autoplay; encrypted-media; picture-in-picture; web-share';
+    frame.allowFullscreen = true;
+    frame.loading = 'eager';
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    instagramLightboxMedia.append(frame);
+};
+
 document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
     card.addEventListener('click', () => {
         if (!(instagramLightbox instanceof HTMLDialogElement) || !instagramLightboxMedia || !instagramLightboxCaption || !instagramLightboxLink) {
             return;
         }
 
-        const mediaUrl = card.dataset.mediaType === 'VIDEO' ? card.dataset.videoUrl : card.dataset.mediaUrl;
+        const mediaUrl = card.dataset.mediaUrl;
         const previewUrl = card.dataset.previewUrl;
         const permalink = card.dataset.permalink;
         const caption = card.dataset.caption ?? '';
-        const captionWordCount = caption.trim().split(/\s+/).filter(Boolean).length;
+        const captionWordCount = caption.trim().split(/\s+/).filter((word) => word && !word.startsWith('#')).length;
 
         if (!permalink || (!mediaUrl && card.dataset.mediaType !== 'VIDEO') || !previewUrl) {
-            return;
-        }
-
-        if (card.dataset.mediaType === 'VIDEO' && !mediaUrl) {
-            window.location.assign(permalink);
             return;
         }
 
         instagramLightboxMedia.replaceChildren();
 
         if (card.dataset.mediaType === 'VIDEO') {
-            const video = document.createElement('video');
-            video.controls = true;
-            video.playsInline = true;
-            video.autoplay = true;
-            video.preload = 'metadata';
-            video.poster = previewUrl;
-            video.src = mediaUrl;
-            video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
-            instagramLightboxMedia.append(video);
+            appendInstagramVideo(mediaUrl, previewUrl, permalink, caption);
         } else {
             const image = document.createElement('img');
             image.src = mediaUrl;
@@ -734,8 +766,9 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
             instagramLightboxMedia.append(image);
         }
 
-        instagramLightboxCaption.textContent = caption;
-        instagramLightbox.classList.toggle('instagram-lightbox--short-caption', captionWordCount <= 7);
+        const hasShortCaption = captionWordCount <= 7;
+        instagramLightboxCaption.textContent = hasShortCaption ? '' : caption;
+        instagramLightbox.classList.toggle('instagram-lightbox--short-caption', hasShortCaption);
         instagramLightboxLink.href = permalink;
         instagramLightbox.showModal();
     });
