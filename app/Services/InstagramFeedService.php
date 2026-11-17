@@ -6,6 +6,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class InstagramFeedService
 {
@@ -16,6 +17,16 @@ class InstagramFeedService
     /**
      * @return array<int, array{id: string, caption: string, media_type: string, media_url: string, preview_url: string, permalink: string}>
      */
+    public function refresh(): ?array
+    {
+        $cache = Cache::store('file');
+        $cache->forget(self::CACHE_KEY);
+
+        $posts = $this->posts();
+
+        return $cache->has(self::CACHE_KEY) ? $posts : null;
+    }
+
     public function posts(): array
     {
         $cache = Cache::store('file');
@@ -81,7 +92,12 @@ class InstagramFeedService
 
                 return $posts;
             });
-        } catch (ConnectionException|RequestException) {
+        } catch (ConnectionException|RequestException $exception) {
+            Log::warning('Instagram Graph API feed refresh failed.', [
+                'exception' => $exception::class,
+                'status' => $exception instanceof RequestException ? $exception->response->status() : null,
+            ]);
+
             return $stalePosts;
         }
     }
