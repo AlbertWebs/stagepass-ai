@@ -272,8 +272,8 @@ h1 em { color: var(--gold); font-style: normal; }
 .project-feed-group { display: flex; flex: none; gap: 12px; padding-right: 12px; }
 .project-card-instagram { flex: 0 0 calc((100cqw - 48px) / 4); padding: 0 0 7px; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
 .project-card-instagram .project-image::before { display: none; }
-.project-feed-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
-.project-card-instagram:hover .project-feed-image, .project-card-instagram:focus-visible .project-feed-image { transform: scale(1.06); }
+.project-feed-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .45s; }
+.project-card-instagram:hover .project-feed-image, .project-card-instagram:focus-visible .project-feed-image { transform: scale(1.02); }
 .project-feed-play { position: absolute; z-index: 1; top: 9px; right: 9px; display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; color: #fff; background: rgba(3,11,25,.68); backdrop-filter: blur(7px); }
 .project-feed-play svg { width: 15px; height: 15px; fill: currentColor; }
 @keyframes project-feed-scroll { to { transform: translateX(-50%); } }
