@@ -1267,7 +1267,7 @@ html.page-transition-leaving { animation: page-leave 240ms cubic-bezier(.4, 0, 1
     padding-block: 28px;
 }
 .project-lane { display: flex; width: 100%; min-width: 0; flex: 1 1 100%; overflow: hidden; }
-.project-lane .project-marquee { animation-duration: 72s; }
+.project-lane .project-marquee { animation-duration: 300s; }
 .project-lane-reverse .project-marquee { animation-direction: reverse; }
 @media (max-width: 760px) {
     .project-track.has-instagram-feed { gap: 0; padding: 12px 0 28px; }
