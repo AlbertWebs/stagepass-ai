@@ -736,6 +736,7 @@ const appendInstagramVideo = (mediaUrl, previewUrl, permalink, caption) => {
     frame.allowFullscreen = true;
     frame.loading = 'eager';
     frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.setAttribute('scrolling', 'no');
     instagramLightboxMedia.append(frame);
 };
 

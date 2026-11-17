@@ -959,6 +959,7 @@ h1 em { color: var(--gold); font-style: normal; }
 .instagram-lightbox-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 1.8; }
 .instagram-lightbox-media { display: grid; width: 100%; min-width: 0; height: 100%; min-height: 0; place-items: center; overflow: hidden; background: #020711; }
 .instagram-lightbox-media img, .instagram-lightbox-media video, .instagram-lightbox-media iframe { display: block; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.instagram-lightbox-media iframe { overflow: hidden; overscroll-behavior: none; }
 .instagram-lightbox-details { display: flex; min-width: 0; min-height: 0; padding: 42px 32px 30px; flex-direction: column; align-items: start; justify-content: space-between; gap: 24px; }
 .instagram-lightbox-caption { max-height: none; margin: 0; overflow: auto; color: #d5e0ee; font-size: 14px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
 .instagram-lightbox-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); font-size: 13px; font-weight: 700; }
