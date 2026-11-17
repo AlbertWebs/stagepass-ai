@@ -706,22 +706,32 @@ document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
         const permalink = card.dataset.permalink;
         const caption = card.dataset.caption ?? '';
 
-        if (!mediaUrl || !previewUrl || !permalink) {
+        if ((!mediaUrl && card.dataset.mediaType !== 'VIDEO') || !previewUrl || !permalink) {
             return;
         }
 
         instagramLightboxMedia.replaceChildren();
 
         if (card.dataset.mediaType === 'VIDEO') {
-            const video = document.createElement('video');
-            video.controls = true;
-            video.playsInline = true;
-            video.autoplay = true;
-            video.preload = 'metadata';
-            video.poster = previewUrl;
-            video.src = mediaUrl;
-            video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
-            instagramLightboxMedia.append(video);
+            if (mediaUrl) {
+                const video = document.createElement('video');
+                video.controls = true;
+                video.playsInline = true;
+                video.autoplay = true;
+                video.preload = 'metadata';
+                video.poster = previewUrl;
+                video.src = mediaUrl;
+                video.setAttribute('aria-label', caption || 'Stagepass Instagram video');
+                instagramLightboxMedia.append(video);
+            } else {
+                const embed = document.createElement('iframe');
+                embed.src = new URL('embed/', permalink).href;
+                embed.title = caption || 'Stagepass Instagram video';
+                embed.allow = 'autoplay; encrypted-media; picture-in-picture; web-share';
+                embed.allowFullscreen = true;
+                embed.loading = 'lazy';
+                instagramLightboxMedia.append(embed);
+            }
         } else {
             const image = document.createElement('img');
             image.src = mediaUrl;

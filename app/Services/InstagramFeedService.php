@@ -72,8 +72,9 @@ class InstagramFeedService
                             ? ($selectedMedia['thumbnail_url'] ?? '')
                             : $mediaUrl;
                         $permalink = $mediaItem['permalink'] ?? '';
+                        $isVideo = $selectedType === 'VIDEO';
 
-                        if (! is_string($mediaUrl) || ! str_starts_with($mediaUrl, 'https://') || ! is_string($previewUrl) || ! str_starts_with($previewUrl, 'https://') || ! is_string($permalink) || ! str_starts_with($permalink, 'https://')) {
+                        if ((! $isVideo && (! is_string($mediaUrl) || ! str_starts_with($mediaUrl, 'https://'))) || ! is_string($previewUrl) || ! str_starts_with($previewUrl, 'https://') || ! is_string($permalink) || ! str_starts_with($permalink, 'https://')) {
                             continue;
                         }
 

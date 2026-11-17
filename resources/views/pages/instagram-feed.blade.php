@@ -39,7 +39,7 @@
                         style="--reveal-order: {{ $loop->index % 4 }}"
                         data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}"
                         data-media-url="{{ $post['media_url'] }}"
-                        @if ($isVideo) data-video-url="{{ route('instagram.video', ['mediaId' => $post['id']]) }}" @endif
+                        @if ($isVideo && is_string($post['media_url'] ?? null) && str_starts_with($post['media_url'], 'https://')) data-video-url="{{ route('instagram.video', ['mediaId' => $post['id']]) }}" @endif
                         data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}"
                         data-caption="{{ $post['caption'] }}"
                         data-permalink="{{ $post['permalink'] }}"
