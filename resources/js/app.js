@@ -540,15 +540,14 @@ const shiftProjectCarousel = (direction) => {
         projectMarquees.forEach((projectMarquee) => {
             const carouselAnimation = projectMarquee.getAnimations()[0];
             const animationDuration = carouselAnimation?.effect?.getComputedTiming().duration;
-            const projectCount = Number(projectMarquee.closest('.project-lane')?.dataset.projectCount);
+            const projectCount = Number(projectTrack?.dataset.projectCount);
 
             if (carouselAnimation && typeof animationDuration === 'number' && projectCount > 0) {
                 const currentTime = Number(carouselAnimation.currentTime ?? 0);
                 carouselAnimation.currentTime = ((currentTime + direction * animationDuration / projectCount) % animationDuration + animationDuration) % animationDuration;
             } else {
-                const projectLane = projectMarquee.closest('.project-lane');
-                const firstProject = projectLane?.querySelector('.project-card');
-                projectLane?.scrollBy({ left: direction * (firstProject?.getBoundingClientRect().width ?? 0), behavior: 'smooth' });
+                const firstProject = projectTrack?.querySelector('.project-card');
+                projectTrack?.scrollBy({ left: direction * (firstProject?.getBoundingClientRect().width ?? 0), behavior: 'smooth' });
             }
         });
 

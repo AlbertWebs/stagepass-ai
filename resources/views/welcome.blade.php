@@ -221,24 +221,22 @@
         @include('partials.industries-section', ['industries' => $industries, 'isHomePage' => true])
 
         <section class="work-section section-rule" id="work">
-            <div class="work-intro section-copy"><p class="eyebrow">Our Work</p><h2>Ideas brought<br>to <em>life.</em></h2><p>A showcase of the events, experiences and productions we have delivered across Africa.</p><a class="button button-outline button-small" href="#contact">Plan Your Event <svg><use href="#i-arrow"/></svg></a></div>
+            <div class="work-intro section-copy"><p class="eyebrow">Our Work</p><h2>Ideas brought<br>to <em>life.</em></h2><p>A showcase of the events, experiences and productions we have delivered across Africa.</p><a class="button button-outline button-small" href="#contact">View Our Work <svg><use href="#i-arrow"/></svg></a></div>
             <div class="project-track {{ count($instagramPosts) > 0 ? 'has-instagram-feed' : 'is-static' }}" aria-label="{{ count($instagramPosts) > 0 ? 'Recent Instagram projects' : 'Selected projects' }}" data-project-count="{{ count($instagramPosts) }}">
                 @if (count($instagramPosts) > 0)
-                    <div class="project-lane project-lane-forward" role="group" aria-label="Instagram projects moving forward" data-project-count="{{ count($instagramPosts) }}">
-                        <div class="project-marquee">
-                            @foreach ([false, true] as $isDuplicate)
-                                <div class="project-feed-group" @if ($isDuplicate) aria-hidden="true" @endif>
-                                    @foreach ($instagramPosts as $post)
-                                        @php($isVideo = ($post['media_type'] ?? '') === 'VIDEO' && isset($post['preview_url']))
-                                        <button class="project-card project-card-instagram instagram-media-trigger" type="button" data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}" data-media-url="{{ $post['media_url'] }}" @if ($isVideo) data-video-url="{{ route('instagram.video', ['mediaId' => $post['id']]) }}" @endif data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}" data-caption="{{ $post['caption'] }}" data-permalink="{{ $post['permalink'] }}" aria-label="View Instagram {{ $isVideo ? 'video' : 'photo' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 100) }}" @if ($isDuplicate) tabindex="-1" @endif>
-                                            <span class="project-image"><img class="project-feed-image" src="{{ $post['preview_url'] ?? $post['media_url'] }}" alt="{{ \Illuminate\Support\Str::limit($post['caption'], 140) }}" loading="lazy" decoding="async">@if ($isVideo)<span class="project-feed-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>@endif</span>
-                                            <strong>{{ \Illuminate\Support\Str::limit($post['caption'] ?: 'Stagepass event production', 58) }}</strong>
-                                            <small>{{ $isVideo ? 'Video' : 'Instagram' }} · @stagepassav</small>
-                                        </button>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="project-marquee">
+                        @foreach ([false, true] as $isDuplicate)
+                            <div class="project-feed-group" @if ($isDuplicate) aria-hidden="true" @endif>
+                                @foreach ($instagramPosts as $post)
+                                    @php($isVideo = ($post['media_type'] ?? '') === 'VIDEO' && isset($post['preview_url']))
+                                    <button class="project-card project-card-instagram instagram-media-trigger" type="button" data-media-type="{{ $isVideo ? 'VIDEO' : 'IMAGE' }}" data-media-url="{{ $post['media_url'] }}" @if ($isVideo) data-video-url="{{ route('instagram.video', ['mediaId' => $post['id']]) }}" @endif data-preview-url="{{ $post['preview_url'] ?? $post['media_url'] }}" data-caption="{{ $post['caption'] }}" data-permalink="{{ $post['permalink'] }}" aria-label="View Instagram {{ $isVideo ? 'video' : 'photo' }}: {{ \Illuminate\Support\Str::limit($post['caption'], 100) }}" @if ($isDuplicate) tabindex="-1" @endif>
+                                        <span class="project-image"><img class="project-feed-image" src="{{ $post['preview_url'] ?? $post['media_url'] }}" alt="{{ \Illuminate\Support\Str::limit($post['caption'], 140) }}" loading="lazy" decoding="async">@if ($isVideo)<span class="project-feed-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>@endif</span>
+                                        <strong>{{ \Illuminate\Support\Str::limit($post['caption'] ?: 'Stagepass event production', 58) }}</strong>
+                                        <small>{{ $isVideo ? 'Video' : 'Instagram' }} · @stagepassav</small>
+                                    </button>
+                                @endforeach
+                            </div>
+                        @endforeach
                     </div>
                 @else
                     @foreach ($projects as [$project, $location, $scene])
