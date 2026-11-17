@@ -737,7 +737,14 @@ const appendInstagramVideo = (mediaUrl, previewUrl, permalink, caption) => {
     frame.loading = 'eager';
     frame.referrerPolicy = 'strict-origin-when-cross-origin';
     frame.setAttribute('scrolling', 'no');
-    instagramLightboxMedia.append(frame);
+
+    const playIndicator = document.createElement('span');
+    playIndicator.className = 'instagram-lightbox-embed-play';
+    playIndicator.setAttribute('aria-hidden', 'true');
+    playIndicator.innerHTML = '<svg viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"></path></svg>';
+    frame.addEventListener('focus', () => playIndicator.remove(), { once: true });
+
+    instagramLightboxMedia.append(frame, playIndicator);
 };
 
 document.querySelectorAll('.instagram-media-trigger').forEach((card) => {
